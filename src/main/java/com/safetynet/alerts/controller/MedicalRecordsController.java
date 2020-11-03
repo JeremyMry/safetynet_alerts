@@ -20,7 +20,6 @@ public class MedicalRecordsController {
 
     @GetMapping("/medicalrecord")
     public List<MedicalRecord> getAllMedicalRecords() {
-        List<MedicalRecord> listMedicalRecords = model.getMedicalrecords();
-        return listMedicalRecords;
+        return model.getMedicalrecords();
     }
 }

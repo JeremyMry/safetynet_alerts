@@ -8,8 +8,6 @@ import org.springframework.boot.actuate.trace.http.InMemoryHttpTraceRepository;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.io.IOException;
-
 @SpringBootApplication
 public class SafetynetAlertsApplication {
 

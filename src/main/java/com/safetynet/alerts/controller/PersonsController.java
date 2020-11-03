@@ -21,7 +21,6 @@ public class PersonsController {
 
     @GetMapping("/person")
     public List<Person> getAllPersons() {
-        List<Person> listPersons = model.getPersons();
-        return  listPersons;
+        return model.getPersons();
     }
 }

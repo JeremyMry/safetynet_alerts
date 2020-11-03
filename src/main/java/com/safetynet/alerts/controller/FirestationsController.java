@@ -20,7 +20,6 @@ public class FirestationsController {
 
     @GetMapping("/firestation")
     public List<Firestation> getAllFirestations() {
-        List<Firestation> listFirestation = model.getFirestations();
-        return listFirestation;
+    return model.getFirestations();
     }
 }

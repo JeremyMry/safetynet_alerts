@@ -1,7 +1,7 @@
 package com.safetynet.alerts.controller;
 
 
-import com.safetynet.alerts.model.Model;
+import com.safetynet.alerts.model.DataContainer;
 import com.safetynet.alerts.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +17,10 @@ public class PersonsController {
     private PersonService personService;
 
     @Autowired
-    private Model model;
+    private DataContainer dataContainer;
 
     @GetMapping("/person")
     public List<Person> getAllPersons() {
-        return model.getPersons();
+        return dataContainer.getPersons();
     }
 }

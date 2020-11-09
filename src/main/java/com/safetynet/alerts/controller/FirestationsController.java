@@ -1,7 +1,7 @@
 package com.safetynet.alerts.controller;
 
 import com.safetynet.alerts.model.Firestation;
-import com.safetynet.alerts.model.Model;
+import com.safetynet.alerts.model.DataContainer;
 import com.safetynet.alerts.service.FirestationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,13 +13,13 @@ import java.util.List;
 public class FirestationsController {
 
     @Autowired
-    private Model model;
+    private DataContainer dataContainer;
 
     @Autowired
     private FirestationService firestationService;
 
     @GetMapping("/firestation")
     public List<Firestation> getAllFirestations() {
-    return model.getFirestations();
+    return dataContainer.getFirestations();
     }
 }

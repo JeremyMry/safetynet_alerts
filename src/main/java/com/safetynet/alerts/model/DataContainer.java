@@ -2,7 +2,7 @@ package com.safetynet.alerts.model;
 
 import java.util.List;
 
-public class Model {
+public class DataContainer {
 
 
     private List<Person> persons;
@@ -11,10 +11,10 @@ public class Model {
 
     private List<MedicalRecord> medicalrecords;
 
-    public Model() {
+    public DataContainer() {
     }
 
-    public Model(List<Person> persons, List<Firestation> firestations, List<MedicalRecord> medicalrecords) {
+    public DataContainer(List<Person> persons, List<Firestation> firestations, List<MedicalRecord> medicalrecords) {
         this.persons = persons;
         this.firestations = firestations;
         this.medicalrecords = medicalrecords;

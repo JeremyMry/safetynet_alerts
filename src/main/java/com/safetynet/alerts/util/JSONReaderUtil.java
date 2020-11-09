@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.model.DataContainer;
 import java.io.File;
 
-public class JSONReader {
+public class JSONReaderUtil {
 
     public DataContainer readJSON() {
 

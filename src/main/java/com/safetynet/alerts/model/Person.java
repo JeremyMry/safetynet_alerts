@@ -1,6 +1,5 @@
 package com.safetynet.alerts.model;
 
-import java.util.Arrays;
 
 public class Person {
 

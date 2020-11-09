@@ -1,7 +1,7 @@
 package com.safetynet.alerts;
 
 import com.safetynet.alerts.model.DataContainer;
-import com.safetynet.alerts.util.JSONReader;
+import com.safetynet.alerts.util.JSONReaderUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.trace.http.HttpTraceRepository;
 import org.springframework.boot.actuate.trace.http.InMemoryHttpTraceRepository;
@@ -17,8 +17,8 @@ public class SafetynetAlertsApplication {
 
 	@Bean
 	public DataContainer loadModel() {
-		JSONReader jsonReader = new JSONReader();
-		return jsonReader.readJSON();
+		JSONReaderUtil jsonReaderUtil = new JSONReaderUtil();
+		return jsonReaderUtil.readJSON();
 	}
 
 	@Bean

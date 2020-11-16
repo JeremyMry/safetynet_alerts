@@ -26,7 +26,6 @@ public class PersonService {
         List<Person> listPersons = dataContainer.getPersons();
 
         for (Person p : listPersons) {
-            // suppose that firstname and lastname can not changed
             if (p.getFirstName().equals(firstname) && p.getLastName().equals(lastName)) {
                 p.setAddress(person.getAddress());
                 p.setCity(person.getCity());

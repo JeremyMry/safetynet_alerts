@@ -2,6 +2,8 @@ package com.safetynet.alerts.service;
 
 import com.safetynet.alerts.model.DataContainer;
 import com.safetynet.alerts.model.Firestation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,9 @@ import java.util.List;
 
 @Service
 public class FirestationService {
+
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private DataContainer dataContainer;
@@ -22,6 +27,7 @@ public class FirestationService {
     public List<Firestation> add(Firestation firestation) {
         List<Firestation> listFirestations = dataContainer.getFirestations();
         listFirestations.add(firestation);
+        logger.info("zzz");
         return listFirestations;
 
     }
@@ -37,6 +43,7 @@ public class FirestationService {
                 fs.setStation(station);
             }
         }
+        logger.info("zzz");
         return listFirestations;
     }
 
@@ -52,6 +59,7 @@ public class FirestationService {
                 it.remove();
             }
         }
+        logger.info("zzz");
         return listFirestations;
     }
 }

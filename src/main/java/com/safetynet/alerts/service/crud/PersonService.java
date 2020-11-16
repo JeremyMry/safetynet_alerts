@@ -1,10 +1,11 @@
-package com.safetynet.alerts.service;
+package com.safetynet.alerts.service.crud;
 
 import com.safetynet.alerts.model.DataContainer;
 import com.safetynet.alerts.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,10 +15,13 @@ public class PersonService {
     @Autowired
     private DataContainer dataContainer;
 
-    public PersonService(DataContainer dc) {
-        this.dataContainer = dc;
-    }
 
+    public List<Person> add(Person person) {
+        List<Person> listPersons = dataContainer.getPersons();
+        listPersons.add(person);
+        return listPersons;
+
+    }
 
     public List<Person> update(Person person) {
         String firstname = person.getFirstName();
@@ -34,13 +38,6 @@ public class PersonService {
                 p.setEmail(person.getEmail());
             }
         }
-        return listPersons;
-
-    }
-
-    public List<Person> add(Person person) {
-        List<Person> listPersons = dataContainer.getPersons();
-        listPersons.add(person);
         return listPersons;
 
     }

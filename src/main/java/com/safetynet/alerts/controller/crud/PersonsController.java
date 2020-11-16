@@ -1,4 +1,4 @@
-package com.safetynet.alerts.controller;
+package com.safetynet.alerts.controller.crud;
 
 
 import com.safetynet.alerts.model.DataContainer;
@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.safetynet.alerts.service.PersonService;
+import com.safetynet.alerts.service.crud.PersonService;
 
 import java.util.List;
 
@@ -20,28 +20,22 @@ public class PersonsController {
     @Autowired
     private PersonService personService;
 
-    @Autowired
-    private DataContainer dataContainer;
-
     @PostMapping("/add")
     public List<Person> addPerson(@RequestBody Person person) {
-        List<Person> listPerson = this.personService.add(person);
         logger.info("rrr");
-        return listPerson;
+        return this.personService.add(person);
     }
 
     @PutMapping("/update")
     public List<Person> updatePerson(@RequestBody Person person) {
-        List<Person> listPerson = personService.update(person);
         logger.info("rrr");
-        return listPerson;
+        return personService.update(person);
 
     }
 
     @DeleteMapping("/delete")
     public List<Person> deletePerson(@RequestParam String firstName, @RequestParam String lastName) {
-        List<Person> listPersons = personService.delete(firstName, lastName);
         logger.info("rrr");
-        return listPersons;
+        return personService.delete(firstName, lastName);
     }
 }

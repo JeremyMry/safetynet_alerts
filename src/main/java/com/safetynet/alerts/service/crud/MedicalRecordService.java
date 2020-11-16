@@ -1,10 +1,12 @@
-package com.safetynet.alerts.service;
+package com.safetynet.alerts.service.crud;
 
 import com.safetynet.alerts.model.DataContainer;
 import com.safetynet.alerts.model.MedicalRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,10 +15,6 @@ public class MedicalRecordService {
 
     @Autowired
     private DataContainer dataContainer;
-
-    public MedicalRecordService(DataContainer dc) {
-        this.dataContainer = dc;
-    }
 
     public List<MedicalRecord> add(MedicalRecord medicalrecord) {
         List<MedicalRecord> listMedicalrecords = dataContainer.getMedicalrecords();
@@ -32,7 +30,6 @@ public class MedicalRecordService {
         List<MedicalRecord> listmedicalrecords = dataContainer.getMedicalrecords();
 
         for (MedicalRecord mr : listmedicalrecords) {
-            // suppose that firstname and lastname can not changed
             if (mr.getFirstName().equals(firstname) && mr.getLastName().equals(lastName)) {
                 mr.setBirthdate(medicalrecord.getBirthdate());
                 mr.setMedications(medicalrecord.getMedications());
@@ -48,7 +45,6 @@ public class MedicalRecordService {
         Iterator<MedicalRecord> it = listmedicalrecords.iterator();
 
         while (it.hasNext()) {
-            // use a combinaison of firstname and lastname for id
             MedicalRecord mr = it.next();
             if (mr.getFirstName().equals(firstName) && mr.getLastName().equals(lastName)) {
                 it.remove();
@@ -56,6 +52,20 @@ public class MedicalRecordService {
 
         }
         return listmedicalrecords;
+    }
+
+    public int getAge(String firstname, String lastName) {
+        int age = 0;
+        List<MedicalRecord> medicalRecordList = dataContainer.getMedicalrecords();
+        for (MedicalRecord mr : medicalRecordList) {
+            if (mr.getFirstName().equals(firstname) && mr.getLastName().equals(lastName)) {
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                LocalDate birthdate = LocalDate.parse(mr.getBirthdate(), formatter);
+                age = Period.between(birthdate, LocalDate.now()).getYears();
+            }
+        }
+        return age;
     }
 
 }

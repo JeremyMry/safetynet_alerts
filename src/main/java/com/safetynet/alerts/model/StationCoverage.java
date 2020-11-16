@@ -2,13 +2,13 @@ package com.safetynet.alerts.model;
 
 import java.util.List;
 
-public class StationNumber {
+public class StationCoverage {
 
     private int adults;
     private int childs;
     private List<Person> personsCovered;
 
-    public StationNumber(int nbAdults, int nbChilds, List<Person> personsCovered) {
+    public StationCoverage(int nbAdults, int nbChilds, List<Person> personsCovered) {
         this.adults = nbAdults;
         this.childs = nbChilds;
         this.personsCovered = personsCovered;

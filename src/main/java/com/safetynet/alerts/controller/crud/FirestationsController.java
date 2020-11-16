@@ -1,9 +1,7 @@
 package com.safetynet.alerts.controller.crud;
 
 import com.safetynet.alerts.model.Firestation;
-import com.safetynet.alerts.model.DataContainer;
-import com.safetynet.alerts.model.Person;
-import com.safetynet.alerts.model.StationNumber;
+import com.safetynet.alerts.model.StationCoverage;
 import com.safetynet.alerts.service.crud.FirestationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,12 +19,6 @@ public class FirestationsController {
 
     @Autowired
     private FirestationService firestationService;
-
-    @GetMapping("")
-    public StationNumber getPeoplesCoverageStation(@RequestParam String stationNumber) throws ParseException {
-        logger.info("eee");
-        return firestationService.getPeoplesCoverageStation(stationNumber);
-    }
 
     @PostMapping("/add")
     public List<Firestation> addFirestation(@RequestBody Firestation firestation) {

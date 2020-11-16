@@ -3,7 +3,7 @@ package com.safetynet.alerts.service.crud;
 import com.safetynet.alerts.model.DataContainer;
 import com.safetynet.alerts.model.Firestation;
 import com.safetynet.alerts.model.Person;
-import com.safetynet.alerts.model.StationNumber;
+import com.safetynet.alerts.model.StationCoverage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,43 +21,7 @@ public class FirestationService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private DataContainer dataContainer;
-
-    @Autowired MedicalRecordService medicalRecordService;
-
-    public StationNumber getPeoplesCoverageStation(String stationNumber) throws ParseException {
-        List<Firestation> firestationList = dataContainer.getFirestations();
-        List<Person> personList = dataContainer.getPersons();
-        List<String> firestationAddress = new ArrayList<>();
-        List<Person> personsCovered = new ArrayList<>();
-        int adult = 0;
-        int child = 0;
-
-        for (Firestation fs : firestationList) {
-            if (fs.getStation().equals(stationNumber)) {
-                String address = fs.getAddress();
-                firestationAddress.add(address);
-            }
-        }
-
-        for( Person person : personList) {
-            if(firestationAddress.contains(person.getAddress())) {
-                Person personCovered = new Person();
-                personCovered.setFirstName(person.getFirstName());
-                personCovered.setLastName(person.getLastName());
-                personCovered.setAddress(person.getAddress());
-                personCovered.setPhone(person.getPhone());
-                personsCovered.add(personCovered);
-                if (medicalRecordService.getAge(personCovered.getFirstName(), personCovered.getLastName()) <= 18) {
-                    child++;
-                } else {
-                    adult++;
-                }
-            }
-        }
-        return new StationNumber(adult, child, personsCovered);
-    }
-
+    DataContainer dataContainer;
 
     public List<Firestation> add(Firestation firestation) {
         List<Firestation> listFirestations = dataContainer.getFirestations();

@@ -1,6 +1,8 @@
 package com.safetynet.alerts.service;
 
 import com.safetynet.alerts.model.*;
+import com.safetynet.alerts.model.crud.Firestation;
+import com.safetynet.alerts.model.crud.Person;
 import com.safetynet.alerts.service.crud.MedicalRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

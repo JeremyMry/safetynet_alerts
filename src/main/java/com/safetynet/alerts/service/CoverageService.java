@@ -1,8 +1,8 @@
 package com.safetynet.alerts.service;
 
 import com.safetynet.alerts.model.DataContainer;
-import com.safetynet.alerts.model.Firestation;
-import com.safetynet.alerts.model.Person;
+import com.safetynet.alerts.model.crud.Firestation;
+import com.safetynet.alerts.model.crud.Person;
 import com.safetynet.alerts.model.StationCoverage;
 import com.safetynet.alerts.service.crud.MedicalRecordService;
 import org.springframework.beans.factory.annotation.Autowired;

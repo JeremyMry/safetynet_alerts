@@ -1,5 +1,9 @@
 package com.safetynet.alerts.model;
 
+import com.safetynet.alerts.model.crud.Firestation;
+import com.safetynet.alerts.model.crud.MedicalRecord;
+import com.safetynet.alerts.model.crud.Person;
+
 import java.util.List;
 
 public class DataContainer {

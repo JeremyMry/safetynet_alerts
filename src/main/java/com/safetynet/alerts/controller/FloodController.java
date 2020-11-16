@@ -1,6 +1,6 @@
 package com.safetynet.alerts.controller;
 
-import com.safetynet.alerts.model.FireAlert;
+import com.safetynet.alerts.model.Flood;
 import com.safetynet.alerts.service.FloodService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController()
@@ -20,7 +21,7 @@ public class FloodController {
     FloodService floodService;
 
     @GetMapping("/flood/stations")
-    public List<FireAlert> getHearthByStationAddress(@RequestParam String stations) {
+    public Collection<List<Flood>> getHearthByStationAddress(@RequestParam String stations) {
         logger.info("eee");
         return floodService.getHearthByStationAddress(stations);
     }

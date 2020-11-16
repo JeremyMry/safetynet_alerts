@@ -1,16 +1,12 @@
 package com.safetynet.alerts.service.crud;
 
 import com.safetynet.alerts.model.DataContainer;
-import com.safetynet.alerts.model.Firestation;
-import com.safetynet.alerts.model.Person;
-import com.safetynet.alerts.model.StationCoverage;
+import com.safetynet.alerts.model.crud.Firestation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 

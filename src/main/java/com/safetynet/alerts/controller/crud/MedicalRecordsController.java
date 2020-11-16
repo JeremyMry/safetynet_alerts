@@ -1,7 +1,6 @@
 package com.safetynet.alerts.controller.crud;
 
-import com.safetynet.alerts.model.MedicalRecord;
-import com.safetynet.alerts.model.DataContainer;
+import com.safetynet.alerts.model.crud.MedicalRecord;
 import com.safetynet.alerts.service.crud.MedicalRecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

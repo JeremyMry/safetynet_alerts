@@ -1,7 +1,7 @@
 package com.safetynet.alerts.service.crud;
 
 import com.safetynet.alerts.model.DataContainer;
-import com.safetynet.alerts.model.MedicalRecord;
+import com.safetynet.alerts.model.crud.MedicalRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;

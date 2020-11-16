@@ -1,5 +1,7 @@
 package com.safetynet.alerts.model;
 
+import com.safetynet.alerts.model.crud.Person;
+
 import java.util.List;
 
 public class StationCoverage {

@@ -68,4 +68,28 @@ public class MedicalRecordService {
         return age;
     }
 
+    public String[] getMedications(String firstName, String lastName) {
+        List<MedicalRecord> medicalRecordList = dataContainer.getMedicalrecords();
+        String[] medications = null;
+
+        for(MedicalRecord mr: medicalRecordList) {
+            if(mr.getFirstName().equals(firstName) && mr.getLastName().equals(lastName)) {
+                medications = mr.getMedications();
+            }
+        }
+        return medications;
+    }
+
+    public String[] getAllergies(String firstName, String lastName) {
+        List<MedicalRecord> medicalRecordList = dataContainer.getMedicalrecords();
+        String[] allergies = null;
+
+        for(MedicalRecord mr: medicalRecordList) {
+            if(mr.getFirstName().equals(firstName) && mr.getLastName().equals(lastName)) {
+                allergies = mr.getAllergies();
+            }
+        }
+        return allergies;
+    }
+
 }

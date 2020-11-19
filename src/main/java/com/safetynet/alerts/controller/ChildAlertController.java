@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class ChildAlertController {
 
@@ -18,7 +20,7 @@ public class ChildAlertController {
     ChildAlertService childAlertService;
 
     @GetMapping("/childAlert")
-    public ChildAlert getChildByAddress(@RequestParam String address) {
+    public List<ChildAlert> getChildByAddress(@RequestParam String address) {
         logger.info("reee");
         return childAlertService.getChildByAddress(address);
     }

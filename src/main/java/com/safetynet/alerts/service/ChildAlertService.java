@@ -21,25 +21,27 @@ public class ChildAlertService {
     @Autowired
     MedicalRecordService medicalRecordService;
 
-    public ChildAlert getChildByAddress(String address) {
+    public List<ChildAlert> getChildByAddress(String address) {
         List<Person> personList = dataContainer.getPersons();
-        ChildAlert childAlert = new ChildAlert();
         List<String> family = new ArrayList<>();
+        List<ChildAlert> childAlertList = new ArrayList<>();
 
         for(Person person: personList) {
             if(person.getAddress().equals(address)) {
                 int age = medicalRecordService.getAge(person.getFirstName(), person.getLastName());
                 if(age <= 18) {
+                    ChildAlert childAlert = new ChildAlert();
                     childAlert.setFirstName(person.getFirstName());
                     childAlert.setLastName(person.getLastName());
                     childAlert.setAge(age);
+                    childAlert.setFamily(family);
+                    childAlertList.add(childAlert);
                 } else {
                     String fusion = person.getFirstName() + " " + person.getLastName();
                     family.add(fusion);
                 }
             }
         }
-        childAlert.setFamily(family);
-        return childAlert;
+        return childAlertList;
     }
 }

@@ -1,11 +1,9 @@
-package com.safetynet.alerts.service.crud;
+package com.safetynet.alerts.service;
 
 import com.safetynet.alerts.model.DataContainer;
-import com.safetynet.alerts.model.crud.Person;
+import com.safetynet.alerts.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -14,12 +12,10 @@ public class PersonService {
     @Autowired
     private DataContainer dataContainer;
 
-
     public List<Person> add(Person person) {
         List<Person> listPersons = dataContainer.getPersons();
         listPersons.add(person);
         return listPersons;
-
     }
 
     public List<Person> update(Person person) {
@@ -43,15 +39,8 @@ public class PersonService {
 
     public List<Person> delete(String firstName, String lastName) {
         List<Person> listPersons = dataContainer.getPersons();
-        Iterator<Person> it = listPersons.iterator();
 
-        while (it.hasNext()) {
-            Person person = it.next();
-            if (person.getFirstName().equals(firstName) && person.getLastName().equals(lastName)) {
-                it.remove();
-            }
-
-        }
+        listPersons.removeIf(person -> person.getFirstName().equals(firstName) && person.getLastName().equals(lastName));
         return listPersons;
     }
 }

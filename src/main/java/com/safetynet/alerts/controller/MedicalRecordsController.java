@@ -1,7 +1,7 @@
-package com.safetynet.alerts.controller.crud;
+package com.safetynet.alerts.controller;
 
-import com.safetynet.alerts.model.crud.MedicalRecord;
-import com.safetynet.alerts.service.crud.MedicalRecordService;
+import com.safetynet.alerts.model.MedicalRecord;
+import com.safetynet.alerts.service.MedicalRecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

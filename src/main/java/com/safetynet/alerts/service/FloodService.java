@@ -2,8 +2,8 @@ package com.safetynet.alerts.service;
 
 import com.safetynet.alerts.model.DataContainer;
 import com.safetynet.alerts.model.Flood;
-import com.safetynet.alerts.model.crud.Person;
-import com.safetynet.alerts.service.crud.MedicalRecordService;
+import com.safetynet.alerts.model.Household;
+import com.safetynet.alerts.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,34 +16,38 @@ import java.util.stream.Collectors;
 public class FloodService {
 
     @Autowired
-    CoverageService coverageService;
-
-    @Autowired
     DataContainer dataContainer;
 
     @Autowired
     MedicalRecordService medicalRecordService;
 
-    public Collection<List<Flood>> getHearthByStationAddress(String stationNumber) {
-        List<String> stationAddress = coverageService.getFirestationAddressByStationNumber(stationNumber);
-        List<Flood> floodList = new ArrayList<>();
-        List<Person> personList = dataContainer.getPersons();
+    @Autowired
+    FirestationService firestationService;
 
-        for(Person person: personList) {
-            if(stationAddress.contains(person.getAddress())) {
-                Flood flood = new Flood();
-                flood.setFirstName(person.getFirstName());
-                flood.setLastName(person.getLastName());
-                flood.setPhone(person.getPhone());
-                flood.setAddress(person.getAddress());
-                flood.setAge(medicalRecordService.getAge(person.getFirstName(), person.getLastName()));
-                flood.setMedications(medicalRecordService.getMedications(person.getFirstName(), person.getLastName()));
-                flood.setAllergies(medicalRecordService.getAllergies(person.getFirstName(), person.getLastName()));
-                floodList.add(flood);
+
+    public List<Household> getHearthByStationAddress(String stationNumber) {
+        List<String> stationAddress = firestationService.getFirestationAddressByStationNumber(stationNumber);
+        List<Person> personList = dataContainer.getPersons();
+        List<Household> householdsList = new ArrayList<>();
+
+        for(String address: stationAddress) {
+            List<Flood> floodList = new ArrayList<>();
+            for(Person person: personList) {
+                if (person.getAddress().equals(address)){
+                    Flood flood = new Flood();
+                    flood.setFirstName(person.getFirstName());
+                    flood.setLastName(person.getLastName());
+                    flood.setPhone(person.getPhone());
+                    flood.setAge(medicalRecordService.getAge(person.getFirstName(), person.getLastName()));
+                    flood.setMedications(medicalRecordService.getMedications(person.getFirstName(), person.getLastName()));
+                    flood.setAllergies(medicalRecordService.getAllergies(person.getFirstName(), person.getLastName()));
+                    floodList.add(flood);
+                }
             }
+            Household household = new Household(address, floodList);
+            householdsList.add(household);
         }
-        Collection<List<Flood>> output = floodList.stream().collect(Collectors.groupingBy(Flood::getAddress)).values();
-        return output;
+        return householdsList;
     }
 
 }

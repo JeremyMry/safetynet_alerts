@@ -1,13 +1,13 @@
-package com.safetynet.alerts.service.crud;
+package com.safetynet.alerts.service;
 
 import com.safetynet.alerts.model.DataContainer;
-import com.safetynet.alerts.model.crud.MedicalRecord;
+import com.safetynet.alerts.model.MedicalRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -42,15 +42,8 @@ public class MedicalRecordService {
 
     public List<MedicalRecord> delete(String firstName, String lastName) {
         List<MedicalRecord> listmedicalrecords = dataContainer.getMedicalrecords();
-        Iterator<MedicalRecord> it = listmedicalrecords.iterator();
 
-        while (it.hasNext()) {
-            MedicalRecord mr = it.next();
-            if (mr.getFirstName().equals(firstName) && mr.getLastName().equals(lastName)) {
-                it.remove();
-            }
-
-        }
+        listmedicalrecords.removeIf(mr -> mr.getFirstName().equals(firstName) && mr.getLastName().equals(lastName));
         return listmedicalrecords;
     }
 
@@ -91,5 +84,4 @@ public class MedicalRecordService {
         }
         return allergies;
     }
-
 }

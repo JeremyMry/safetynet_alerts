@@ -12,8 +12,6 @@ public class Flood {
 
     private String phone;
 
-    private String address;
-
     private String[] medications;
 
     private String[] allergies;
@@ -22,12 +20,11 @@ public class Flood {
     public Flood() {
     }
 
-    public Flood(String firstName, String lastName, int age, String phone, String address, String[] medications, String[] allergies) {
+    public Flood(String firstName, String lastName, int age, String phone, String[] medications, String[] allergies) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.phone = phone;
-        this.address = address;
         this.medications = medications;
         this.allergies = allergies;
     }
@@ -48,8 +45,8 @@ public class Flood {
         this.lastName = lastName;
     }
 
-    public Integer getAge() {
-        return age;
+    public Integer getAge(int age) {
+        return this.age;
     }
 
     public void setAge(int age) {
@@ -80,16 +77,8 @@ public class Flood {
         this.allergies = allergies;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     @Override
     public String toString() {
-        return "Person [firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone + ", address=" + address + ", medications" + medications + ", allergies" + allergies + "]";
+        return "Person [firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone + ", medications" + medications + ", allergies" + allergies + "]";
     }
 }

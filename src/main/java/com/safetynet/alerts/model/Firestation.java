@@ -1,4 +1,4 @@
-package com.safetynet.alerts.model.crud;
+package com.safetynet.alerts.model;
 
 import java.util.Arrays;
 

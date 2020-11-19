@@ -1,18 +1,16 @@
 package com.safetynet.alerts.model;
 
-import com.safetynet.alerts.model.crud.Person;
-
 import java.util.List;
 
 public class StationCoverage {
 
     private int adults;
-    private int childs;
-    private List<Person> personsCovered;
+    private int child;
+    private List<PersonCovered> personsCovered;
 
-    public StationCoverage(int nbAdults, int nbChilds, List<Person> personsCovered) {
+    public StationCoverage(int nbAdults, int nbChild, List<PersonCovered> personsCovered) {
         this.adults = nbAdults;
-        this.childs = nbChilds;
+        this.child = nbChild;
         this.personsCovered = personsCovered;
 
     }
@@ -20,25 +18,25 @@ public class StationCoverage {
     public int getAdults() {
         return adults;
     }
-    public int getChilds() {
-        return childs;
+    public int getChild() {
+        return child;
     }
-    public List<Person> getPersonsCovered() {
+    public List<PersonCovered> getPersonsCovered() {
         return personsCovered;
     }
 
     public void setAdults(int adults) {
         this.adults = adults;
     }
-    public void setChilds(int childs) {
-        this.childs = childs;
+    public void setChild(int childs) {
+        this.child = childs;
     }
-    public void setPersonsCovered(List<Person> personsCovered) {
+    public void setPersonsCovered(List<PersonCovered> personsCovered) {
         this.personsCovered = personsCovered;
     }
 
     @Override
     public String toString() {
-        return "PersonInfo [There is " + adults + " adults and " + childs + " childs covered. This the list of all the persons covered: " + personsCovered + "]";
+        return "PersonInfo [There is " + adults + " adults and " + child + " childs covered. This the list of all the persons covered: " + personsCovered + "]";
     }
 }

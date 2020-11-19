@@ -1,12 +1,12 @@
-package com.safetynet.alerts.controller.crud;
+package com.safetynet.alerts.controller;
 
 
-import com.safetynet.alerts.model.crud.Person;
+import com.safetynet.alerts.model.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.safetynet.alerts.service.crud.PersonService;
+import com.safetynet.alerts.service.PersonService;
 
 import java.util.List;
 

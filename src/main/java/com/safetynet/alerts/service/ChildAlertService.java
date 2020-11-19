@@ -2,8 +2,7 @@ package com.safetynet.alerts.service;
 
 import com.safetynet.alerts.model.ChildAlert;
 import com.safetynet.alerts.model.DataContainer;
-import com.safetynet.alerts.model.crud.Person;
-import com.safetynet.alerts.service.crud.MedicalRecordService;
+import com.safetynet.alerts.model.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

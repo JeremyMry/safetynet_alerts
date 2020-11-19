@@ -1,9 +1,7 @@
 package com.safetynet.alerts.service;
 
 import com.safetynet.alerts.model.*;
-import com.safetynet.alerts.model.crud.Firestation;
-import com.safetynet.alerts.model.crud.Person;
-import com.safetynet.alerts.service.crud.MedicalRecordService;
+import com.safetynet.alerts.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +17,9 @@ public class FireAlertService {
     @Autowired
     MedicalRecordService medicalRecordService;
 
+    @Autowired
+    FirestationService firestationService;
+
     public List<FireAlert> getPersonsByAddress(String address) {
         List<FireAlert> fireAlertList = new ArrayList<>();
         List<Person> personList = dataContainer.getPersons();
@@ -32,26 +33,10 @@ public class FireAlertService {
                 fireAlert.setAge(medicalRecordService.getAge(person.getFirstName(), person.getLastName()));
                 fireAlert.setMedications(medicalRecordService.getMedications(person.getFirstName(), person.getLastName()));
                 fireAlert.setAllergies(medicalRecordService.getAllergies(person.getFirstName(), person.getLastName()));
-                fireAlert.setStationNumber(getFirestationStationByAddress(address));
+                fireAlert.setStationNumber(firestationService.getFirestationStationNumberByAddress(address));
                 fireAlertList.add(fireAlert);
             }
         }
         return fireAlertList;
     }
-
-
-    public List<String> getFirestationStationByAddress(String address) {
-        List<Firestation> firestationList = dataContainer.getFirestations();
-        List<String> firestationAddress = new ArrayList<>();
-
-        for (Firestation fs : firestationList) {
-            if (fs.getAddress().equals(address)) {
-                String station = fs.getStation();
-                firestationAddress.add(station);
-            }
-        }
-        return firestationAddress;
-    }
-
-
 }

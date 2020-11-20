@@ -8,23 +8,17 @@ public class StationCoverage {
     private int child;
     private List<PersonCovered> personsCovered;
 
+    public StationCoverage() {}
+
     public StationCoverage(int nbAdults, int nbChild, List<PersonCovered> personsCovered) {
         this.adults = nbAdults;
         this.child = nbChild;
         this.personsCovered = personsCovered;
-
     }
 
-    public int getAdults() {
-        return adults;
-    }
-    public int getChild() {
-        return child;
-    }
-    public List<PersonCovered> getPersonsCovered() {
-        return personsCovered;
-    }
-
+    public int getAdults() { return adults; }
+    public int getChild() { return child; }
+    public List<PersonCovered> getPersonsCovered() { return personsCovered; }
     public void setAdults(int adults) {
         this.adults = adults;
     }
@@ -33,10 +27,5 @@ public class StationCoverage {
     }
     public void setPersonsCovered(List<PersonCovered> personsCovered) {
         this.personsCovered = personsCovered;
-    }
-
-    @Override
-    public String toString() {
-        return "PersonInfo [There is " + adults + " adults and " + child + " childs covered. This the list of all the persons covered: " + personsCovered + "]";
     }
 }

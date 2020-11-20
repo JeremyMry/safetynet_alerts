@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController
 public class PersonInfoController {
 
@@ -19,7 +21,16 @@ public class PersonInfoController {
 
     @GetMapping("/personInfo")
     public PersonInfo getPersonInformations(@RequestParam String firstName, String lastName) {
-        logger.info("eee");
-        return personInfoService.getPersonInformations(firstName, lastName);
+        PersonInfo empty = new PersonInfo();
+
+        logger.info("Request = " + firstName + " " + lastName);
+        Optional<PersonInfo> personInfoOptional = Optional.ofNullable(personInfoService.getPersonInformations(firstName, lastName));
+        if(personInfoOptional.isPresent()) {
+            logger.info("HTTP GET request received, SUCCESS");
+            return personInfoService.getPersonInformations(firstName, lastName);
+        } else {
+            logger.error("HTTP GET request received, ERROR");
+            return empty;
+        }
     }
 }

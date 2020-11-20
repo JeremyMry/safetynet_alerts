@@ -8,12 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
-public class FloodService {
+public class FloodService implements IFloodService {
 
     @Autowired
     DataContainer dataContainer;
@@ -24,7 +22,13 @@ public class FloodService {
     @Autowired
     FirestationService firestationService;
 
+    public FloodService(DataContainer dataContainer, MedicalRecordService medicalRecordService, FirestationService firestationService) {
+        this.dataContainer = dataContainer;
+        this.medicalRecordService = medicalRecordService;
+        this.firestationService = firestationService;
+    }
 
+    @Override
     public List<Household> getHearthByStationAddress(String stationNumber) {
         List<String> stationAddress = firestationService.getFirestationAddressByStationNumber(stationNumber);
         List<Person> personList = dataContainer.getPersons();

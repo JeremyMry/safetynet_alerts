@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PersonInfoService {
+public class PersonInfoService implements  IPersonInfoService {
 
     @Autowired
     DataContainer dataContainer;
@@ -18,10 +18,16 @@ public class PersonInfoService {
     @Autowired
     MedicalRecordService medicalRecordService;
 
+    public PersonInfoService(DataContainer dataContainer, MedicalRecordService medicalRecordService) {
+        this.dataContainer = dataContainer;
+        this.medicalRecordService = medicalRecordService;
+    }
+
+    @Override
     public PersonInfo getPersonInformations(String firstName, String lastName) {
         List<Person> personList = dataContainer.getPersons();
-        List<MedicalRecord> medicalRecordList = dataContainer.getMedicalrecords();
         PersonInfo pi = new PersonInfo();
+
         for(Person person : personList) {
             if(person.getFirstName().equals(firstName) && person.getLastName().equals(lastName)) {
                 pi.setFirstName(person.getFirstName());

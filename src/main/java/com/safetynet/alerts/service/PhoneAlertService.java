@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class PhoneAlert {
+public class PhoneAlertService implements IPhoneAlertService {
 
     @Autowired
     DataContainer dataContainer;
@@ -16,6 +16,12 @@ public class PhoneAlert {
     @Autowired
     FirestationService firestationService;
 
+    public PhoneAlertService(DataContainer dataContainer, FirestationService firestationService) {
+        this.dataContainer = dataContainer;
+        this.firestationService = firestationService;
+    }
+
+    @Override
     public List<String> getPhoneNumberByCoverage(String firestation_number) {
         List<Person> personList = dataContainer.getPersons();
         List<String> phoneNumberList = new ArrayList<>();

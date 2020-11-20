@@ -1,12 +1,14 @@
 package com.safetynet.alerts.controller;
 
 import com.safetynet.alerts.model.MedicalRecord;
+import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.service.MedicalRecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/medicalRecord")
@@ -21,20 +23,44 @@ public class MedicalRecordsController {
 
     @PostMapping("/add")
     public List<MedicalRecord> addMedicalrecord(@RequestBody MedicalRecord medicalRecord) {
-        logger.info("zzz");
-        return medicalRecordService.add(medicalRecord);
+        List<MedicalRecord> empty = new ArrayList<>();
+
+        logger.info("Request = " + medicalRecord );
+        if(!medicalRecordService.add(medicalRecord).isEmpty()) {
+            logger.info("HTTP GET request received, SUCCESS");
+            return medicalRecordService.add(medicalRecord);
+        } else {
+            logger.error("HTTP GET request received, ERROR");
+            return empty;
+        }
     }
 
     @PutMapping("/update")
     public List<MedicalRecord> updateMedicalrecord(@RequestBody MedicalRecord medicalRecord) {
-        logger.info("zzz");
-        return medicalRecordService.update(medicalRecord);
+        List<MedicalRecord> empty = new ArrayList<>();
+
+        logger.info("Request = " + medicalRecord );
+        if(!medicalRecordService.update(medicalRecord).isEmpty()) {
+            logger.info("HTTP GET request received, SUCCESS");
+            return medicalRecordService.update(medicalRecord);
+        } else {
+            logger.error("HTTP GET request received, ERROR");
+            return empty;
+        }
 
     }
 
     @DeleteMapping("/delete")
     public List<MedicalRecord> deleteMedicalrecord(@RequestParam String firstName, @RequestParam String lastName) {
-        logger.info("zzz");
-        return medicalRecordService.delete(firstName, lastName);
+        List<MedicalRecord> empty = new ArrayList<>();
+
+        logger.info("Request = " + firstName + " " + lastName );
+        if(!medicalRecordService.delete(firstName, lastName).isEmpty()) {
+            logger.info("HTTP GET request received, SUCCESS");
+            return medicalRecordService.delete(firstName, lastName);
+        } else {
+            logger.error("HTTP GET request received, ERROR");
+            return empty;
+        }
     }
 }

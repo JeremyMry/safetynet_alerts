@@ -20,40 +20,20 @@ public class ChildAlert {
         this.family = family;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
+    public String getFirstName() { return firstName; }
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
-    public String getLastName() {
-        return lastName;
-    }
-
+    public String getLastName() { return lastName; }
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-    public Integer getAge() {
-        return age;
-    }
-
+    public Integer getAge() { return age; }
     public void setAge(Integer age) {
         this.age = age;
     }
-
-    public List<String> getFamily() {
-        return family;
-    }
-
+    public List<String> getFamily() { return family; }
     public void setFamily(List<String> family) {
         this.family = family;
-    }
-
-    @Override
-    public String toString() {
-        return "ChildAlert [ firstname: " + firstName + " lastname: " + lastName + " age: " + age + " family : " + family + "]";
     }
 }

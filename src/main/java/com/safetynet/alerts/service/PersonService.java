@@ -7,17 +7,23 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PersonService {
+public class PersonService implements IPersonService {
 
     @Autowired
     private DataContainer dataContainer;
 
+    public PersonService(DataContainer dataContainer) {
+        this.dataContainer = dataContainer;
+    }
+
+    @Override
     public List<Person> add(Person person) {
         List<Person> listPersons = dataContainer.getPersons();
         listPersons.add(person);
         return listPersons;
     }
 
+    @Override
     public List<Person> update(Person person) {
         String firstname = person.getFirstName();
         String lastName = person.getLastName();
@@ -37,6 +43,7 @@ public class PersonService {
 
     }
 
+    @Override
     public List<Person> delete(String firstName, String lastName) {
         List<Person> listPersons = dataContainer.getPersons();
 

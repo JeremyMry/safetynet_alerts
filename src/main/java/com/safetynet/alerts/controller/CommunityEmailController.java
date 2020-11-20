@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,7 +22,16 @@ public class CommunityEmailController {
 
     @GetMapping("/communityEmail")
     public List<String> getEmail(@RequestParam String city) {
-        logger.info("eee");
-        return communityEmailService.getEmail(city);
+
+        List<String> empty = new ArrayList<>();
+
+        logger.info("Request = " + city );
+        if(!communityEmailService.getEmail(city).isEmpty()) {
+            logger.info("HTTP GET request received, SUCCESS");
+            return communityEmailService.getEmail(city);
+        } else {
+            logger.error("HTTP GET request received, ERROR");
+            return empty;
+        }
     }
 }

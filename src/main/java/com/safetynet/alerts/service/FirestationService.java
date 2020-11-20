@@ -1,18 +1,13 @@
 package com.safetynet.alerts.service;
 
 import com.safetynet.alerts.model.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Service
-public class FirestationService {
+public class FirestationService implements IFireStationService {
 
     @Autowired
     DataContainer dataContainer;
@@ -20,6 +15,12 @@ public class FirestationService {
     @Autowired
     MedicalRecordService medicalRecordService;
 
+    public FirestationService(DataContainer dataContainer, MedicalRecordService medicalRecordService) {
+        this.dataContainer = dataContainer;
+        this.medicalRecordService = medicalRecordService;
+    }
+
+    @Override
     public List<Firestation> add(Firestation firestation) {
         List<Firestation> listFirestations = dataContainer.getFirestations();
         listFirestations.add(firestation);
@@ -27,6 +28,7 @@ public class FirestationService {
 
     }
 
+    @Override
     public List<Firestation> update(Firestation firestation) {
 
         String address = firestation.getAddress();
@@ -41,6 +43,7 @@ public class FirestationService {
         return listFirestations;
     }
 
+    @Override
     public List<Firestation> delete(String address) {
         List<Firestation> listFirestations = dataContainer.getFirestations();
 
@@ -48,7 +51,8 @@ public class FirestationService {
         return listFirestations;
     }
 
-    public StationCoverage getPeoplesCoverageStation(String stationNumber) throws ParseException {
+    @Override
+    public StationCoverage getPeoplesCoverageStation(String stationNumber) {
         List<Person> personList = dataContainer.getPersons();
         List<PersonCovered> personsCovered = new ArrayList<>();
         int adult = 0;
@@ -72,6 +76,7 @@ public class FirestationService {
         return new StationCoverage(adult, child, personsCovered);
     }
 
+    @Override
     public List<String> getFirestationAddressByStationNumber(String stationNumber) {
         List<Firestation> firestationList = dataContainer.getFirestations();
         List<String> firestationAddress = new ArrayList<>();
@@ -85,6 +90,7 @@ public class FirestationService {
         return firestationAddress;
     }
 
+    @Override
     public List<String> getFirestationStationNumberByAddress(String address) {
         List<Firestation> firestationList = dataContainer.getFirestations();
         List<String> firestationAddress = new ArrayList<>();

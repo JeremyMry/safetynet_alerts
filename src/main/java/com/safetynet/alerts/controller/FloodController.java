@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController()
@@ -21,7 +23,15 @@ public class FloodController {
 
     @GetMapping("/flood/stations")
     public List<Household> getHearthByStationAddress(@RequestParam String stations) {
-        logger.info("eee");
-        return floodService.getHearthByStationAddress(stations);
+        List<Household> empty = new ArrayList<>();
+
+        logger.info("Request = " + stations );
+        if(!floodService.getHearthByStationAddress(stations).isEmpty()) {
+            logger.info("HTTP GET request received, SUCCESS");
+            return floodService.getHearthByStationAddress(stations);
+        } else {
+            logger.error("HTTP GET request received, ERROR");
+            return empty;
+        }
     }
 }

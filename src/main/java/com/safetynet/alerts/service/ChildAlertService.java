@@ -3,17 +3,13 @@ package com.safetynet.alerts.service;
 import com.safetynet.alerts.model.ChildAlert;
 import com.safetynet.alerts.model.DataContainer;
 import com.safetynet.alerts.model.Person;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
-public class ChildAlertService {
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+public class ChildAlertService implements IChildAlertservice {
 
     @Autowired
     DataContainer dataContainer;
@@ -21,6 +17,12 @@ public class ChildAlertService {
     @Autowired
     MedicalRecordService medicalRecordService;
 
+    public ChildAlertService(DataContainer dataContainer, MedicalRecordService medicalRecordService) {
+        this.dataContainer = dataContainer;
+        this.medicalRecordService = medicalRecordService;
+    }
+
+    @Override
     public List<ChildAlert> getChildByAddress(String address) {
         List<Person> personList = dataContainer.getPersons();
         List<String> family = new ArrayList<>();

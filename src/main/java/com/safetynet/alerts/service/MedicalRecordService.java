@@ -4,18 +4,22 @@ import com.safetynet.alerts.model.DataContainer;
 import com.safetynet.alerts.model.MedicalRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
-public class MedicalRecordService {
+public class MedicalRecordService implements IMedicalRecordService {
 
     @Autowired
     private DataContainer dataContainer;
 
+    public MedicalRecordService(DataContainer dataContainer) {
+        this.dataContainer = dataContainer;
+    }
+
+    @Override
     public List<MedicalRecord> add(MedicalRecord medicalrecord) {
         List<MedicalRecord> listMedicalrecords = dataContainer.getMedicalrecords();
         listMedicalrecords.add(medicalrecord);
@@ -23,14 +27,15 @@ public class MedicalRecordService {
 
     }
 
+    @Override
     public List<MedicalRecord> update(MedicalRecord medicalrecord) {
-        String firstname = medicalrecord.getFirstName();
+        String firstName = medicalrecord.getFirstName();
         String lastName = medicalrecord.getLastName();
 
         List<MedicalRecord> listmedicalrecords = dataContainer.getMedicalrecords();
 
         for (MedicalRecord mr : listmedicalrecords) {
-            if (mr.getFirstName().equals(firstname) && mr.getLastName().equals(lastName)) {
+            if (mr.getFirstName().equals(firstName) && mr.getLastName().equals(lastName)) {
                 mr.setBirthdate(medicalrecord.getBirthdate());
                 mr.setMedications(medicalrecord.getMedications());
                 mr.setAllergies(medicalrecord.getAllergies());
@@ -40,6 +45,7 @@ public class MedicalRecordService {
 
     }
 
+    @Override
     public List<MedicalRecord> delete(String firstName, String lastName) {
         List<MedicalRecord> listmedicalrecords = dataContainer.getMedicalrecords();
 
@@ -47,6 +53,7 @@ public class MedicalRecordService {
         return listmedicalrecords;
     }
 
+    @Override
     public int getAge(String firstname, String lastName) {
         int age = 0;
         List<MedicalRecord> medicalRecordList = dataContainer.getMedicalrecords();
@@ -61,9 +68,10 @@ public class MedicalRecordService {
         return age;
     }
 
+    @Override
     public String[] getMedications(String firstName, String lastName) {
         List<MedicalRecord> medicalRecordList = dataContainer.getMedicalrecords();
-        String[] medications = null;
+        String[] medications = new String[0];
 
         for(MedicalRecord mr: medicalRecordList) {
             if(mr.getFirstName().equals(firstName) && mr.getLastName().equals(lastName)) {
@@ -73,9 +81,10 @@ public class MedicalRecordService {
         return medications;
     }
 
+    @Override
     public String[] getAllergies(String firstName, String lastName) {
         List<MedicalRecord> medicalRecordList = dataContainer.getMedicalrecords();
-        String[] allergies = null;
+        String[] allergies = new String[0];
 
         for(MedicalRecord mr: medicalRecordList) {
             if(mr.getFirstName().equals(firstName) && mr.getLastName().equals(lastName)) {

@@ -26,65 +26,45 @@ public class FireAlert {
         this.lastName = lastName;
         this.age = age;
         this.phone = phone;
-        this.medications = medications;
-        this.allergies = allergies;
+        this.medications = medications.clone();
+        this.allergies = allergies.clone();
         this.stationNumber = stationNumber;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
+    public String getFirstName() { return firstName; }
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
     public Integer getAge() {
         return age;
     }
-
     public void setAge(int age) {
         this.age = age;
     }
-
     public String getPhone() {
         return phone;
     }
-
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
     public String[] getMedications() {
-        return medications;
+        return medications.clone();
     }
-
     public void setMedications(String[] medications) {
-        this.medications = medications;
+        this.medications = medications.clone();
     }
-
     public String[] getAllergies() {
-        return allergies;
+        return allergies.clone();
     }
-
     public void setAllergies(String[] allergies) {
-        this.allergies = allergies;
+        this.allergies = allergies.clone();
     }
-
     public List<String> getStationNumber() { return stationNumber;}
-
     public void setStationNumber(List<String> stationNumber) { this.stationNumber = stationNumber; }
-
-    @Override
-    public String toString() {
-        return "Person [firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone + ", medications" + medications + ", allergies" + allergies + ", stationNumber=" + stationNumber +"]";
-    }
 }

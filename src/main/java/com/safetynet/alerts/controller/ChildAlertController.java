@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ChildAlertController {
@@ -21,7 +23,16 @@ public class ChildAlertController {
 
     @GetMapping("/childAlert")
     public List<ChildAlert> getChildByAddress(@RequestParam String address) {
-        logger.info("reee");
-        return childAlertService.getChildByAddress(address);
+
+        List<ChildAlert> empty = new ArrayList<>();
+
+        logger.info("Request = " + address);
+        if(!childAlertService.getChildByAddress(address).isEmpty()) {
+            logger.info("HTTP GET request received, SUCCESS");
+            return childAlertService.getChildByAddress(address);
+        } else {
+            logger.error("HTTP GET request received, ERROR");
+            return empty;
+        }
     }
 }

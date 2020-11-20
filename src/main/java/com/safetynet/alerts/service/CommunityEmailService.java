@@ -8,11 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CommunityEmailService {
+public class CommunityEmailService implements ICommunityEmailService {
 
     @Autowired
     private DataContainer dataContainer;
 
+    public CommunityEmailService(DataContainer dataContainer) {
+        this.dataContainer = dataContainer;
+    }
+
+    @Override
     public List<String> getEmail(String city) {
         List<Person> personList = dataContainer.getPersons();
         List<String> emailList = new ArrayList<>();

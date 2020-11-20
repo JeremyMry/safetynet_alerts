@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class FireAlertService {
+public class FireAlertService implements IFireAlertService{
 
     @Autowired
     DataContainer dataContainer;
@@ -20,6 +20,13 @@ public class FireAlertService {
     @Autowired
     FirestationService firestationService;
 
+    public FireAlertService(DataContainer dataContainer, MedicalRecordService medicalRecordService, FirestationService firestationService) {
+        this.dataContainer = dataContainer;
+        this.medicalRecordService = medicalRecordService;
+        this.firestationService = firestationService;
+    }
+
+    @Override
     public List<FireAlert> getPersonsByAddress(String address) {
         List<FireAlert> fireAlertList = new ArrayList<>();
         List<Person> personList = dataContainer.getPersons();

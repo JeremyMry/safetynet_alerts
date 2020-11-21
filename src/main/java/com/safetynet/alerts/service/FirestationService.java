@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class FirestationService implements IFireStationService {
+public class FirestationService implements IFirestationService {
 
     @Autowired
     DataContainer dataContainer;
@@ -52,14 +52,14 @@ public class FirestationService implements IFireStationService {
     }
 
     @Override
-    public StationCoverage getPeoplesCoverageStation(String stationNumber) {
+    public StationCoverage getPersonsCoverageByStationNumber(String stationNumber) {
         List<Person> personList = dataContainer.getPersons();
         List<PersonCovered> personsCovered = new ArrayList<>();
         int adult = 0;
         int child = 0;
 
         for( Person person : personList) {
-            if(getFirestationAddressByStationNumber(stationNumber).contains(person.getAddress())) {
+            if(getFireStationAddressByStationNumber(stationNumber).contains(person.getAddress())) {
                 PersonCovered personCovered = new PersonCovered();
                 personCovered.setFirstName(person.getFirstName());
                 personCovered.setLastName(person.getLastName());
@@ -77,30 +77,30 @@ public class FirestationService implements IFireStationService {
     }
 
     @Override
-    public List<String> getFirestationAddressByStationNumber(String stationNumber) {
+    public List<String> getFireStationAddressByStationNumber(String stationNumber) {
         List<Firestation> firestationList = dataContainer.getFirestations();
-        List<String> firestationAddress = new ArrayList<>();
+        List<String> fireStationAddressList = new ArrayList<>();
 
         for (Firestation fs : firestationList) {
             if (fs.getStation().equals(stationNumber)) {
                 String address = fs.getAddress();
-                firestationAddress.add(address);
+                fireStationAddressList.add(address);
             }
         }
-        return firestationAddress;
+        return fireStationAddressList;
     }
 
     @Override
-    public List<String> getFirestationStationNumberByAddress(String address) {
+    public List<String> getFireStationStationNumberByAddress(String address) {
         List<Firestation> firestationList = dataContainer.getFirestations();
-        List<String> firestationAddress = new ArrayList<>();
+        List<String> fireStationAddressList = new ArrayList<>();
 
         for (Firestation fs : firestationList) {
             if (fs.getAddress().equals(address)) {
                 String station = fs.getStation();
-                firestationAddress.add(station);
+                fireStationAddressList.add(station);
             }
         }
-        return firestationAddress;
+        return fireStationAddressList;
     }
 }

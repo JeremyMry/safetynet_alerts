@@ -23,7 +23,7 @@ public class CommunityEmailControllerTest {
     private CommunityEmailService communityEmailService;
 
     @Test
-    public void getEmailTest() throws Exception {
+    public void getEmailTestByCity() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/communityEmail")
                 .param("city", "Culver"))
                 .andDo(MockMvcResultHandlers.print())

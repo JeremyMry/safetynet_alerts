@@ -18,12 +18,14 @@ public class StationCoverage {
 
     public int getAdults() { return adults; }
     public int getChild() { return child; }
+
     public List<PersonCovered> getPersonsCovered() { return personsCovered; }
     public void setAdults(int adults) {
         this.adults = adults;
     }
-    public void setChild(int childs) {
-        this.child = childs;
+
+    public void setChild(int child) {
+        this.child = child;
     }
     public void setPersonsCovered(List<PersonCovered> personsCovered) {
         this.personsCovered = personsCovered;

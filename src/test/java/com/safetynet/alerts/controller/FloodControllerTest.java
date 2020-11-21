@@ -25,7 +25,7 @@ public class FloodControllerTest {
     private FloodService floodService;
 
     @Test
-    public void getFloodStationsTest() throws Exception {
+    public void getHouseholdByFireStationAddressTest() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/flood/stations")
                 .param("stations", "2"))
                 .andDo(MockMvcResultHandlers.print())

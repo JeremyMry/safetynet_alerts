@@ -25,7 +25,7 @@ public class PhoneAlertControllerTest {
     private PhoneAlertService phoneAlertService;
 
     @Test
-    public void getPhoneNumberByStationTest() throws Exception {
+    public void getPhoneNumbersByStationTest() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/phoneAlert")
                 .param("firestation", "2"))
                 .andDo(MockMvcResultHandlers.print())

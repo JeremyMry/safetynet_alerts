@@ -20,14 +20,14 @@ public class PersonInfoController {
     PersonInfoService personInfoService;
 
     @GetMapping("/personInfo")
-    public PersonInfo getPersonInformations(@RequestParam String firstName, String lastName) {
+    public PersonInfo getAPersonInformation(@RequestParam String firstName, String lastName) {
         PersonInfo empty = new PersonInfo();
 
         logger.info("Request = " + firstName + " " + lastName);
-        Optional<PersonInfo> personInfoOptional = Optional.ofNullable(personInfoService.getPersonInformations(firstName, lastName));
+        Optional<PersonInfo> personInfoOptional = Optional.ofNullable(personInfoService.getPersonInformation(firstName, lastName));
         if(personInfoOptional.isPresent()) {
             logger.info("HTTP GET request received, SUCCESS");
-            return personInfoService.getPersonInformations(firstName, lastName);
+            return personInfoService.getPersonInformation(firstName, lastName);
         } else {
             logger.error("HTTP GET request received, ERROR");
             return empty;

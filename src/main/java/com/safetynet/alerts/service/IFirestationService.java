@@ -5,7 +5,7 @@ import com.safetynet.alerts.model.StationCoverage;
 
 import java.util.List;
 
-public interface IFireStationService {
+public interface IFirestationService {
 
     List<Firestation> add(Firestation firestation);
 
@@ -13,9 +13,9 @@ public interface IFireStationService {
 
     List<Firestation> delete(String address);
 
-    StationCoverage getPeoplesCoverageStation(String stationNumber);
+    StationCoverage getPersonsCoverageByStationNumber(String stationNumber);
 
-    List<String> getFirestationAddressByStationNumber(String stationNumber);
+    List<String> getFireStationAddressByStationNumber(String stationNumber);
 
-    List<String> getFirestationStationNumberByAddress(String address);
+    List<String> getFireStationStationNumberByAddress(String address);
 }

@@ -1,16 +1,11 @@
 package com.safetynet.alerts.model;
 
-import java.util.Arrays;
-
 public class Firestation {
 
-
     private String address;
-
     private String station;
 
-    public Firestation() {
-    }
+    public Firestation() { }
 
     public Firestation(String address, String station) {
         this.address = address;
@@ -23,6 +18,7 @@ public class Firestation {
     public void setAddress(String address) {
         this.address = address;
     }
+
     public String getStation() {
         return station;
     }

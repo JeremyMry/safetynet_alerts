@@ -2,7 +2,6 @@ package com.safetynet.alerts.service;
 
 import com.safetynet.alerts.model.DataContainer;
 import com.safetynet.alerts.model.Person;
-import com.safetynet.alerts.service.CommunityEmailService;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -45,7 +44,7 @@ public class CommunityAlertServiceTest {
 
         when(dataContainer.getPersons()).thenReturn(listPersons);
 
-        Assert.assertNotNull(communityEmailService.getEmail("Culver"));
-        Assert.assertEquals(3, communityEmailService.getEmail("Culver").size());
+        Assert.assertNotNull(communityEmailService.getEmailByCity("Culver"));
+        Assert.assertEquals(3, communityEmailService.getEmailByCity("Culver").size());
     }
 }

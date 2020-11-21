@@ -7,9 +7,7 @@ public class Household {
     private String address;
     private List<Flood> flood;
 
-    public Household() {
-
-    }
+    public Household() { }
 
     public Household(String address, List<Flood> flood) {
         this.address = address;
@@ -20,6 +18,7 @@ public class Household {
     public void setAddress(String address) {
         this.address = address;
     }
+
     public List<Flood> getFlood() { return flood; }
     public void setFlood(List<Flood> flood) {
         this.flood = flood;

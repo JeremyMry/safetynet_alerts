@@ -1,6 +1,5 @@
 package com.safetynet.alerts.model;
 
-import org.agileware.test.PropertiesTester;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +35,7 @@ public class ModelTest {
     }
 
     @Test
-    public void firestationTest() {
+    public void fireStationTest() {
         Firestation fs = new Firestation("000", "111");
 
         Assert.assertEquals("000", fs.getAddress());
@@ -45,15 +44,15 @@ public class ModelTest {
 
     @Test
     public void medicalRecordTest() throws Exception {
-        String[] medication = {"eee"};
-        String[] allergies = {"aaa"};
+        List<String> medication = new ArrayList<>();
+        List<String> allergies = new ArrayList<>();
         MedicalRecord mr = new MedicalRecord("John", "Doe", "01/01/01", medication, allergies);
 
         Assert.assertEquals("John", mr.getFirstName());
         Assert.assertEquals("Doe", mr.getLastName());
         Assert.assertEquals("01/01/01", mr.getBirthdate());
-        Assert.assertArrayEquals(medication, mr.getMedications());
-        Assert.assertArrayEquals(allergies, mr.getAllergies());
+        Assert.assertEquals(medication, mr.getMedications());
+        Assert.assertEquals(allergies, mr.getAllergies());
 
     }
 
@@ -71,8 +70,8 @@ public class ModelTest {
 
     @Test
     public void fireAlertTest()  {
-        String[] medication = {"eee"};
-        String[] allergies = {"aaa"};
+        List<String> medication = new ArrayList<>();
+        List<String> allergies = new ArrayList<>();
         List<String> stationNumber = new ArrayList<>();
         stationNumber.add("z");
         FireAlert fa = new FireAlert("John", "Doe", 15, "000", medication, allergies, stationNumber);
@@ -81,23 +80,23 @@ public class ModelTest {
         Assert.assertEquals("Doe", fa.getLastName());
         Assert.assertEquals(java.util.Optional.of(15), java.util.Optional.of(fa.getAge()));
         Assert.assertEquals("000", fa.getPhone());
-        Assert.assertArrayEquals(medication, fa.getMedications());
-        Assert.assertArrayEquals(allergies, fa.getAllergies());
+        Assert.assertEquals(medication, fa.getMedications());
+        Assert.assertEquals(allergies, fa.getAllergies());
         Assert.assertEquals(stationNumber.size(), fa.getStationNumber().size());
     }
 
     @Test
     public void floodTest() throws Exception {
-        String[] medication = {"eee"};
-        String[] allergies = {"aaa"};
+        List<String> medication = new ArrayList<>();
+        List<String> allergies = new ArrayList<>();
         Flood flood = new Flood("John", "Doe", 15, "000", medication, allergies);
 
         Assert.assertEquals("John", flood.getFirstName());
         Assert.assertEquals("Doe", flood.getLastName());
         Assert.assertEquals(java.util.Optional.of(15), java.util.Optional.of(flood.getAge()));
         Assert.assertEquals("000", flood.getPhone());
-        Assert.assertArrayEquals(medication, flood.getMedications());
-        Assert.assertArrayEquals(allergies, flood.getAllergies());
+        Assert.assertEquals(medication, flood.getMedications());
+        Assert.assertEquals(allergies, flood.getAllergies());
     }
 
     @Test
@@ -105,8 +104,14 @@ public class ModelTest {
         List<Flood> flood = new ArrayList<>();
         Household hh = new Household("000", flood);
 
+        Household h = new Household();
+        h.setAddress("000");
+        h.setFlood(flood);
+
         Assert.assertEquals("000", hh.getAddress());
         Assert.assertEquals(flood.size(), hh.getFlood().size());
+        Assert.assertEquals("000", h.getAddress());
+        Assert.assertEquals(flood.size(), h.getFlood().size());
     }
 
     @Test
@@ -121,8 +126,8 @@ public class ModelTest {
 
     @Test
     public void personInfoTest() throws Exception {
-        String[] medication = {"eee"};
-        String[] allergies = {"aaa"};
+        List<String> medication = new ArrayList<>();
+        List<String> allergies = new ArrayList<>();
         PersonInfo pi = new PersonInfo("John", "Doe", "000", 15, "000", medication, allergies);
 
         Assert.assertEquals("John", pi.getFirstName());
@@ -130,8 +135,8 @@ public class ModelTest {
         Assert.assertEquals("000", pi.getAddress());
         Assert.assertEquals(java.util.Optional.of(15), java.util.Optional.of(pi.getAge()));
         Assert.assertEquals("000", pi.getEmail());
-        Assert.assertArrayEquals(medication, pi.getMedications());
-        Assert.assertArrayEquals(allergies, pi.getAllergies());
+        Assert.assertEquals(medication, pi.getMedications());
+        Assert.assertEquals(allergies, pi.getAllergies());
     }
 
     @Test
@@ -139,9 +144,17 @@ public class ModelTest {
         List<PersonCovered> personCovered = new ArrayList<>();
         StationCoverage sc = new StationCoverage(1, 1, personCovered);
 
+        StationCoverage s = new StationCoverage();
+        s.setAdults(1);
+        s.setChild(1);
+        s.setPersonsCovered(personCovered);
+
         Assert.assertEquals(1, sc.getChild());
         Assert.assertEquals(1, sc.getAdults());
         Assert.assertEquals(personCovered.size(), sc.getPersonsCovered().size());
+        Assert.assertEquals(1, s.getChild());
+        Assert.assertEquals(1, s.getAdults());
+        Assert.assertEquals(personCovered.size(), s.getPersonsCovered().size());
     }
 
 }

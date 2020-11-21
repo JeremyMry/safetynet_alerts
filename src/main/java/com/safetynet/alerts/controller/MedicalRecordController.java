@@ -1,7 +1,6 @@
 package com.safetynet.alerts.controller;
 
 import com.safetynet.alerts.model.MedicalRecord;
-import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.service.MedicalRecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +12,7 @@ import java.util.List;
 
 @RequestMapping("/medicalRecord")
 @RestController
-public class MedicalRecordsController {
+public class MedicalRecordController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -22,7 +21,7 @@ public class MedicalRecordsController {
 
 
     @PostMapping("/add")
-    public List<MedicalRecord> addMedicalrecord(@RequestBody MedicalRecord medicalRecord) {
+    public List<MedicalRecord> addMedicalRecord(@RequestBody MedicalRecord medicalRecord) {
         List<MedicalRecord> empty = new ArrayList<>();
 
         logger.info("Request = " + medicalRecord );
@@ -36,7 +35,7 @@ public class MedicalRecordsController {
     }
 
     @PutMapping("/update")
-    public List<MedicalRecord> updateMedicalrecord(@RequestBody MedicalRecord medicalRecord) {
+    public List<MedicalRecord> updateMedicalRecord(@RequestBody MedicalRecord medicalRecord) {
         List<MedicalRecord> empty = new ArrayList<>();
 
         logger.info("Request = " + medicalRecord );
@@ -51,7 +50,7 @@ public class MedicalRecordsController {
     }
 
     @DeleteMapping("/delete")
-    public List<MedicalRecord> deleteMedicalrecord(@RequestParam String firstName, @RequestParam String lastName) {
+    public List<MedicalRecord> deleteMedicalRecord(@RequestParam String firstName, @RequestParam String lastName) {
         List<MedicalRecord> empty = new ArrayList<>();
 
         logger.info("Request = " + firstName + " " + lastName );

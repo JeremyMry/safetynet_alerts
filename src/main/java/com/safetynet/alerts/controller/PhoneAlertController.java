@@ -20,7 +20,7 @@ public class PhoneAlertController {
     PhoneAlertService phoneAlertService;
 
     @GetMapping("/phoneAlert")
-    public List<String> getPhoneNumbersCoverageStation(@RequestParam String firestation) {
+    public List<String> getPhoneNumbersByCoverageStation(@RequestParam String firestation) {
         List<String> empty = new ArrayList<>();
 
         logger.info("Request = " + firestation );

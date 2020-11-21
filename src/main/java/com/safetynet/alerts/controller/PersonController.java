@@ -13,7 +13,7 @@ import java.util.List;
 
 @RequestMapping("/person")
 @RestController
-public class PersonsController {
+public class PersonController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 

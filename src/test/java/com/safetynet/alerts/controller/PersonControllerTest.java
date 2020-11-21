@@ -1,7 +1,6 @@
 package com.safetynet.alerts.controller;
 
-
-import com.safetynet.alerts.service.FirestationService;
+import com.safetynet.alerts.service.PersonService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,46 +15,37 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(FirestationsController.class)
+@WebMvcTest(PersonController.class)
 @ExtendWith(SpringExtension.class)
-public class FirestationsControllerTest {
+public class PersonControllerTest {
 
     @Autowired
     private MockMvc mvc;
 
     @MockBean
-    private FirestationService firestationService;
+    private PersonService service;
 
     @Test
-    public void addFirestationTest() throws Exception {
-        this.mvc.perform(post("/firestation/add")
-                .contentType(MediaType.APPLICATION_JSON).content("{\"address\": \"7777 XXXXX Ddddd\",\"station\": \"1\"}"))
+    public void addPersonTest() throws Exception {
+        this.mvc.perform(post("/person/add")
+                .contentType(MediaType.APPLICATION_JSON).content("{\"firstName\": \"Test\",\"lastName\": \"\",\"address\": \"\",\"city\": \"\",\"zip\": \"\",\"phone\": \"\",\"email\": \"\"}"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void deleteFirestationTest() throws Exception {
-        this.mvc.perform(MockMvcRequestBuilders.delete("/firestation/delete")
-                .param("address", "1509 Culver St"))
+    public void deletePersonTest() throws Exception {
+        this.mvc.perform(MockMvcRequestBuilders.delete("/person/delete")
+                .param("firstName", "Eric").param("lastName", "Cadigan"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void updateFirestationTest() throws Exception {
-        this.mvc.perform(MockMvcRequestBuilders.put("/firestation/update")
-                .contentType(MediaType.APPLICATION_JSON).content("{\"address\": \"1509 Culver St\",\"station\": \"2\"}"))
+    public void updatePersonTest() throws Exception {
+        this.mvc.perform(MockMvcRequestBuilders.put("/person/update")
+                .contentType(MediaType.APPLICATION_JSON).content("{\"firstName\": \"Jacob\",\"lastName\": \"Boyd\",\"address\": \"157 dum street\",\"city\": \"ZZZ\",\"zip\": \"15874\",\"phone\": \"825-854-6513\",\"email\": \"Jacob@gmail.com\"}"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
     }
-
-    @Test
-    public void getFirestationTest() throws Exception {
-        this.mvc.perform(MockMvcRequestBuilders.get("/firestation")
-                .param("stationNumber", "3"))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk());
-    }
-
 }

@@ -2,12 +2,7 @@ package com.safetynet.alerts.service;
 
 import com.safetynet.alerts.model.DataContainer;
 import com.safetynet.alerts.model.Firestation;
-import com.safetynet.alerts.model.Flood;
 import com.safetynet.alerts.model.Person;
-import com.safetynet.alerts.service.FireAlertService;
-import com.safetynet.alerts.service.FirestationService;
-import com.safetynet.alerts.service.FloodService;
-import com.safetynet.alerts.service.MedicalRecordService;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -61,8 +56,8 @@ public class FloodServiceTest {
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getFirestations()).thenReturn(firestationList);
 
-        Assert.assertNotNull(floodService.getHearthByStationAddress("2"));
-        Assert.assertEquals(1, floodService.getHearthByStationAddress("2").size());
+        Assert.assertNotNull(floodService.getHouseholdByStationAddress("2"));
+        Assert.assertEquals(1, floodService.getHouseholdByStationAddress("2").size());
     }
 
     @Test
@@ -95,8 +90,8 @@ public class FloodServiceTest {
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getFirestations()).thenReturn(firestationList);
 
-        Assert.assertNotNull(floodService.getHearthByStationAddress("2"));
-        Assert.assertEquals(2, floodService.getHearthByStationAddress("2").size());
+        Assert.assertNotNull(floodService.getHouseholdByStationAddress("2"));
+        Assert.assertEquals(2, floodService.getHouseholdByStationAddress("2").size());
     }
 
     @Test
@@ -107,8 +102,8 @@ public class FloodServiceTest {
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getFirestations()).thenReturn(firestationList);
 
-        Assert.assertNotNull(floodService.getHearthByStationAddress("2"));
-        Assert.assertEquals(0, floodService.getHearthByStationAddress("2").size());
+        Assert.assertNotNull(floodService.getHouseholdByStationAddress("2"));
+        Assert.assertEquals(0, floodService.getHouseholdByStationAddress("2").size());
     }
 
     @Test
@@ -119,8 +114,8 @@ public class FloodServiceTest {
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getFirestations()).thenReturn(firestationList);
 
-        Assert.assertNotNull(floodService.getHearthByStationAddress(null));
-        Assert.assertEquals(0, floodService.getHearthByStationAddress(null).size());
+        Assert.assertNotNull(floodService.getHouseholdByStationAddress(null));
+        Assert.assertEquals(0, floodService.getHouseholdByStationAddress(null).size());
     }
 
 }

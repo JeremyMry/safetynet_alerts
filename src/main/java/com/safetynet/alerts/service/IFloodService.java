@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface IFloodService {
 
-    List<Household> getHearthByStationAddress(String stationNumber);
+    List<Household> getHouseholdByStationAddress(String stationNumber);
 }

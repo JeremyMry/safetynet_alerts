@@ -1,12 +1,8 @@
 package com.safetynet.alerts.service;
 
-import com.safetynet.alerts.model.ChildAlert;
 import com.safetynet.alerts.model.DataContainer;
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.model.Person;
-import com.safetynet.alerts.service.ChildAlertService;
-import com.safetynet.alerts.service.FirestationService;
-import com.safetynet.alerts.service.MedicalRecordService;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

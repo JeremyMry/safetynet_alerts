@@ -1,12 +1,10 @@
 package com.safetynet.alerts.service;
 
 import com.safetynet.alerts.model.DataContainer;
-import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.model.PersonInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -24,7 +22,7 @@ public class PersonInfoService implements  IPersonInfoService {
     }
 
     @Override
-    public PersonInfo getPersonInformations(String firstName, String lastName) {
+    public PersonInfo getPersonInformation(String firstName, String lastName) {
         List<Person> personList = dataContainer.getPersons();
         PersonInfo pi = new PersonInfo();
 

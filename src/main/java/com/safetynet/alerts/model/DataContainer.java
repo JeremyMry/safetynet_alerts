@@ -4,15 +4,11 @@ import java.util.List;
 
 public class DataContainer {
 
-
     private List<Person> persons;
-
     private List<Firestation> firestations;
-
     private List<MedicalRecord> medicalrecords;
 
-    public DataContainer() {
-    }
+    public DataContainer() { }
 
     public DataContainer(List<Person> persons, List<Firestation> firestations, List<MedicalRecord> medicalrecords) {
         this.persons = persons;
@@ -26,16 +22,16 @@ public class DataContainer {
     public void setPersons(List<Person> persons) {
         this.persons = persons;
     }
-    public void setFirestations(List<Firestation> firestations) {
-        this.firestations = firestations;
-    }
+
+    public List<MedicalRecord> getMedicalrecords() { return medicalrecords; }
     public void setMedicalrecords(List<MedicalRecord> medicalrecords) {
         this.medicalrecords = medicalrecords;
     }
-    public List<MedicalRecord> getMedicalrecords() {
-        return medicalrecords;
-    }
+
     public List<Firestation> getFirestations() {
         return firestations;
+    }
+    public void setFirestations(List<Firestation> firestations) {
+        this.firestations = firestations;
     }
 }

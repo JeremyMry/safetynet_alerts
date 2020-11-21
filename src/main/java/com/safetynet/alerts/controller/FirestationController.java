@@ -1,7 +1,6 @@
 package com.safetynet.alerts.controller;
 
 import com.safetynet.alerts.model.Firestation;
-import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.model.StationCoverage;
 import com.safetynet.alerts.service.FirestationService;
 import org.slf4j.Logger;
@@ -15,7 +14,7 @@ import java.util.Optional;
 
 @RequestMapping("/firestation")
 @RestController
-public class FirestationsController {
+public class FirestationController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -23,7 +22,7 @@ public class FirestationsController {
     private FirestationService firestationService;
 
     @PostMapping("/add")
-    public List<Firestation> addFirestation(@RequestBody Firestation firestation) {
+    public List<Firestation> addFireStation(@RequestBody Firestation firestation) {
         List<Firestation> empty = new ArrayList<>();
 
         logger.info("Request = " + firestation );
@@ -37,7 +36,7 @@ public class FirestationsController {
     }
 
     @PutMapping("/update")
-    public List<Firestation> updateFirestation(@RequestBody Firestation firestation) {
+    public List<Firestation> updateFireStation(@RequestBody Firestation firestation) {
         List<Firestation> empty = new ArrayList<>();
 
         logger.info("Request = " + firestation );
@@ -51,7 +50,7 @@ public class FirestationsController {
     }
 
     @DeleteMapping("/delete")
-    public List<Firestation> deleteFirestation(@RequestParam String address) {
+    public List<Firestation> deleteFireStation(@RequestParam String address) {
         List<Firestation> empty = new ArrayList<>();
 
         logger.info("Request = " + address );
@@ -65,14 +64,14 @@ public class FirestationsController {
     }
 
     @GetMapping("")
-    public StationCoverage getPeoplesCoverageStation(@RequestParam String stationNumber) {
+    public StationCoverage getPersonsCoverageStation(@RequestParam String stationNumber) {
         StationCoverage empty = new StationCoverage();
 
         logger.info("Request = " + stationNumber );
-        Optional<StationCoverage> firestationOptional = Optional.ofNullable(firestationService.getPeoplesCoverageStation(stationNumber));
-        if(firestationOptional.isPresent()) {
+        Optional<StationCoverage> fireStationOptional = Optional.ofNullable(firestationService.getPersonsCoverageByStationNumber(stationNumber));
+        if(fireStationOptional.isPresent()) {
             logger.info("HTTP GET request received, SUCCESS");
-            return firestationService.getPeoplesCoverageStation(stationNumber);
+            return firestationService.getPersonsCoverageByStationNumber(stationNumber);
         } else {
             logger.error("HTTP GET request received, ERROR");
             return empty;

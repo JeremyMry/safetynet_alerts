@@ -1,6 +1,5 @@
 package com.safetynet.alerts.controller;
 
-import com.safetynet.alerts.model.Flood;
 import com.safetynet.alerts.model.Household;
 import com.safetynet.alerts.service.FloodService;
 import org.slf4j.Logger;
@@ -22,13 +21,13 @@ public class FloodController {
     FloodService floodService;
 
     @GetMapping("/flood/stations")
-    public List<Household> getHearthByStationAddress(@RequestParam String stations) {
+    public List<Household> getHouseholdByFireStationAddress(@RequestParam String stations) {
         List<Household> empty = new ArrayList<>();
 
         logger.info("Request = " + stations );
-        if(!floodService.getHearthByStationAddress(stations).isEmpty()) {
+        if(!floodService.getHouseholdByStationAddress(stations).isEmpty()) {
             logger.info("HTTP GET request received, SUCCESS");
-            return floodService.getHearthByStationAddress(stations);
+            return floodService.getHouseholdByStationAddress(stations);
         } else {
             logger.error("HTTP GET request received, ERROR");
             return empty;

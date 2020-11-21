@@ -26,7 +26,7 @@ public class FireAlertControllerTest {
     private FireAlertService fireAlertService;
 
     @Test
-    public void getFireAlertTest() throws Exception {
+    public void getPersonsByAddress() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/fire")
                 .param("address", "1509 Culver St"))
                 .andDo(MockMvcResultHandlers.print())

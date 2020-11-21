@@ -14,7 +14,7 @@ public interface IMedicalRecordService {
 
     int getAge(String firstname, String lastName);
 
-    String[] getMedications(String firstName, String lastName);
+    List<String>  getMedications(String firstName, String lastName);
 
-    String[] getAllergies(String firstName, String lastName);
+    List<String>  getAllergies(String firstName, String lastName);
 }

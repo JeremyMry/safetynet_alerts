@@ -1,7 +1,6 @@
 package com.safetynet.alerts.controller;
 
 
-import com.safetynet.alerts.controller.MedicalRecordsController;
 import com.safetynet.alerts.service.MedicalRecordService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,9 +17,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(MedicalRecordsController.class)
+@WebMvcTest(MedicalRecordController.class)
 @ExtendWith(SpringExtension.class)
-public class MedicalRecordsControllerTest {
+public class MedicalRecordControllerTest {
 
     @Autowired
     private MockMvc mvc;
@@ -29,7 +28,7 @@ public class MedicalRecordsControllerTest {
     private MedicalRecordService medicalRecordService;
 
     @Test
-    public void addMedicalrecordTest() throws Exception {
+    public void addMedicalRecordTest() throws Exception {
         this.mvc.perform(post("/medicalRecord/add")
                 .contentType(MediaType.APPLICATION_JSON).content("{\"firstName\": \"AAAA\",\"lastName\": \"BBBB\",\"birthdate\": \"01/10/1987\",\"medications\": [\"aznol:350mg\",\"hydrapermazol:100mg\"],\"allergies\":[\"nillacila111\"]}"))
                 .andDo(MockMvcResultHandlers.print())
@@ -37,7 +36,7 @@ public class MedicalRecordsControllerTest {
     }
 
     @Test
-    public void deleteMedicalrecordTest() throws Exception {
+    public void deleteMedicalRecordTest() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.delete("/medicalRecord/delete")
                 .param("firstName", "Eric").param("lastName", "Cadigan"))
                 .andDo(MockMvcResultHandlers.print())
@@ -45,7 +44,7 @@ public class MedicalRecordsControllerTest {
     }
 
     @Test
-    public void updateMedicalrecordTest() throws Exception {
+    public void updateMedicalRecordTest() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.put("/medicalRecord/update")
                 .contentType(MediaType.APPLICATION_JSON).content("{\"firstName\": \"Jacob\",\"lastName\": \"Boyd\",\"birthdate\": \"01/10/1987\",\"medications\": [\"aznoly:350mg\",\"hydrapermazol:100mg\"],\"allergies\":[\"nillacilan\"]}").accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())

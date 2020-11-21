@@ -27,7 +27,7 @@ public class PhoneAlertService implements IPhoneAlertService {
         List<String> phoneNumberList = new ArrayList<>();
 
         for(Person person : personList) {
-            if(firestationService.getFirestationAddressByStationNumber(firestation_number).contains(person.getAddress())) {
+            if(firestationService.getFireStationAddressByStationNumber(firestation_number).contains(person.getAddress())) {
                 phoneNumberList.add(person.getPhone());
             }
         }

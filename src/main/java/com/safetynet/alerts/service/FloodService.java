@@ -29,12 +29,12 @@ public class FloodService implements IFloodService {
     }
 
     @Override
-    public List<Household> getHearthByStationAddress(String stationNumber) {
-        List<String> stationAddress = firestationService.getFirestationAddressByStationNumber(stationNumber);
+    public List<Household> getHouseholdByStationAddress(String stationNumber) {
+        List<String> stationAddressList = firestationService.getFireStationAddressByStationNumber(stationNumber);
         List<Person> personList = dataContainer.getPersons();
         List<Household> householdsList = new ArrayList<>();
 
-        for(String address: stationAddress) {
+        for(String address: stationAddressList) {
             List<Flood> floodList = new ArrayList<>();
             for(Person person: personList) {
                 if (person.getAddress().equals(address)){

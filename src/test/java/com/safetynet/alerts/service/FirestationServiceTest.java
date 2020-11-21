@@ -1,13 +1,10 @@
 package com.safetynet.alerts.service;
 
 import com.safetynet.alerts.model.*;
-import net.bytebuddy.build.ToStringPlugin;
-import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -416,10 +413,10 @@ public class FirestationServiceTest {
         when(dataContainer.getFirestations()).thenReturn(listFirestation);
         when(dataContainer.getMedicalrecords()).thenReturn(medicalRecordList);
 
-        Assert.assertNotNull(firestationService.getPeoplesCoverageStation("3"));
-        Assert.assertTrue(new ReflectionEquals(test.getAdults()).matches(firestationService.getPeoplesCoverageStation("3").getAdults()));
-        Assert.assertTrue(new ReflectionEquals(test.getChild()).matches(firestationService.getPeoplesCoverageStation("3").getChild()));
-        Assert.assertTrue(new ReflectionEquals(test.getPersonsCovered()).matches(firestationService.getPeoplesCoverageStation("3").getPersonsCovered()));
+        Assert.assertNotNull(firestationService.getPersonsCoverageByStationNumber("3"));
+        Assert.assertTrue(new ReflectionEquals(test.getAdults()).matches(firestationService.getPersonsCoverageByStationNumber("3").getAdults()));
+        Assert.assertTrue(new ReflectionEquals(test.getChild()).matches(firestationService.getPersonsCoverageByStationNumber("3").getChild()));
+        Assert.assertTrue(new ReflectionEquals(test.getPersonsCovered()).matches(firestationService.getPersonsCoverageByStationNumber("3").getPersonsCovered()));
     }
 
     @Test
@@ -434,9 +431,9 @@ public class FirestationServiceTest {
 
         when(dataContainer.getFirestations()).thenReturn(listFirestation);
 
-        Assert.assertNotNull(firestationService.getFirestationStationNumberByAddress("1509 Culver St"));
-        Assert.assertEquals(1, firestationService.getFirestationStationNumberByAddress("1509 Culver St").size());
-        Assert.assertArrayEquals(actual.toArray(), firestationService.getFirestationStationNumberByAddress("1509 Culver St").toArray());
+        Assert.assertNotNull(firestationService.getFireStationStationNumberByAddress("1509 Culver St"));
+        Assert.assertEquals(1, firestationService.getFireStationStationNumberByAddress("1509 Culver St").size());
+        Assert.assertArrayEquals(actual.toArray(), firestationService.getFireStationStationNumberByAddress("1509 Culver St").toArray());
     }
 
     @Test
@@ -451,8 +448,8 @@ public class FirestationServiceTest {
 
         when(dataContainer.getFirestations()).thenReturn(listFirestation);
 
-        Assert.assertNotNull(firestationService.getFirestationStationNumberByAddress(null));
-        Assert.assertEquals(0, firestationService.getFirestationStationNumberByAddress(null).size());
+        Assert.assertNotNull(firestationService.getFireStationStationNumberByAddress(null));
+        Assert.assertEquals(0, firestationService.getFireStationStationNumberByAddress(null).size());
     }
 
     @Test
@@ -467,9 +464,9 @@ public class FirestationServiceTest {
 
         when(dataContainer.getFirestations()).thenReturn(listFirestation);
 
-        Assert.assertNotNull(firestationService.getFirestationAddressByStationNumber("3"));
-        Assert.assertEquals(1, firestationService.getFirestationAddressByStationNumber("3").size());
-        Assert.assertArrayEquals(actual.toArray(), firestationService.getFirestationAddressByStationNumber("3").toArray());
+        Assert.assertNotNull(firestationService.getFireStationAddressByStationNumber("3"));
+        Assert.assertEquals(1, firestationService.getFireStationAddressByStationNumber("3").size());
+        Assert.assertArrayEquals(actual.toArray(), firestationService.getFireStationAddressByStationNumber("3").toArray());
     }
 
     @Test
@@ -484,7 +481,7 @@ public class FirestationServiceTest {
 
         when(dataContainer.getFirestations()).thenReturn(listFirestation);
 
-        Assert.assertNotNull(firestationService.getFirestationAddressByStationNumber(null));
-        Assert.assertEquals(0, firestationService.getFirestationAddressByStationNumber(null).size());
+        Assert.assertNotNull(firestationService.getFireStationAddressByStationNumber(null));
+        Assert.assertEquals(0, firestationService.getFireStationAddressByStationNumber(null).size());
     }
 }

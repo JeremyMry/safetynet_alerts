@@ -4,7 +4,6 @@ import com.safetynet.alerts.model.*;
 import com.safetynet.alerts.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +39,7 @@ public class FireAlertService implements IFireAlertService{
                 fireAlert.setAge(medicalRecordService.getAge(person.getFirstName(), person.getLastName()));
                 fireAlert.setMedications(medicalRecordService.getMedications(person.getFirstName(), person.getLastName()));
                 fireAlert.setAllergies(medicalRecordService.getAllergies(person.getFirstName(), person.getLastName()));
-                fireAlert.setStationNumber(firestationService.getFirestationStationNumberByAddress(address));
+                fireAlert.setStationNumber(firestationService.getFireStationStationNumberByAddress(address));
                 fireAlertList.add(fireAlert);
             }
         }

@@ -3,14 +3,9 @@ package com.safetynet.alerts.service;
 import com.safetynet.alerts.model.DataContainer;
 import com.safetynet.alerts.model.Firestation;
 import com.safetynet.alerts.model.Person;
-import com.safetynet.alerts.service.ChildAlertService;
-import com.safetynet.alerts.service.FirestationService;
-import com.safetynet.alerts.service.MedicalRecordService;
-import com.safetynet.alerts.service.PhoneAlertService;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;

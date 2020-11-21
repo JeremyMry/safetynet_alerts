@@ -18,7 +18,7 @@ public class CommunityEmailService implements ICommunityEmailService {
     }
 
     @Override
-    public List<String> getEmail(String city) {
+    public List<String> getEmailByCity(String city) {
         List<Person> personList = dataContainer.getPersons();
         List<String> emailList = new ArrayList<>();
 

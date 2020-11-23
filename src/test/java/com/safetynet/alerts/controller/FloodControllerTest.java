@@ -1,5 +1,7 @@
 package com.safetynet.alerts.controller;
 
+import com.safetynet.alerts.model.Flood;
+import com.safetynet.alerts.model.Household;
 import com.safetynet.alerts.service.ChildAlertService;
 import com.safetynet.alerts.service.FloodService;
 import org.junit.jupiter.api.Test;
@@ -12,6 +14,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -27,11 +33,20 @@ public class FloodControllerTest {
 
     @Test
     public void getHouseholdByFireStationAddressTest() throws Exception {
+        List<Household> hh = new ArrayList<>();
+        List<Flood> floodList = new ArrayList<>();
+        Flood flood = new Flood("eee", "eee", 15, "000", null, null);
+        floodList.add(flood);
+        Household household = new Household("eee", floodList);
+        hh.add(household);
+
+        when(floodService.getHouseholdByStationAddress("2")).thenReturn(hh);
+
         this.mvc.perform(MockMvcRequestBuilders.get("/flood/stations")
                 .param("stations", "2"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().json("[]"));
+                .andExpect(content().json("[{\"address\":\"eee\",\"flood\":[{\"firstName\":\"eee\",\"lastName\":\"eee\",\"age\":15,\"phone\":\"000\",\"medications\":null,\"allergies\":null}]}]"));
     }
 
     @Test

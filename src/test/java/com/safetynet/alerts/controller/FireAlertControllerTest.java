@@ -1,5 +1,6 @@
 package com.safetynet.alerts.controller;
 
+import com.safetynet.alerts.model.FireAlert;
 import com.safetynet.alerts.service.CommunityEmailService;
 import com.safetynet.alerts.service.FireAlertService;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -28,11 +33,16 @@ public class FireAlertControllerTest {
 
     @Test
     public void getPersonsByAddress() throws Exception {
+        List<FireAlert> fireAlertList = new ArrayList<>();
+        FireAlert fa = new FireAlert("John", "Doe", 15, "000", null, null, null);
+        fireAlertList.add(fa);
+        when(fireAlertService.getPersonsByAddress("1509 Culver St")).thenReturn(fireAlertList);
+
         this.mvc.perform(MockMvcRequestBuilders.get("/fire")
                 .param("address", "1509 Culver St"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().json("[]"));
+                .andExpect(content().json("[{\"firstName\":\"John\",\"lastName\":\"Doe\",\"age\":15,\"phone\":\"000\",\"medications\":null,\"allergies\":null,\"stationNumber\":null}]"));
     }
 
     @Test

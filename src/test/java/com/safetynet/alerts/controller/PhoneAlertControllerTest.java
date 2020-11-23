@@ -12,6 +12,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -27,11 +31,16 @@ public class PhoneAlertControllerTest {
 
     @Test
     public void getPhoneNumbersByStationTest() throws Exception {
+        List<String> stringList = new ArrayList<>();
+        stringList.add("000");
+
+        when(phoneAlertService.getPhoneNumberByCoverage("2")).thenReturn(stringList);
+
         this.mvc.perform(MockMvcRequestBuilders.get("/phoneAlert")
                 .param("firestation", "2"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().json("[]"));
+                .andExpect(content().json("[\"000\"]"));
     }
 
     @Test
@@ -44,6 +53,10 @@ public class PhoneAlertControllerTest {
 
     @Test
     public void getPhoneNumbersByStationTestWithIncorrectParamValue() throws Exception {
+        List<String> stringList = new ArrayList<>();
+
+        when(phoneAlertService.getPhoneNumberByCoverage("a")).thenReturn(stringList);
+
         this.mvc.perform(MockMvcRequestBuilders.get("/phoneAlert")
                 .param("firestation", "a"))
                 .andDo(MockMvcResultHandlers.print())

@@ -32,7 +32,7 @@ public class MedicalRecordControllerTest {
         this.mvc.perform(post("/medicalRecord/add")
                 .contentType(MediaType.APPLICATION_JSON).content("{\"firstName\": \"AAAA\",\"lastName\": \"BBBB\",\"birthdate\": \"01/10/1987\",\"medications\": [\"aznol:350mg\",\"hydrapermazol:100mg\"],\"allergies\":[\"nillacila111\"]}"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk());
+                .andExpect(status().is2xxSuccessful());
     }
 
     @Test
@@ -40,7 +40,7 @@ public class MedicalRecordControllerTest {
         this.mvc.perform(MockMvcRequestBuilders.delete("/medicalRecord/delete")
                 .param("firstName", "Eric").param("lastName", "Cadigan"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk());
+                .andExpect(status().is2xxSuccessful());
     }
 
     @Test
@@ -49,7 +49,7 @@ public class MedicalRecordControllerTest {
                 .contentType(MediaType.APPLICATION_JSON).content("{\"firstName\": \"Jacob\",\"lastName\": \"Boyd\",\"birthdate\": \"01/10/1987\",\"medications\": [\"aznoly:350mg\",\"hydrapermazol:100mg\"],\"allergies\":[\"nillacilan\"]}").accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(content().contentType("application/json"))
-                .andExpect(status().isOk());
+                .andExpect(status().is2xxSuccessful());
     }
 
 

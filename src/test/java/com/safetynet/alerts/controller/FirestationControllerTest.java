@@ -2,6 +2,7 @@ package com.safetynet.alerts.controller;
 
 
 import com.safetynet.alerts.model.PersonCovered;
+import com.safetynet.alerts.model.StationCoverage;
 import com.safetynet.alerts.service.FirestationService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -58,11 +59,42 @@ public class FirestationControllerTest {
     }
 
     @Test
+    public void getFireStationTest() throws Exception {
+        PersonCovered pc = new PersonCovered("eee", "eee", "eee", "eee");
+        List<PersonCovered> personCoveredList = new ArrayList<>();
+        personCoveredList.add(pc);
+        StationCoverage sc = new StationCoverage(1, 1, personCoveredList);
+
+        when(firestationService.getPersonsCoverageByStationNumber("3")).thenReturn(sc);
+
+        this.mvc.perform(MockMvcRequestBuilders.get("/firestation")
+                .param("stationNumber", "3"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().json("{\"adults\":1,\"child\":1,\"personsCovered\":[{\"firstName\":\"eee\",\"lastName\":\"eee\",\"address\":\"eee\",\"phone\":\"eee\"}]}"));
+
+    }
+
+    @Test
     public void getFireStationTestWithIncorrectParamName() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/firestation")
                 .param("a", "3"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    public void getFireStationTestWithIncorrectParamValue() throws Exception {
+        List<PersonCovered> personCoveredList = new ArrayList<>();
+        StationCoverage sc = new StationCoverage(0, 0, personCoveredList);
+
+        when(firestationService.getPersonsCoverageByStationNumber("a")).thenReturn(sc);
+
+        this.mvc.perform(MockMvcRequestBuilders.get("/firestation")
+                .param("stationNumber", "a"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().json("{\"adults\":0,\"child\":0,\"personsCovered\":[]}"));
     }
 
 }

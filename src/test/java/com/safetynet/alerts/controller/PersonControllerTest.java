@@ -30,7 +30,7 @@ public class PersonControllerTest {
         this.mvc.perform(post("/person/add")
                 .contentType(MediaType.APPLICATION_JSON).content("{\"firstName\": \"Test\",\"lastName\": \"\",\"address\": \"\",\"city\": \"\",\"zip\": \"\",\"phone\": \"\",\"email\": \"\"}"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk());
+                .andExpect(status().is2xxSuccessful());
     }
 
     @Test
@@ -38,7 +38,7 @@ public class PersonControllerTest {
         this.mvc.perform(MockMvcRequestBuilders.delete("/person/delete")
                 .param("firstName", "Eric").param("lastName", "Cadigan"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk());
+                .andExpect(status().is2xxSuccessful());
     }
 
     @Test
@@ -46,6 +46,6 @@ public class PersonControllerTest {
         this.mvc.perform(MockMvcRequestBuilders.put("/person/update")
                 .contentType(MediaType.APPLICATION_JSON).content("{\"firstName\": \"Jacob\",\"lastName\": \"Boyd\",\"address\": \"157 dum street\",\"city\": \"ZZZ\",\"zip\": \"15874\",\"phone\": \"825-854-6513\",\"email\": \"Jacob@gmail.com\"}"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk());
+                .andExpect(status().is2xxSuccessful());
     }
 }

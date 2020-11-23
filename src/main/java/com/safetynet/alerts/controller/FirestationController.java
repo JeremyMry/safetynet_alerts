@@ -71,7 +71,7 @@ public class FirestationController {
         StationCoverage response = firestationService.getPersonsCoverageByStationNumber(stationNumber);
         List<PersonCovered> personCoveredList = firestationService.getPersonsCoverageByStationNumber(stationNumber).getPersonsCovered();
 
-        logger.info("Request = " + stationNumber );
+        logger.info("Request = /firestation?stationNumber=" + stationNumber );
         if(!personCoveredList.isEmpty()) {
             logger.info("HTTP GET request received, SUCCESS / Response =" + response.toString());
         } else {

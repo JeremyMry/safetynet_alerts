@@ -27,7 +27,7 @@ public class FloodController {
     public List<Household> getHouseholdByFireStationAddress(@RequestParam String stations) {
         List<Household> response = floodService.getHouseholdByStationAddress(stations);
 
-        logger.info("Request = " + stations );
+        logger.info("Request = /flood/stations?stations=" + stations );
         if(!response.isEmpty()) {
             logger.info("HTTP GET request received, SUCCESS / Response = " + response.toString());
         } else {

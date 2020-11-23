@@ -26,7 +26,7 @@ public class ChildAlertController {
     public List<ChildAlert> getChildByAddress(@RequestParam String address) {
         List<ChildAlert> response = childAlertService.getChildByAddress(address);
 
-        logger.info("Request = " + address);
+        logger.info("Request = /childAlert?address=" + address);
         if(!response.isEmpty()) {
             logger.info("HTTP GET request received, SUCCESS / Response = " + response.toString());
         } else {

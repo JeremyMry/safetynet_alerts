@@ -26,7 +26,7 @@ public class PersonInfoController {
     public PersonInfo getAPersonInformation(@RequestParam String firstName, String lastName) {
         PersonInfo response = personInfoService.getPersonInformation(firstName, lastName);
 
-        logger.info("Request = " + firstName + " " + lastName);
+        logger.info("Request = /personInfo?firstName=" + firstName + "&lastName=" + lastName);
         if(response.getFirstName() == null && response.getLastName() == null) {
             logger.info("HTTP GET request received, ERROR / Response = " + response.toString());
         } else {

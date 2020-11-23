@@ -25,7 +25,7 @@ public class CommunityEmailController {
     public List<String> getEmailsByCity(@RequestParam String city) {
         List<String> response = communityEmailService.getEmailByCity(city);
 
-        logger.info("Request = " + city );
+        logger.info("Request = /communityEmail?city=" + city );
         if(!response.isEmpty()) {
             logger.info("HTTP GET request received, SUCCESS / Response = " + response.toString());
         } else {

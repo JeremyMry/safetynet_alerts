@@ -26,7 +26,7 @@ public class PhoneAlertController {
     public List<String> getPhoneNumbersByCoverageStation(@RequestParam String firestation) {
         List<String> response = phoneAlertService.getPhoneNumberByCoverage(firestation);
 
-        logger.info("Request = " + firestation );
+        logger.info("Request = /phoneAlert?firestation=" + firestation );
         if(!response.isEmpty()) {
             logger.info("HTTP GET request received, SUCCESS / Response =" + response.toString());
         } else {

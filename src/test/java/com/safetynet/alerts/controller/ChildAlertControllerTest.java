@@ -2,6 +2,7 @@ package com.safetynet.alerts.controller;
 
 import com.safetynet.alerts.model.ChildAlert;
 import com.safetynet.alerts.service.ChildAlertService;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -60,10 +61,5 @@ public class ChildAlertControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(content().json("[]"));
-    }
-
-    @Test
-    public void test() throws Exception {
-
     }
 }

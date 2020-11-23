@@ -27,7 +27,7 @@ public class FireAlertController {
     public List<FireAlert> getPersonsByAddress(@RequestParam String address) {
         List<FireAlert> response = fireAlertService.getPersonsByAddress(address);
 
-        logger.info("Request = " + address );
+        logger.info("Request = /fire?address=" + address );
         if(!response.isEmpty()) {
             logger.info("HTTP GET request received, SUCCESS / Response = " + response.toString());
         } else {

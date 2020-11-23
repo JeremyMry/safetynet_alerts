@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -30,6 +31,24 @@ public class FireAlertControllerTest {
         this.mvc.perform(MockMvcRequestBuilders.get("/fire")
                 .param("address", "1509 Culver St"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk());
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().json("[]"));
+    }
+
+    @Test
+    public void getPersonsByAddressWithIncorrectParamValue() throws Exception {
+        this.mvc.perform(MockMvcRequestBuilders.get("/fire")
+                .param("a", "1509 Culver St"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    public void getPersonsByAddressWithIncorrectParamName() throws Exception {
+        this.mvc.perform(MockMvcRequestBuilders.get("/fire")
+                .param("address", "a"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().json("[]"));
     }
 }

@@ -38,36 +38,36 @@ public class FireAlertServiceTest {
     public void getFireAlertWith5Persons() {
 
         List<Person> listPersons = new ArrayList<>();
+        Person person = new Person();
+        person.setFirstName("John");
+        person.setLastName("Boyd");
+        person.setAddress("1509 Culver St");
+        person.setPhone("test");
+        listPersons.add(person);
+
         Person person1 = new Person();
-        person1.setFirstName("John");
+        person1.setFirstName("Jacob");
         person1.setLastName("Boyd");
         person1.setAddress("1509 Culver St");
-        person1.setPhone("test");
         listPersons.add(person1);
 
         Person person2 = new Person();
-        person2.setFirstName("Jacob");
+        person2.setFirstName("Tenley");
         person2.setLastName("Boyd");
         person2.setAddress("1509 Culver St");
         listPersons.add(person2);
 
         Person person3 = new Person();
-        person3.setFirstName("Tenley");
+        person3.setFirstName("Roger");
         person3.setLastName("Boyd");
         person3.setAddress("1509 Culver St");
         listPersons.add(person3);
 
         Person person4 = new Person();
-        person4.setFirstName("Roger");
+        person4.setFirstName("Felicia");
         person4.setLastName("Boyd");
         person4.setAddress("1509 Culver St");
         listPersons.add(person4);
-
-        Person person5 = new Person();
-        person5.setFirstName("Felicia");
-        person5.setLastName("Boyd");
-        person5.setAddress("1509 Culver St");
-        listPersons.add(person5);
 
         when(dataContainer.getPersons()).thenReturn(listPersons);
 
@@ -79,24 +79,24 @@ public class FireAlertServiceTest {
     public void getFireAlertWithDifferentAddresses() {
 
         List<Person> listPersons = new ArrayList<>();
+        Person person = new Person();
+        person.setFirstName("John");
+        person.setLastName("Boyd");
+        person.setAddress("1509 Culver St");
+        person.setPhone("test");
+        listPersons.add(person);
+
         Person person1 = new Person();
-        person1.setFirstName("John");
+        person1.setFirstName("Jacob");
         person1.setLastName("Boyd");
         person1.setAddress("1509 Culver St");
-        person1.setPhone("test");
         listPersons.add(person1);
 
         Person person2 = new Person();
-        person2.setFirstName("Jacob");
+        person2.setFirstName("Tenley");
         person2.setLastName("Boyd");
-        person2.setAddress("1509 Culver St");
+        person2.setAddress("1510 Culver St");
         listPersons.add(person2);
-
-        Person person3 = new Person();
-        person3.setFirstName("Tenley");
-        person3.setLastName("Boyd");
-        person3.setAddress("1510 Culver St");
-        listPersons.add(person3);
 
         when(dataContainer.getPersons()).thenReturn(listPersons);
 

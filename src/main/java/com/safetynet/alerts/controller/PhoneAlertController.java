@@ -1,8 +1,7 @@
 package com.safetynet.alerts.controller;
 
 import com.safetynet.alerts.service.PhoneAlertService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,23 +13,26 @@ import java.util.List;
 @RestController
 public class PhoneAlertController {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger;
+
+    public PhoneAlertController(Logger logger) {
+        this.logger = logger;
+    }
 
     @Autowired
     PhoneAlertService phoneAlertService;
 
     @GetMapping("/phoneAlert")
     public List<String> getPhoneNumbersByCoverageStation(@RequestParam String firestation) {
-        List<String> empty = new ArrayList<>();
+        List<String> response = phoneAlertService.getPhoneNumberByCoverage(firestation);
 
         logger.info("Request = " + firestation );
-        if(!phoneAlertService.getPhoneNumberByCoverage(firestation).isEmpty()) {
-            logger.info("HTTP GET request received, SUCCESS");
-            return phoneAlertService.getPhoneNumberByCoverage(firestation);
+        if(!response.isEmpty()) {
+            logger.info("HTTP GET request received, SUCCESS / Response =" + response.toString());
         } else {
-            logger.error("HTTP GET request received, ERROR");
-            return empty;
+            logger.error("HTTP GET request received, ERROR / Response = " + response.toString());
         }
+        return response;
     }
 
 }

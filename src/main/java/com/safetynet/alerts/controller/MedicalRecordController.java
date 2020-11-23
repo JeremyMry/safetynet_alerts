@@ -2,19 +2,21 @@ package com.safetynet.alerts.controller;
 
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.service.MedicalRecordService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/medicalRecord")
 @RestController
 public class MedicalRecordController {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger;
+
+    public MedicalRecordController(Logger logger) {
+        this.logger = logger;
+    }
 
     @Autowired
     private MedicalRecordService medicalRecordService;
@@ -22,44 +24,40 @@ public class MedicalRecordController {
 
     @PostMapping("/add")
     public List<MedicalRecord> addMedicalRecord(@RequestBody MedicalRecord medicalRecord) {
-        List<MedicalRecord> empty = new ArrayList<>();
+        List<MedicalRecord> response = medicalRecordService.add(medicalRecord);
 
         logger.info("Request = " + medicalRecord );
-        if(!medicalRecordService.add(medicalRecord).isEmpty()) {
-            logger.info("HTTP GET request received, SUCCESS");
-            return medicalRecordService.add(medicalRecord);
+        if(!response.isEmpty()) {
+            logger.info("HTTP POST request received, SUCCESS / Response = " + response.toString());
         } else {
-            logger.error("HTTP GET request received, ERROR");
-            return empty;
+            logger.error("HTTP POST request received, ERROR / Response = " + response.toString());
         }
+        return response;
     }
 
     @PutMapping("/update")
     public List<MedicalRecord> updateMedicalRecord(@RequestBody MedicalRecord medicalRecord) {
-        List<MedicalRecord> empty = new ArrayList<>();
+        List<MedicalRecord> response = medicalRecordService.update(medicalRecord);
 
         logger.info("Request = " + medicalRecord );
-        if(!medicalRecordService.update(medicalRecord).isEmpty()) {
-            logger.info("HTTP GET request received, SUCCESS");
-            return medicalRecordService.update(medicalRecord);
+        if(!response.isEmpty()) {
+            logger.info("HTTP PUT request received, SUCCESS / Response = " + response.toString());
         } else {
-            logger.error("HTTP GET request received, ERROR");
-            return empty;
+            logger.error("HTTP PUT request received, ERROR / Response = " + response.toString());
         }
-
+        return response;
     }
 
     @DeleteMapping("/delete")
     public List<MedicalRecord> deleteMedicalRecord(@RequestParam String firstName, @RequestParam String lastName) {
-        List<MedicalRecord> empty = new ArrayList<>();
+        List<MedicalRecord> response = medicalRecordService.delete(firstName, lastName);
 
         logger.info("Request = " + firstName + " " + lastName );
-        if(!medicalRecordService.delete(firstName, lastName).isEmpty()) {
-            logger.info("HTTP GET request received, SUCCESS");
-            return medicalRecordService.delete(firstName, lastName);
+        if(!response.isEmpty()) {
+            logger.info("HTTP DELETE request received, SUCCESS / Response = " + response.toString());
         } else {
-            logger.error("HTTP GET request received, ERROR");
-            return empty;
+            logger.error("HTTP DELETE request received, ERROR / Response = " + response.toString());
         }
+        return response;
     }
 }

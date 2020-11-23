@@ -30,4 +30,9 @@ public class StationCoverage {
     public void setPersonsCovered(List<PersonCovered> personsCovered) {
         this.personsCovered = personsCovered;
     }
+
+    @Override
+    public String toString() {
+        return "Coverage: adults = " + adults + ", child = " + child + ", person covered = " + personsCovered;
+    }
 }

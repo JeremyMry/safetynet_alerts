@@ -37,4 +37,9 @@ public class ChildAlert {
     public void setFamily(List<String> family) {
         this.family = family;
     }
+
+    @Override
+    public String toString() {
+        return "Children: firstName= " + firstName + ", lastName = " + lastName + ", age= " + age + ", family = " + family;
+    }
 }

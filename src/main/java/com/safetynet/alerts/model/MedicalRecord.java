@@ -47,4 +47,9 @@ public class MedicalRecord {
 
     public List<String> getAllergies() { return allergies; }
     public void setAllergies(List<String> allergies) { this.allergies = allergies; }
+
+    @Override
+    public String toString() {
+        return "Person: firstname= " + firstName + ", lastName = " + lastName + ", birthdate = " + birthdate + ", medications = " + medications + ", allergies = " + allergies;
+    }
 }

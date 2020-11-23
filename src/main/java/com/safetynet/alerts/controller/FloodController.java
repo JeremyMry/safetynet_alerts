@@ -2,8 +2,7 @@ package com.safetynet.alerts.controller;
 
 import com.safetynet.alerts.model.Household;
 import com.safetynet.alerts.service.FloodService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,22 +14,25 @@ import java.util.List;
 @RestController()
 public class FloodController {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger;
+
+    public FloodController(Logger logger) {
+        this.logger = logger;
+    }
 
     @Autowired
     FloodService floodService;
 
     @GetMapping("/flood/stations")
     public List<Household> getHouseholdByFireStationAddress(@RequestParam String stations) {
-        List<Household> empty = new ArrayList<>();
+        List<Household> response = floodService.getHouseholdByStationAddress(stations);
 
         logger.info("Request = " + stations );
-        if(!floodService.getHouseholdByStationAddress(stations).isEmpty()) {
-            logger.info("HTTP GET request received, SUCCESS");
-            return floodService.getHouseholdByStationAddress(stations);
+        if(!response.isEmpty()) {
+            logger.info("HTTP GET request received, SUCCESS / Response = " + response.toString());
         } else {
-            logger.error("HTTP GET request received, ERROR");
-            return empty;
+            logger.error("HTTP GET request received, ERROR / Response = " + response.toString());
         }
+        return response;
     }
 }

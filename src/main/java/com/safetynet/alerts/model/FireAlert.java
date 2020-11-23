@@ -73,4 +73,9 @@ public class FireAlert {
 
     public List<String> getStationNumber() { return stationNumber;}
     public void setStationNumber(List<String> stationNumber) { this.stationNumber = stationNumber; }
+
+    @Override
+    public String toString() {
+        return "Person: firstname= " + firstName + ", lastName = " + lastName + ", age = " + age + ", phone number = " + phone + ", medications = " + medications + ", allergies = " + allergies + ", station number = " + stationNumber;
+    }
 }

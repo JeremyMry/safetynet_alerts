@@ -10,6 +10,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(CommunityEmailController.class)
@@ -27,6 +29,24 @@ public class CommunityEmailControllerTest {
         this.mvc.perform(MockMvcRequestBuilders.get("/communityEmail")
                 .param("city", "Culver"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk());
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().json("[]"));
+    }
+
+    @Test
+    public void getEmailTestByCityWithIncorrectParamName() throws Exception {
+        this.mvc.perform(MockMvcRequestBuilders.get("/communityEmail")
+                .param("a", "Culver"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    public void getEmailTestByCityWithIncorrectParamValue() throws Exception {
+        this.mvc.perform(MockMvcRequestBuilders.get("/communityEmail")
+                .param("city", "a"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().json("[]"));
     }
 }

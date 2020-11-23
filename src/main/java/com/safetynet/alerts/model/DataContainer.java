@@ -34,4 +34,5 @@ public class DataContainer {
     public void setFirestations(List<Firestation> firestations) {
         this.firestations = firestations;
     }
+
 }

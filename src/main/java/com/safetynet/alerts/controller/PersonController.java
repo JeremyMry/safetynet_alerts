@@ -2,8 +2,7 @@ package com.safetynet.alerts.controller;
 
 
 import com.safetynet.alerts.model.Person;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.safetynet.alerts.service.PersonService;
@@ -15,51 +14,51 @@ import java.util.List;
 @RestController
 public class PersonController {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger;
+
+    public PersonController(Logger logger) {
+        this.logger = logger;
+    }
 
     @Autowired
     private PersonService personService;
 
     @PostMapping("/add")
     public List<Person> addPerson(@RequestBody Person person) {
-        List<Person> empty = new ArrayList<>();
+        List<Person> response = personService.add(person);
 
         logger.info("Request = " + person );
-        if(!personService.add(person).isEmpty()) {
-            logger.info("HTTP GET request received, SUCCESS");
-            return personService.add(person);
+        if(!response.isEmpty()) {
+            logger.info("HTTP POST request received, SUCCESS / Response = " + response.toString());
         } else {
-            logger.error("HTTP GET request received, ERROR");
-            return empty;
+            logger.error("HTTP POST request received, ERROR / Response = " + response.toString());
         }
+        return response;
     }
 
     @PutMapping("/update")
     public List<Person> updatePerson(@RequestBody Person person) {
-        List<Person> empty = new ArrayList<>();
+        List<Person> response = personService.update(person);
 
         logger.info("Request = " + person );
         if(!personService.update(person).isEmpty()) {
-            logger.info("HTTP GET request received, SUCCESS");
-            return personService.update(person);
+            logger.info("HTTP PUT request received, SUCCESS / Response = " + response.toString());
         } else {
-            logger.error("HTTP GET request received, ERROR");
-            return empty;
+            logger.error("HTTP PUT request received, ERROR / Response = " + response.toString());
         }
-
+        return response;
     }
 
     @DeleteMapping("/delete")
     public List<Person> deletePerson(@RequestParam String firstName, @RequestParam String lastName) {
-        List<Person> empty = new ArrayList<>();
+        List<Person> response = personService.delete(firstName, lastName);
 
         logger.info("Request = " + firstName + " " + lastName );
-        if(!personService.delete(firstName, lastName).isEmpty()) {
-            logger.info("HTTP GET request received, SUCCESS");
-            return personService.delete(firstName, lastName);
+        if(!response.isEmpty()) {
+            logger.info("HTTP DELETE request received, SUCCESS / Response = " + response.toString());
         } else {
-            logger.error("HTTP GET request received, ERROR");
-            return empty;
+            logger.error("HTTP DELETE request received, ERROR / Response = " + response.toString());
         }
+        return response;
     }
 }

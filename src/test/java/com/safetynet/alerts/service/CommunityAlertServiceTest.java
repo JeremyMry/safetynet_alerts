@@ -27,24 +27,34 @@ public class CommunityAlertServiceTest {
     public void getEmailList() {
         List<Person> listPersons = new ArrayList<>();
 
+        Person person = new Person();
+        person.setEmail("test@testmail.com");
+        person.setCity("Culver");
+        listPersons.add(person);
+
         Person person1 = new Person();
-        person1.setEmail("test@testmail.com");
+        person1.setEmail("test2@testmail.com");
         person1.setCity("Culver");
         listPersons.add(person1);
-
-        Person person2 = new Person();
-        person2.setEmail("test2@testmail.com");
-        person2.setCity("Culver");
-        listPersons.add(person2);
-
-        Person person3 = new Person();
-        person3.setEmail("test3@testmail.com");
-        person3.setCity("Culver");
-        listPersons.add(person3);
 
         when(dataContainer.getPersons()).thenReturn(listPersons);
 
         Assert.assertNotNull(communityEmailService.getEmailByCity("Culver"));
-        Assert.assertEquals(3, communityEmailService.getEmailByCity("Culver").size());
+        Assert.assertEquals(2, communityEmailService.getEmailByCity("Culver").size());
+    }
+
+    @Test
+    public void getEmailListWithNoEmailInTheCity() {
+        List<Person> listPersons = new ArrayList<>();
+
+        Person person = new Person();
+        person.setEmail("test@testmail.com");
+        person.setCity("Culv");
+        listPersons.add(person);
+
+        when(dataContainer.getPersons()).thenReturn(listPersons);
+
+        Assert.assertNotNull(communityEmailService.getEmailByCity("Culver"));
+        Assert.assertEquals(0, communityEmailService.getEmailByCity("Culver").size());
     }
 }

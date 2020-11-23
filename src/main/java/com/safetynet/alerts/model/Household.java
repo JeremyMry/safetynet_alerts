@@ -23,4 +23,9 @@ public class Household {
     public void setFlood(List<Flood> flood) {
         this.flood = flood;
     }
+
+    @Override
+    public String toString() {
+        return "address= " + address + ", person = " + flood;
+    }
 }

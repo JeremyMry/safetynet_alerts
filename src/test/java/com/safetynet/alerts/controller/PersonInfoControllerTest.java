@@ -15,6 +15,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(PersonInfoController.class)
@@ -27,14 +29,12 @@ public class PersonInfoControllerTest {
     @MockBean
     private PersonInfoService personInfoService;
 
-
     @Test
-    public void getPersonInformationTest() throws Exception {
+    public void getPersonInformationTestWithIncorrectParamName() throws Exception {
 
         this.mvc.perform(MockMvcRequestBuilders.get("/personInfo")
-                .param("firstName", "John").param("lastName", "Boyd"))
+                .param("a", "John").param("lastName", "a"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk());
+                .andExpect(status().is4xxClientError());
     }
-
 }

@@ -66,4 +66,9 @@ public class PersonInfo {
     public void setAllergies(List<String> allergies) {
         this.allergies = allergies;
     }
+
+    @Override
+    public String toString() {
+        return "Person: firstname= " + firstName + ", lastName = " + lastName + ", address = " + address + ", age = " + age + ", email = " + email + ", medications = " + medications + ", allergies = " + allergies;
+    }
 }

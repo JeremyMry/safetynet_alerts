@@ -1,5 +1,6 @@
 package com.safetynet.alerts.service;
 
+import com.safetynet.alerts.model.ChildAlert;
 import com.safetynet.alerts.model.DataContainer;
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.model.Person;
@@ -36,67 +37,66 @@ public class ChildAlertServiceTest {
     @Test
     public void getChildFromListWhenThereIsTwoChild() {
         List<Person> listPersons = new ArrayList<>();
+        Person person = new Person();
+        person.setFirstName("John");
+        person.setLastName("Boyd");
+        person.setAddress("1509 Culver St");
+        listPersons.add(person);
+
         Person person1 = new Person();
-        person1.setFirstName("John");
+        person1.setFirstName("Jacob");
         person1.setLastName("Boyd");
         person1.setAddress("1509 Culver St");
         listPersons.add(person1);
 
         Person person2 = new Person();
-        person2.setFirstName("Jacob");
+        person2.setFirstName("Tenley");
         person2.setLastName("Boyd");
         person2.setAddress("1509 Culver St");
         listPersons.add(person2);
 
         Person person3 = new Person();
-        person3.setFirstName("Tenley");
+        person3.setFirstName("Roger");
         person3.setLastName("Boyd");
         person3.setAddress("1509 Culver St");
         listPersons.add(person3);
 
         Person person4 = new Person();
-        person4.setFirstName("Roger");
+        person4.setFirstName("Felicia");
         person4.setLastName("Boyd");
         person4.setAddress("1509 Culver St");
         listPersons.add(person4);
 
-        Person person5 = new Person();
-        person5.setFirstName("Felicia");
-        person5.setLastName("Boyd");
-        person5.setAddress("1509 Culver St");
-        listPersons.add(person5);
-
         List<MedicalRecord> listMedicalrecords = new ArrayList<>();
+        MedicalRecord medicalRecord = new MedicalRecord();
+        medicalRecord.setFirstName("John");
+        medicalRecord.setLastName("Boyd");
+        medicalRecord.setBirthdate("03/06/1984");
+        listMedicalrecords.add(medicalRecord);
 
-        MedicalRecord medicalrecord1 = new MedicalRecord();
-        medicalrecord1.setFirstName("John");
-        medicalrecord1.setLastName("Boyd");
-        medicalrecord1.setBirthdate("03/06/1984");
-        listMedicalrecords.add(medicalrecord1);
+        MedicalRecord medicalRecord1 = new MedicalRecord();
+        medicalRecord1.setFirstName("Jacob");
+        medicalRecord1.setLastName("Boyd");
+        medicalRecord1.setBirthdate("03/06/1989");
+        listMedicalrecords.add(medicalRecord1);
 
-        MedicalRecord medicalrecord2 = new MedicalRecord();
-        medicalrecord2.setFirstName("Jacob");
-        medicalrecord2.setLastName("Boyd");
-        medicalrecord2.setBirthdate("03/06/1989");
-        listMedicalrecords.add(medicalrecord2);
+        MedicalRecord medicalRecord2 = new MedicalRecord();
+        medicalRecord2.setFirstName("Tenley");
+        medicalRecord2.setLastName("Boyd");
+        medicalRecord2.setBirthdate("02/18/2012");
+        listMedicalrecords.add(medicalRecord2);
 
-        MedicalRecord medicalrecord3 = new MedicalRecord();
-        medicalrecord3.setFirstName("Tenley");
-        medicalrecord3.setLastName("Boyd");
-        medicalrecord3.setBirthdate("02/18/2012");
-        listMedicalrecords.add(medicalrecord3);
+        MedicalRecord medicalRecord3 = new MedicalRecord();
+        medicalRecord3.setFirstName("Roger");
+        medicalRecord3.setLastName("Boyd");
+        medicalRecord3.setBirthdate("09/06/2017");
+        listMedicalrecords.add(medicalRecord3);
 
-        MedicalRecord medicalrecord4 = new MedicalRecord();
-        medicalrecord4.setFirstName("Roger");
-        medicalrecord4.setLastName("Boyd");
-        medicalrecord4.setBirthdate("09/06/2017");
-        listMedicalrecords.add(medicalrecord4);
-
-        MedicalRecord medicalrecord5 = new MedicalRecord();
-        medicalrecord5.setFirstName("Felicia");
-        medicalrecord5.setLastName("Boyd");
-        medicalrecord5.setBirthdate("01/08/1986");
-        listMedicalrecords.add(medicalrecord5);
+        MedicalRecord medicalRecord4 = new MedicalRecord();
+        medicalRecord4.setFirstName("Felicia");
+        medicalRecord4.setLastName("Boyd");
+        medicalRecord4.setBirthdate("01/08/1986");
+        listMedicalrecords.add(medicalRecord4);
 
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
@@ -116,11 +116,11 @@ public class ChildAlertServiceTest {
 
         List<MedicalRecord> listMedicalrecords = new ArrayList<>();
 
-        MedicalRecord medicalrecord1 = new MedicalRecord();
-        medicalrecord1.setFirstName("John");
-        medicalrecord1.setLastName("Boyd");
-        medicalrecord1.setBirthdate("03/06/1984");
-        listMedicalrecords.add(medicalrecord1);
+        MedicalRecord medicalRecord = new MedicalRecord();
+        medicalRecord.setFirstName("John");
+        medicalRecord.setLastName("Boyd");
+        medicalRecord.setBirthdate("03/06/1984");
+        listMedicalrecords.add(medicalRecord);
 
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);

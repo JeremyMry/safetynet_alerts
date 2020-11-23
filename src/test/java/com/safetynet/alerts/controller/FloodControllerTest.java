@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(FloodController.class)
@@ -29,6 +30,24 @@ public class FloodControllerTest {
         this.mvc.perform(MockMvcRequestBuilders.get("/flood/stations")
                 .param("stations", "2"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk());
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().json("[]"));
+    }
+
+    @Test
+    public void getHouseholdByFireStationAddressTestWithIncorrectParamName() throws Exception {
+        this.mvc.perform(MockMvcRequestBuilders.get("/flood/stations")
+                .param("a", "2"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    public void getHouseholdByFireStationAddressTestWithIncorrectParamValue() throws Exception {
+        this.mvc.perform(MockMvcRequestBuilders.get("/flood/stations")
+                .param("stations", "a"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().json("[]"));
     }
 }

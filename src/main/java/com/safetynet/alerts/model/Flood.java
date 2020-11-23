@@ -50,4 +50,8 @@ public class Flood {
     public void setAllergies(List<String> allergies) {
         this.allergies = allergies;
     }
+
+    public String toString() {
+        return "[ firstname= " + firstName + ", lastName = " + lastName + ", age = " + age + ", phone number = " + phone + ", medications = " + medications + ", allergies = " + allergies + "]";
+    }
 }

@@ -1,10 +1,10 @@
 package com.safetynet.alerts.controller;
 
 import com.safetynet.alerts.model.Firestation;
+import com.safetynet.alerts.model.PersonCovered;
 import com.safetynet.alerts.model.StationCoverage;
 import com.safetynet.alerts.service.FirestationService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,65 +16,67 @@ import java.util.Optional;
 @RestController
 public class FirestationController {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger;
+
+    private StationCoverage stationCoverage;
+
+    public FirestationController(Logger logger) {
+        this.logger = logger;
+    }
 
     @Autowired
     private FirestationService firestationService;
 
     @PostMapping("/add")
     public List<Firestation> addFireStation(@RequestBody Firestation firestation) {
-        List<Firestation> empty = new ArrayList<>();
+        List<Firestation> response = firestationService.add(firestation);
 
         logger.info("Request = " + firestation );
-        if(!firestationService.add(firestation).isEmpty()) {
-            logger.info("HTTP GET request received, SUCCESS");
-            return firestationService.add(firestation);
+        if(!response.isEmpty()) {
+            logger.info("HTTP POST request received, SUCCESS / Response = " + response.toString());
         } else {
-            logger.error("HTTP GET request received, ERROR");
-            return empty;
+            logger.error("HTTP POST request received, ERROR / Response = " + response.toString());
         }
+        return response;
     }
 
     @PutMapping("/update")
     public List<Firestation> updateFireStation(@RequestBody Firestation firestation) {
-        List<Firestation> empty = new ArrayList<>();
+        List<Firestation> response = firestationService.update(firestation);
 
         logger.info("Request = " + firestation );
-        if(!firestationService.update(firestation).isEmpty()) {
-            logger.info("HTTP GET request received, SUCCESS");
-            return firestationService.update(firestation);
+        if(!response.isEmpty()) {
+            logger.info("HTTP PUT request received, SUCCESS / Response = " + response.toString());
         } else {
-            logger.error("HTTP GET request received, ERROR");
-            return empty;
+            logger.error("HTTP PUT request received, ERROR / Response = " + response.toString());
         }
+        return response;
     }
 
     @DeleteMapping("/delete")
     public List<Firestation> deleteFireStation(@RequestParam String address) {
-        List<Firestation> empty = new ArrayList<>();
+        List<Firestation> response = firestationService.delete(address);
 
-        logger.info("Request = " + address );
-        if(!firestationService.delete(address).isEmpty()) {
-            logger.info("HTTP GET request received, SUCCESS");
-            return firestationService.delete(address);
+        logger.info("Request = " + address);
+        if(!response.isEmpty()) {
+            logger.info("HTTP DELETE request received, SUCCESS / Response = " + response.toString());
         } else {
-            logger.error("HTTP GET request received, ERROR");
-            return empty;
+            logger.error("HTTP DELETE request received, ERROR / Response = " + response.toString());
         }
+        return response;
     }
 
     @GetMapping("")
     public StationCoverage getPersonsCoverageStation(@RequestParam String stationNumber) {
-        StationCoverage empty = new StationCoverage();
+        StationCoverage response = firestationService.getPersonsCoverageByStationNumber(stationNumber);
+        List<PersonCovered> personCoveredList = firestationService.getPersonsCoverageByStationNumber(stationNumber).getPersonsCovered();
 
         logger.info("Request = " + stationNumber );
-        Optional<StationCoverage> fireStationOptional = Optional.ofNullable(firestationService.getPersonsCoverageByStationNumber(stationNumber));
-        if(fireStationOptional.isPresent()) {
-            logger.info("HTTP GET request received, SUCCESS");
-            return firestationService.getPersonsCoverageByStationNumber(stationNumber);
+        if(!personCoveredList.isEmpty()) {
+            logger.info("HTTP GET request received, SUCCESS / Response =" + response.toString());
         } else {
-            logger.error("HTTP GET request received, ERROR");
-            return empty;
+            logger.error("HTTP GET request received, ERROR / Response = " + response.toString());
         }
+        return response;
     }
 }

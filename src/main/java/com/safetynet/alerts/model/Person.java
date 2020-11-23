@@ -72,4 +72,9 @@ public class Person {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public String toString() {
+        return "Person: firstname= " + firstName + ", lastName = " + lastName + ", address = " + address + ", city = " + city + ", zip = " + zip + ", phone number = " + phone + ", email = " + email ;
+    }
 }

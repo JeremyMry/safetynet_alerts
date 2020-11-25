@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 public class PersonInfoController {
@@ -23,11 +23,12 @@ public class PersonInfoController {
     PersonInfoService personInfoService;
 
     @GetMapping("/personInfo")
-    public PersonInfo getAPersonInformation(@RequestParam String firstName, String lastName) {
-        PersonInfo response = personInfoService.getPersonInformation(firstName, lastName);
+    public List<PersonInfo> getAPersonInformation(@RequestParam String firstName, String lastName) {
+        List<PersonInfo> response = personInfoService.getPersonInformation(firstName, lastName);
 
         logger.info("Request = /personInfo?firstName=" + firstName + "&lastName=" + lastName);
-        if(response.getFirstName() == null && response.getLastName() == null) {
+        // If response.getFirstName and response.getLastName are null it means that the request is correct but the parameters doesn't match with anything the json file
+        if(!response.isEmpty()) {
             logger.info("HTTP GET request received, ERROR / Response = " + response.toString());
         } else {
             logger.error("HTTP GET request received, SUCCESS / Response = " + response.toString());

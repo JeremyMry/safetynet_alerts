@@ -28,9 +28,6 @@ public class SafetynetAlertsApplication {
 		return new InMemoryHttpTraceRepository();
 	}
 
-
 	@Bean
-	public Logger logger() {
-		return LogManager.getRootLogger();
-	}
+	public Logger logger() { return LogManager.getRootLogger(); }
 }

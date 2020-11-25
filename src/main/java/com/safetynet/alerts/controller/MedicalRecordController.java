@@ -27,11 +27,7 @@ public class MedicalRecordController {
         List<MedicalRecord> response = medicalRecordService.add(medicalRecord);
 
         logger.info("Request = " + medicalRecord );
-        if(!response.isEmpty()) {
-            logger.info("HTTP POST request received, SUCCESS / Response = " + response.toString());
-        } else {
-            logger.error("HTTP POST request received, ERROR / Response = " + response.toString());
-        }
+        logger.info("HTTP POST request received, SUCCESS / Response = " + response.toString());
         return response;
     }
 
@@ -40,11 +36,7 @@ public class MedicalRecordController {
         List<MedicalRecord> response = medicalRecordService.update(medicalRecord);
 
         logger.info("Request = " + medicalRecord );
-        if(!response.isEmpty()) {
-            logger.info("HTTP PUT request received, SUCCESS / Response = " + response.toString());
-        } else {
-            logger.error("HTTP PUT request received, ERROR / Response = " + response.toString());
-        }
+        logger.info("HTTP PUT request received, SUCCESS / Response = " + response.toString());
         return response;
     }
 
@@ -53,11 +45,7 @@ public class MedicalRecordController {
         List<MedicalRecord> response = medicalRecordService.delete(firstName, lastName);
 
         logger.info("Request = " + firstName + " " + lastName );
-        if(!response.isEmpty()) {
-            logger.info("HTTP DELETE request received, SUCCESS / Response = " + response.toString());
-        } else {
-            logger.error("HTTP DELETE request received, ERROR / Response = " + response.toString());
-        }
+        logger.info("HTTP DELETE request received, SUCCESS / Response = " + response.toString());
         return response;
     }
 }

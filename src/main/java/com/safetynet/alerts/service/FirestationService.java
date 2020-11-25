@@ -25,7 +25,6 @@ public class FirestationService implements IFirestationService {
         List<Firestation> listFirestations = dataContainer.getFirestations();
         listFirestations.add(firestation);
         return listFirestations;
-
     }
 
     @Override
@@ -52,9 +51,10 @@ public class FirestationService implements IFirestationService {
     }
 
     @Override
-    public StationCoverage getPersonsCoverageByStationNumber(String stationNumber) {
+    public List<StationCoverage> getPersonsCoverageByStationNumber(String stationNumber) {
         List<Person> personList = dataContainer.getPersons();
-        List<PersonCovered> personsCovered = new ArrayList<>();
+        List<PersonCovered> personCoveredList = new ArrayList<>();
+        List<StationCoverage> stationCoverageList = new ArrayList<>();
         int adult = 0;
         int child = 0;
 
@@ -65,7 +65,7 @@ public class FirestationService implements IFirestationService {
                 personCovered.setLastName(person.getLastName());
                 personCovered.setAddress(person.getAddress());
                 personCovered.setPhone(person.getPhone());
-                personsCovered.add(personCovered);
+                personCoveredList.add(personCovered);
                 if (medicalRecordService.getAge(personCovered.getFirstName(), personCovered.getLastName()) <= 18) {
                     child++;
                 } else {
@@ -73,7 +73,11 @@ public class FirestationService implements IFirestationService {
                 }
             }
         }
-        return new StationCoverage(adult, child, personsCovered);
+        if (!personCoveredList.isEmpty()) {
+            StationCoverage stationCoverage = new StationCoverage(adult, child, personCoveredList);
+            stationCoverageList.add(stationCoverage);
+        }
+        return stationCoverageList;
     }
 
     @Override

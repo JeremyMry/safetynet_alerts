@@ -31,320 +31,109 @@ public class FirestationServiceTest {
         firestationService = new FirestationService(dataContainer, medicalRecordService);
     }
 
+    // test the add method from FirestationService class
+    // it must add a firestation to the Firestation List then return this list with the new firestation added
     @Test
-    public void testAdd () throws Exception {
-        List<Firestation> listFirestation = new ArrayList<>();
+    public void testAdd () {
+        List<Firestation> firestationList = new ArrayList<>();
 
         Firestation firestation = new Firestation();
         firestation.setAddress("1509 Culver St");
         firestation.setStation("3");
 
-        listFirestation.add(firestation);
-
-        Firestation firestation2 = new Firestation();
-        firestation2.setAddress("29 15th St");
-        firestation2.setStation("2");
-
-        listFirestation.add(firestation2);
-
-        Firestation firestation3 = new Firestation();
-        firestation3.setAddress("834 Binoc Ave");
-        firestation3.setStation("3");
-
-        listFirestation.add(firestation3);
-
-        Firestation firestation4 = new Firestation();
-        firestation4.setAddress("644 Gershwin Cir");
-        firestation4.setStation("1");
-
-        listFirestation.add(firestation4);
-
-        Firestation firestation5 = new Firestation();
-        firestation5.setAddress("748 Townings Dr");
-        firestation5.setStation("3");
-
-        listFirestation.add(firestation5);
-
-        Firestation firestation6 = new Firestation();
-        firestation6.setAddress("112 Steppes Pl");
-        firestation6.setStation("3");
-
-        listFirestation.add(firestation6);
-
-        Firestation firestation7 = new Firestation();
-        firestation7.setAddress("489 Manchester St");
-        firestation7.setStation("4");
-
-        listFirestation.add(firestation7);
-
-        Firestation firestation8 = new Firestation();
-        firestation8.setAddress("892 Downing Ct");
-        firestation8.setStation("2");
-
-        listFirestation.add(firestation8);
-
-        Firestation firestation9 = new Firestation();
-        firestation9.setAddress("908 73rd St");
-        firestation9.setStation("1");
-
-        listFirestation.add(firestation9);
-
-        Firestation firestation10 = new Firestation();
-        firestation10.setAddress("112 Steppes Pl");
-        firestation10.setStation("4");
-
-        listFirestation.add(firestation10);
-
-        Firestation firestation11 = new Firestation();
-        firestation11.setAddress("947 E. Rose Dr");
-        firestation11.setStation("1");
-
-        listFirestation.add(firestation11);
-
-        Firestation firestation12 = new Firestation();
-        firestation12.setAddress("748 Townings Dr");
-        firestation12.setStation("3");
-
-        listFirestation.add(firestation12);
-
-        Firestation firestation13 = new Firestation();
-        firestation13.setAddress("951 LoneTree Rd");
-        firestation13.setStation("2");
-
-        listFirestation.add(firestation13);
-
-        assertEquals(13, listFirestation.size());
+        firestationList.add(firestation);
 
         Firestation newFirestation = new Firestation();
-        newFirestation.setAddress("ZZZZ");
-        newFirestation.setStation("3");
+        newFirestation.setAddress("1509 Culver St");
+        newFirestation.setStation("1");
 
-        when(dataContainer.getFirestations()).thenReturn(listFirestation);
-        listFirestation = firestationService.add(newFirestation);
-        assertEquals(14, listFirestation.size());
-        assertEquals(newFirestation.getAddress(), listFirestation.get(13).getAddress());
+        when(dataContainer.getFirestations()).thenReturn(firestationList);
+        firestationList = firestationService.add(newFirestation);
+
+        assertEquals(2, firestationList.size());
+        assertEquals(newFirestation.getAddress(), firestationList.get(1).getAddress());
     }
 
-
+    // test the update method from FirestationService class
+    // it must update a firestation from the Firestation List then return this list with the updated firestation
     @Test
-    public void testUpdate () throws Exception {
-        List<Firestation> listFirestation = new ArrayList<>();
-
+    public void testUpdate () {
+        List<Firestation> firestationList = new ArrayList<>();
         Firestation firestation = new Firestation();
         firestation.setAddress("1509 Culver St");
         firestation.setStation("3");
-
-        listFirestation.add(firestation);
-
-        Firestation firestation2 = new Firestation();
-        firestation2.setAddress("29 15th St");
-        firestation2.setStation("2");
-
-        listFirestation.add(firestation2);
-
-        Firestation firestation3 = new Firestation();
-        firestation3.setAddress("834 Binoc Ave");
-        firestation3.setStation("3");
-
-        listFirestation.add(firestation3);
-
-        Firestation firestation4 = new Firestation();
-        firestation4.setAddress("644 Gershwin Cir");
-        firestation4.setStation("1");
-
-        listFirestation.add(firestation4);
-
-        Firestation firestation5 = new Firestation();
-        firestation5.setAddress("748 Townings Dr");
-        firestation5.setStation("3");
-
-        listFirestation.add(firestation5);
-
-        Firestation firestation6 = new Firestation();
-        firestation6.setAddress("112 Steppes Pl");
-        firestation6.setStation("3");
-
-        listFirestation.add(firestation6);
-
-        Firestation firestation7 = new Firestation();
-        firestation7.setAddress("489 Manchester St");
-        firestation7.setStation("4");
-
-        listFirestation.add(firestation7);
-
-        Firestation firestation8 = new Firestation();
-        firestation8.setAddress("892 Downing Ct");
-        firestation8.setStation("2");
-
-        listFirestation.add(firestation8);
-
-        Firestation firestation9 = new Firestation();
-        firestation9.setAddress("908 73rd St");
-        firestation9.setStation("1");
-
-        listFirestation.add(firestation9);
-
-        Firestation firestation10 = new Firestation();
-        firestation10.setAddress("112 Steppes Pl");
-        firestation10.setStation("4");
-
-        listFirestation.add(firestation10);
-
-        Firestation firestation11 = new Firestation();
-        firestation11.setAddress("947 E. Rose Dr");
-        firestation11.setStation("1");
-
-        listFirestation.add(firestation11);
-
-        Firestation firestation12 = new Firestation();
-        firestation12.setAddress("748 Townings Dr");
-        firestation12.setStation("3");
-
-        listFirestation.add(firestation12);
-
-        Firestation firestation13 = new Firestation();
-        firestation13.setAddress("951 LoneTree Rd");
-        firestation13.setStation("2");
-
-        listFirestation.add(firestation13);
-
-        assertEquals(13, listFirestation.size());
-        assertEquals("2", listFirestation.get(12).getStation());
+        firestationList.add(firestation);
 
         Firestation updatedFirestation = new Firestation();
-        updatedFirestation.setAddress("951 LoneTree Rd");
+        updatedFirestation.setAddress("1509 Culver St");
         updatedFirestation.setStation("1");
 
-        when(dataContainer.getFirestations()).thenReturn(listFirestation);
-        listFirestation = firestationService.update(updatedFirestation);
+        List<Firestation> firestationList1 = new ArrayList<>();
+        Firestation firestation1 = new Firestation();
+        firestation1.setAddress("1509 Culver St");
+        firestation1.setStation("1");
+        firestationList1.add(firestation1);
 
-        assertEquals(13, listFirestation.size());
-        assertEquals("1", listFirestation.get(12).getStation());
+        when(dataContainer.getFirestations()).thenReturn(firestationList1);
+        firestationList = firestationService.update(updatedFirestation);
+
+        assertEquals(1, firestationList1.size());
+        assertEquals(firestationList.toString(), firestationList1.toString());
+        assertEquals("1", firestationList1.get(0).getStation());
     }
 
+    // test the delete method from FirestationService class
+    // it must delete a firestation from the Firestation List then return this list without the firestation deleted
     @Test
     public void testDelete () throws Exception {
-        List<Firestation> listFirestation = new ArrayList<>();
+        List<Firestation> firestationList = new ArrayList<>();
+        List<Firestation> firestationList1 = new ArrayList<>();
 
         Firestation firestation = new Firestation();
         firestation.setAddress("1509 Culver St");
         firestation.setStation("3");
 
-        listFirestation.add(firestation);
+        firestationList.add(firestation);
 
-        Firestation firestation2 = new Firestation();
-        firestation2.setAddress("29 15th St");
-        firestation2.setStation("2");
+        when(dataContainer.getFirestations()).thenReturn(firestationList);
+        firestationList = firestationService.delete(firestation.getAddress());
 
-        listFirestation.add(firestation2);
-
-        Firestation firestation3 = new Firestation();
-        firestation3.setAddress("834 Binoc Ave");
-        firestation3.setStation("3");
-
-        listFirestation.add(firestation3);
-
-        Firestation firestation4 = new Firestation();
-        firestation4.setAddress("644 Gershwin Cir");
-        firestation4.setStation("1");
-
-        listFirestation.add(firestation4);
-
-        Firestation firestation5 = new Firestation();
-        firestation5.setAddress("748 Townings Dr");
-        firestation5.setStation("3");
-
-        listFirestation.add(firestation5);
-
-        Firestation firestation6 = new Firestation();
-        firestation6.setAddress("112 Steppes Pl");
-        firestation6.setStation("3");
-
-        listFirestation.add(firestation6);
-
-        Firestation firestation7 = new Firestation();
-        firestation7.setAddress("489 Manchester St");
-        firestation7.setStation("4");
-
-        listFirestation.add(firestation7);
-
-        Firestation firestation8 = new Firestation();
-        firestation8.setAddress("892 Downing Ct");
-        firestation8.setStation("2");
-
-        listFirestation.add(firestation8);
-
-        Firestation firestation9 = new Firestation();
-        firestation9.setAddress("908 73rd St");
-        firestation9.setStation("1");
-
-        listFirestation.add(firestation9);
-
-        Firestation firestation10 = new Firestation();
-        firestation10.setAddress("112 Steppes Pl");
-        firestation10.setStation("4");
-
-        listFirestation.add(firestation10);
-
-        Firestation firestation11 = new Firestation();
-        firestation11.setAddress("947 E. Rose Dr");
-        firestation11.setStation("1");
-
-        listFirestation.add(firestation11);
-
-        Firestation firestation12 = new Firestation();
-        firestation12.setAddress("748 Townings Dr");
-        firestation12.setStation("3");
-
-        listFirestation.add(firestation12);
-
-        Firestation firestation13 = new Firestation();
-        firestation13.setAddress("951 LoneTree Rd");
-        firestation13.setStation("2");
-
-        listFirestation.add(firestation13);
-
-        assertEquals(13, listFirestation.size());
-        assertEquals("951 LoneTree Rd", listFirestation.get(12).getAddress());
-        assertEquals("2", listFirestation.get(12).getStation());
-
-        when(dataContainer.getFirestations()).thenReturn(listFirestation);
-        listFirestation = firestationService.delete(firestation.getAddress());
-
-        assertEquals(12, listFirestation.size());
+        assertEquals(firestationList1.toString(), firestationList.toString());
     }
 
+    // test the getPeoplesCoverageStation method from the FirestationService class
+    // it must return a List of Station Coverage
     @Test
     public void getPeoplesCoverageStationTest() {
-        List<Person> listPersons = new ArrayList<>();
+        List<Person> personList = new ArrayList<>();
 
         Person person1 = new Person();
         person1.setFirstName("John");
         person1.setLastName("Boyd");
         person1.setAddress("1509 Culver St");
         person1.setPhone("841-874-6512");
-        listPersons.add(person1);
+        personList.add(person1);
 
         Person person2 = new Person();
         person2.setFirstName("Jacob");
         person2.setLastName("Boyd");
         person2.setAddress("1509 Culver St");
         person2.setPhone("841-874-6513");
-        listPersons.add(person2);
+        personList.add(person2);
 
         Person person3 = new Person();
         person3.setFirstName("Tenley");
         person3.setLastName("Boyd");
         person3.setAddress("1509 Culver St");
         person3.setPhone("841-874-6512");
-        listPersons.add(person3);
+        personList.add(person3);
 
         Person person4 = new Person();
         person4.setFirstName("Roger");
         person4.setLastName("Boyd");
         person4.setAddress("1509 Culver St");
         person4.setPhone("841-874-6512");
-        listPersons.add(person4);
+        personList.add(person4);
 
         List<Firestation> listFirestation = new ArrayList<>();
         Firestation firestation = new Firestation();
@@ -408,80 +197,159 @@ public class FirestationServiceTest {
         personCoveredList.add(personCovered3);
 
         StationCoverage test = new StationCoverage(2, 2, personCoveredList);
+        List<StationCoverage> stationCoverageList = new ArrayList<>();
+        stationCoverageList.add(test);
 
-        when(dataContainer.getPersons()).thenReturn(listPersons);
+        when(dataContainer.getPersons()).thenReturn(personList);
         when(dataContainer.getFirestations()).thenReturn(listFirestation);
         when(dataContainer.getMedicalrecords()).thenReturn(medicalRecordList);
 
         Assert.assertNotNull(firestationService.getPersonsCoverageByStationNumber("3"));
-        Assert.assertTrue(new ReflectionEquals(test.getAdults()).matches(firestationService.getPersonsCoverageByStationNumber("3").getAdults()));
-        Assert.assertTrue(new ReflectionEquals(test.getChild()).matches(firestationService.getPersonsCoverageByStationNumber("3").getChild()));
-        Assert.assertTrue(new ReflectionEquals(test.getPersonsCovered()).matches(firestationService.getPersonsCoverageByStationNumber("3").getPersonsCovered()));
+        Assert.assertEquals(stationCoverageList.toString(), firestationService.getPersonsCoverageByStationNumber("3").toString());
     }
 
+    // test the getPeoplesCoverageStation method from the FirestationService class when the station number doesn't match anything
+    // it must return an empty List of Station Coverage
+    @Test
+    public void getPeoplesCoverageStationTestWithNoDataTest() {
+        List<Person> personList = new ArrayList<>();
+        List<MedicalRecord> medicalRecordList = new ArrayList<>();
+        List<PersonCovered> personCoveredList = new ArrayList<>();
+        List<Firestation> firestationList = new ArrayList<>();
+        Firestation firestation = new Firestation("000", "3");
+        firestationList.add(firestation);
+        List<StationCoverage> stationCoverageList = new ArrayList<>();
+
+        when(dataContainer.getPersons()).thenReturn(personList);
+        when(dataContainer.getFirestations()).thenReturn(firestationList);
+        when(dataContainer.getMedicalrecords()).thenReturn(medicalRecordList);
+
+        Assert.assertNotNull(firestationService.getPersonsCoverageByStationNumber("2"));
+        Assert.assertEquals(stationCoverageList.toString(), firestationService.getPersonsCoverageByStationNumber("2").toString());
+    }
+
+    // test the getPeoplesCoverageStation method from the FirestationService class when the station number is incorrect
+    // it must return an empty List of Station Coverage
+    @Test
+    public void getPeoplesCoverageStationTestWithIncorrectParamTest() {
+        List<Person> personList = new ArrayList<>();
+        List<MedicalRecord> medicalRecordList = new ArrayList<>();
+        List<PersonCovered> personCoveredList = new ArrayList<>();
+        List<Firestation> firestationList = new ArrayList<>();
+        List<StationCoverage> stationCoverageList = new ArrayList<>();
+
+        when(dataContainer.getPersons()).thenReturn(personList);
+        when(dataContainer.getFirestations()).thenReturn(firestationList);
+        when(dataContainer.getMedicalrecords()).thenReturn(medicalRecordList);
+
+        Assert.assertNotNull(firestationService.getPersonsCoverageByStationNumber(""));
+        Assert.assertEquals(stationCoverageList.toString(), firestationService.getPersonsCoverageByStationNumber("").toString());
+    }
+
+    // test the getFirestationStationNumberByAddress method from the FirestationService class
+    // it must return a List of Firestation number
     @Test
     public void getFirestationStationNumberByAddressTest() {
-        List<Firestation> listFirestation = new ArrayList<>();
+        List<Firestation> firestationList = new ArrayList<>();
         Firestation firestation = new Firestation();
         firestation.setAddress("1509 Culver St");
         firestation.setStation("3");
-        listFirestation.add(firestation);
+        firestationList.add(firestation);
         List<String> actual = new ArrayList<>();
         actual.add("3");
 
-        when(dataContainer.getFirestations()).thenReturn(listFirestation);
+        when(dataContainer.getFirestations()).thenReturn(firestationList);
 
         Assert.assertNotNull(firestationService.getFireStationStationNumberByAddress("1509 Culver St"));
         Assert.assertEquals(1, firestationService.getFireStationStationNumberByAddress("1509 Culver St").size());
-        Assert.assertArrayEquals(actual.toArray(), firestationService.getFireStationStationNumberByAddress("1509 Culver St").toArray());
+        Assert.assertEquals(actual.toString(), firestationService.getFireStationStationNumberByAddress("1509 Culver St").toString());
     }
 
+    // test the getFirestationStationNumberByAddress method from the FirestationService class when the station doesn't match with anything
+    // it must return an empty List of Firestation number
     @Test
-    public void getFirestationStationNumberByAddressWithNoParamTest() {
-        List<Firestation> listFirestation = new ArrayList<>();
+    public void getFirestationStationNumberByAddressWithIncorrectNoDataTest() {
+        List<Firestation> firestationList = new ArrayList<>();
         Firestation firestation = new Firestation();
         firestation.setAddress("1509 Culver St");
         firestation.setStation("3");
-        listFirestation.add(firestation);
+        firestationList.add(firestation);
         List<String> actual = new ArrayList<>();
-        actual.add("3");
 
-        when(dataContainer.getFirestations()).thenReturn(listFirestation);
+        when(dataContainer.getFirestations()).thenReturn(firestationList);
 
-        Assert.assertNotNull(firestationService.getFireStationStationNumberByAddress(null));
-        Assert.assertEquals(0, firestationService.getFireStationStationNumberByAddress(null).size());
+        Assert.assertNotNull(firestationService.getFireStationStationNumberByAddress("2"));
+        Assert.assertEquals(actual.toString(), firestationService.getFireStationStationNumberByAddress("2").toString());
     }
 
+    // test the getFirestationStationNumberByAddress method from the FirestationService class when the station is incorrect
+    // it must return an empty List of Firestation number
+    @Test
+    public void getFirestationStationNumberByAddressWithIncorrectParamTest() {
+        List<Firestation> firestationList = new ArrayList<>();
+        Firestation firestation = new Firestation();
+        firestation.setAddress("1509 Culver St");
+        firestation.setStation("3");
+        firestationList.add(firestation);
+        List<String> actual = new ArrayList<>();
+
+        when(dataContainer.getFirestations()).thenReturn(firestationList);
+
+        Assert.assertNotNull(firestationService.getFireStationStationNumberByAddress(""));
+        Assert.assertEquals(actual.toString(), firestationService.getFireStationStationNumberByAddress("").toString());
+    }
+
+    // test the getFirestationAddressByStationNumber method from the FirestationService class
+    // it must return a List of Firestation address
     @Test
     public void getFirestationAddressByStationNumberTest() {
-        List<Firestation> listFirestation = new ArrayList<>();
+        List<Firestation> firestationList = new ArrayList<>();
         Firestation firestation = new Firestation();
         firestation.setAddress("1509 Culver St");
         firestation.setStation("3");
-        listFirestation.add(firestation);
+        firestationList.add(firestation);
         List<String> actual = new ArrayList<>();
         actual.add("1509 Culver St");
 
-        when(dataContainer.getFirestations()).thenReturn(listFirestation);
+        when(dataContainer.getFirestations()).thenReturn(firestationList);
 
         Assert.assertNotNull(firestationService.getFireStationAddressByStationNumber("3"));
         Assert.assertEquals(1, firestationService.getFireStationAddressByStationNumber("3").size());
-        Assert.assertArrayEquals(actual.toArray(), firestationService.getFireStationAddressByStationNumber("3").toArray());
+        Assert.assertEquals(actual.toString(), firestationService.getFireStationAddressByStationNumber("3").toString());
     }
 
+    // test the getFirestationAddressByStationNumber method from the FirestationService class when the station number doesn't match with anything
+    // it must return an empty List of Firestation address
     @Test
-    public void getFirestationAddressByStationNumberWithNoParamTest() {
-        List<Firestation> listFirestation = new ArrayList<>();
+    public void getFirestationAddressByStationNumberWithNoDataTest() {
+        List<Firestation> firestationList = new ArrayList<>();
+        Firestation firestation = new Firestation();
+        firestation.setAddress("1509 Culver St");
+        firestation.setStation("2");
+        firestationList.add(firestation);
+        List<String> actual = new ArrayList<>();
+
+        when(dataContainer.getFirestations()).thenReturn(firestationList);
+
+        Assert.assertNotNull(firestationService.getFireStationAddressByStationNumber("3"));
+        Assert.assertEquals(actual.toString(), firestationService.getFireStationAddressByStationNumber("3").toString());
+    }
+
+    // test the getFirestationAddressByStationNumber method from the FirestationService class when the station is incorrect
+    // it must return an empty List of Firestation address
+    @Test
+    public void getFirestationAddressByStationNumberWithIncorrectParamTest() {
+        List<Firestation> firestationList = new ArrayList<>();
         Firestation firestation = new Firestation();
         firestation.setAddress("1509 Culver St");
         firestation.setStation("3");
-        listFirestation.add(firestation);
+        firestationList.add(firestation);
+
         List<String> actual = new ArrayList<>();
-        actual.add("1509 Culver St");
 
-        when(dataContainer.getFirestations()).thenReturn(listFirestation);
+        when(dataContainer.getFirestations()).thenReturn(firestationList);
 
-        Assert.assertNotNull(firestationService.getFireStationAddressByStationNumber(null));
-        Assert.assertEquals(0, firestationService.getFireStationAddressByStationNumber(null).size());
+        Assert.assertNotNull(firestationService.getFireStationAddressByStationNumber(""));
+        Assert.assertEquals(actual.toString(), firestationService.getFireStationAddressByStationNumber("").toString());
     }
 }

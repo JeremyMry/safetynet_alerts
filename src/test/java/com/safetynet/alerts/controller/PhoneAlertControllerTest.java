@@ -29,6 +29,8 @@ public class PhoneAlertControllerTest {
     @MockBean
     private PhoneAlertService phoneAlertService;
 
+    // Test the getPhoneNumbersByCoverageStation method when the request is correct
+    // It must return a 200 status and a json array
     @Test
     public void getPhoneNumbersByStationTest() throws Exception {
         List<String> stringList = new ArrayList<>();
@@ -43,6 +45,8 @@ public class PhoneAlertControllerTest {
                 .andExpect(content().json("[\"000\"]"));
     }
 
+    // Test the getPhoneNumbersByCoverageStation method when the request parameter name is incorrect
+    // It must return a 400 status
     @Test
     public void getPhoneNumbersByStationTestWithIncorrectParamName() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/phoneAlert")
@@ -51,6 +55,8 @@ public class PhoneAlertControllerTest {
                 .andExpect(status().is4xxClientError());
     }
 
+    // Test the getPhoneNumbersByCoverageStation method when the request parameter value is incorrect
+    // It must return a 200 status and an empty json array
     @Test
     public void getPhoneNumbersByStationTestWithIncorrectParamValue() throws Exception {
         List<String> stringList = new ArrayList<>();

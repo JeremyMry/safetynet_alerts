@@ -13,7 +13,7 @@ public interface IFirestationService {
 
     List<Firestation> delete(String address);
 
-    StationCoverage getPersonsCoverageByStationNumber(String stationNumber);
+    List<StationCoverage> getPersonsCoverageByStationNumber(String stationNumber);
 
     List<String> getFireStationAddressByStationNumber(String stationNumber);
 

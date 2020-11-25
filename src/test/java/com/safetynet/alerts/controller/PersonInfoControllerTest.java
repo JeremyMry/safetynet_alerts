@@ -17,6 +17,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -31,21 +34,26 @@ public class PersonInfoControllerTest {
     @MockBean
     private PersonInfoService personInfoService;
 
-
+    // Test the getAPersonInformation method when the request is correct
+    // It must return a 200 status and a json array
     @Test
     public void getPersonInformationTest() throws Exception {
 
         PersonInfo pi = new PersonInfo("John", "Boyd", "000", 15, "000", null, null);
+        List<PersonInfo> personInfoList = new ArrayList<>();
+        personInfoList.add(pi);
 
-        when(personInfoService.getPersonInformation("John", "Boyd")).thenReturn(pi);
+        when(personInfoService.getPersonInformation("John", "Boyd")).thenReturn(personInfoList);
 
         this.mvc.perform(MockMvcRequestBuilders.get("/personInfo")
                 .param("firstName", "John").param("lastName", "Boyd"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().json("{\"firstName\":\"John\",\"lastName\":\"Boyd\",\"address\":\"000\",\"age\":15,\"email\":\"000\",\"medications\":null,\"allergies\":null}"));
+                .andExpect(content().json("[{\"firstName\":\"John\",\"lastName\":\"Boyd\",\"address\":\"000\",\"age\":15,\"email\":\"000\",\"medications\":null,\"allergies\":null}]"));
     }
 
+    // Test the getAPersonInformation method when the request parameter name is incorrect
+    // It must return a 400 status
     @Test
     public void getPersonInformationTestWithIncorrectParamName() throws Exception {
 
@@ -55,17 +63,19 @@ public class PersonInfoControllerTest {
                 .andExpect(status().is4xxClientError());
     }
 
+    // Test the getAPersonInformation method when the request parameter value is incorrect
+    // It must return a 200 status and an empty json array
     @Test
     public void getPersonInformationTestWithIncorrectParamValue() throws Exception {
-        PersonInfo pi = new PersonInfo();
+        List<PersonInfo> personInfoList = new ArrayList<>();
 
-        when(personInfoService.getPersonInformation("a", "a")).thenReturn(pi);
+        when(personInfoService.getPersonInformation("", "")).thenReturn(personInfoList);
 
         this.mvc.perform(MockMvcRequestBuilders.get("/personInfo")
-                .param("firstName", "a").param("lastName", "a"))
+                .param("firstName", "").param("lastName", ""))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().json("{}"));
+                .andExpect(content().json("[]"));
     }
 
 }

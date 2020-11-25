@@ -31,6 +31,8 @@ public class ChildAlertControllerTest {
     @MockBean
     private ChildAlertService childAlertService;
 
+    // Test the getChildByAddress method when the request is correct
+    // It must return a 200 status and json array
     @Test
     public void getChildByAddressTest() throws Exception {
         List<String> family = new ArrayList<>();
@@ -46,6 +48,8 @@ public class ChildAlertControllerTest {
                 .andExpect(content().json("[{\"firstName\":\"eee\",\"lastName\":\"eee\",\"age\":15,\"family\":[]}]"));
     }
 
+    // Test the getChildByAddress method when the request parameter name is incorrect
+    // It must return a 400 status
     @Test
     public void getChildByAddressTestWithIncorrectParamName() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/childAlert")
@@ -54,6 +58,8 @@ public class ChildAlertControllerTest {
                 .andExpect(status().is4xxClientError());
     }
 
+    // Test the getChildByAddress method when the request parameter value is incorrect
+    // It must return a 200 status and an empty json array
     @Test
     public void getChildByAddressTestWithIncorrectParamValue() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/childAlert")

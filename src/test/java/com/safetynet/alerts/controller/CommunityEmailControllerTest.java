@@ -28,6 +28,8 @@ public class CommunityEmailControllerTest {
     @MockBean
     private CommunityEmailService communityEmailService;
 
+    // Test the getEmailsByCity method when the request is correct
+    // It must return a 200 status and json array
     @Test
     public void getEmailTestByCity() throws Exception {
         List<String> email = new ArrayList<>();
@@ -41,6 +43,8 @@ public class CommunityEmailControllerTest {
                 .andExpect(content().json("[john.doe@testmail.com]"));
     }
 
+    // Test the getEmailsByCity method when the request parameter name is incorrect
+    // It must return a 400 status
     @Test
     public void getEmailTestByCityWithIncorrectParamName() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/communityEmail")
@@ -49,6 +53,8 @@ public class CommunityEmailControllerTest {
                 .andExpect(status().is4xxClientError());
     }
 
+    // Test the getEmailsByCity method when the request parameter value is incorrect
+    // It must return a 200 status and an empty json array
     @Test
     public void getEmailTestByCityWithIncorrectParamValue() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/communityEmail")

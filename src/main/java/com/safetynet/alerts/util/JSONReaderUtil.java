@@ -11,6 +11,7 @@ public class JSONReaderUtil {
         DataContainer obj = new DataContainer();
         ObjectMapper mapper = new ObjectMapper();
         try {
+            //read the json file stored in resources and parse it into the DataContainer model
             obj = mapper.readValue(new File("./src/main/resources/data.json"), DataContainer.class);
             return obj;
         } catch (Exception e) {

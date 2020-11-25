@@ -30,57 +30,10 @@ public class PhoneAlertServiceTest {
         phoneAlertService = new PhoneAlertService(dataContainer, firestationService);
     }
 
+    // test the getPhoneNumberByCoverage method from the PhoneAlertService class
+    // it must return a List of string
     @Test
-    public void getPhoneNumberListWithOneStation() {
-        List<Person> listPersons = new ArrayList<>();
-
-        Person person = new Person();
-        person.setAddress("1510 Culver St");
-        person.setPhone("testphone1");
-        listPersons.add(person);
-
-        Person person1 = new Person();
-        person1.setAddress("1509 Culver St");
-        person1.setPhone("testphone1");
-        listPersons.add(person1);
-
-        Person person2 = new Person();
-        person2.setAddress("1509 Culver St");
-        person2.setPhone("testphone2");
-        listPersons.add(person2);
-
-        Person person3 = new Person();
-        person3.setAddress("1509 Culver St");
-        person3.setPhone("testphone3");
-        listPersons.add(person3);
-
-        Person person4 = new Person();
-        person4.setAddress("1509 Culver St");
-        person4.setPhone("testphone4");
-        listPersons.add(person4);
-
-        Person person5 = new Person();
-        person5.setAddress("1509 Culver St");
-        person5.setPhone("testphone5");
-        listPersons.add(person5);
-
-
-
-        List<Firestation> firestationList = new ArrayList<>();
-        Firestation firestation = new Firestation();
-        firestation.setStation("2");
-        firestation.setAddress("1509 Culver St");
-        firestationList.add(firestation);
-
-        when(dataContainer.getPersons()).thenReturn(listPersons);
-        when(dataContainer.getFirestations()).thenReturn(firestationList);
-
-        Assert.assertNotNull(phoneAlertService.getPhoneNumberByCoverage("2"));
-        Assert.assertEquals(5, phoneAlertService.getPhoneNumberByCoverage("2").size());
-    }
-
-    @Test
-    public void getPhoneNumberListWithTwoStation() {
+    public void getPhoneNumberListTest() {
         List<Person> listPersons = new ArrayList<>();
         Person person1 = new Person();
         person1.setAddress("1510 Culver St");
@@ -118,37 +71,50 @@ public class PhoneAlertServiceTest {
         firestation1.setAddress("1510 Culver St");
         firestationList.add(firestation1);
 
-        when(dataContainer.getPersons()).thenReturn(listPersons);
-        when(dataContainer.getFirestations()).thenReturn(firestationList);
-
-        Assert.assertNotNull(phoneAlertService.getPhoneNumberByCoverage("2"));
-        Assert.assertEquals(5, phoneAlertService.getPhoneNumberByCoverage("2").size());
-    }
-
-    @Test
-    public void getPhoneNumberListWithNoData() {
-        List<Person> listPersons = new ArrayList<>();
-
-        List<Firestation> firestationList = new ArrayList<>();
+        List<String> phoneList = new ArrayList<>();
+        phoneList.add("testphone1");
+        phoneList.add("testphone2");
+        phoneList.add("testphone3");
+        phoneList.add("testphone4");
+        phoneList.add("testphone5");
 
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getFirestations()).thenReturn(firestationList);
 
         Assert.assertNotNull(phoneAlertService.getPhoneNumberByCoverage("2"));
-        Assert.assertEquals(0, phoneAlertService.getPhoneNumberByCoverage("2").size());
+        Assert.assertEquals(phoneList.toString(), phoneAlertService.getPhoneNumberByCoverage("2").toString());
     }
 
+    // test the getPhoneNumberByCoverage method from the PhoneAlertService class when the parameters doesn't match with anything
+    // it must return an empty List of string
     @Test
-    public void getPhoneNumberListWithNoStationNumber() {
+    public void getPhoneNumberListWithNoDataTest() {
         List<Person> listPersons = new ArrayList<>();
+        List<String> phoneList = new ArrayList<>();
+        List<Firestation> firestationList = new ArrayList<>();
+        Firestation firestation = new Firestation("000", "3");
+        firestationList.add(firestation);
 
+        when(dataContainer.getPersons()).thenReturn(listPersons);
+        when(dataContainer.getFirestations()).thenReturn(firestationList);
+
+        Assert.assertNotNull(phoneAlertService.getPhoneNumberByCoverage("2"));
+        Assert.assertEquals(phoneList.toString(), phoneAlertService.getPhoneNumberByCoverage("2").toString());
+    }
+
+    // test the getPhoneNumberByCoverage method from the PhoneAlertService class when the parameters are incorrect
+    // it must return an empty List of string
+    @Test
+    public void getPhoneNumberListWithIncorrectParamTest() {
+        List<Person> listPersons = new ArrayList<>();
+        List<String> phoneList = new ArrayList<>();
         List<Firestation> firestationList = new ArrayList<>();
 
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getFirestations()).thenReturn(firestationList);
 
-        Assert.assertNotNull(phoneAlertService.getPhoneNumberByCoverage(null));
-        Assert.assertEquals(0, phoneAlertService.getPhoneNumberByCoverage(null).size());
+        Assert.assertNotNull(phoneAlertService.getPhoneNumberByCoverage(""));
+        Assert.assertEquals(phoneList.toString(), phoneAlertService.getPhoneNumberByCoverage("").toString());
     }
 
 }

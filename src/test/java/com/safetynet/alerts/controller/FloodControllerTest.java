@@ -31,6 +31,8 @@ public class FloodControllerTest {
     @MockBean
     private FloodService floodService;
 
+    // Test the getHouseholdByFireStationAddress method when the request parameter is correct
+    // It must return a 200 status and json array
     @Test
     public void getHouseholdByFireStationAddressTest() throws Exception {
         List<Household> hh = new ArrayList<>();
@@ -49,6 +51,8 @@ public class FloodControllerTest {
                 .andExpect(content().json("[{\"address\":\"eee\",\"flood\":[{\"firstName\":\"eee\",\"lastName\":\"eee\",\"age\":15,\"phone\":\"000\",\"medications\":null,\"allergies\":null}]}]"));
     }
 
+    // Test the getHouseholdByFireStationAddress method when the request parameter name is incorrect
+    // It must return a 400 status
     @Test
     public void getHouseholdByFireStationAddressTestWithIncorrectParamName() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/flood/stations")
@@ -57,6 +61,8 @@ public class FloodControllerTest {
                 .andExpect(status().is4xxClientError());
     }
 
+    // Test the getHouseholdByFireStationAddress method when the request parameter value is incorrect
+    // It must return a 200 status and an empty json array
     @Test
     public void getHouseholdByFireStationAddressTestWithIncorrectParamValue() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/flood/stations")

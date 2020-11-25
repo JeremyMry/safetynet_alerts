@@ -28,6 +28,7 @@ public class FireAlertController {
         List<FireAlert> response = fireAlertService.getPersonsByAddress(address);
 
         logger.info("Request = /fire?address=" + address );
+        // If the response list is empty, it means that the request is correct but the parameter doesn't match with anything the json file
         if(!response.isEmpty()) {
             logger.info("HTTP GET request received, SUCCESS / Response = " + response.toString());
         } else {

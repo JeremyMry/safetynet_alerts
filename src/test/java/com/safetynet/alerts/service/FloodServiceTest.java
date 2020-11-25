@@ -1,8 +1,6 @@
 package com.safetynet.alerts.service;
 
-import com.safetynet.alerts.model.DataContainer;
-import com.safetynet.alerts.model.Firestation;
-import com.safetynet.alerts.model.Person;
+import com.safetynet.alerts.model.*;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -30,38 +28,10 @@ public class FloodServiceTest {
         firestationService = new FirestationService(dataContainer, medicalRecordService);
         floodService = new FloodService(dataContainer, medicalRecordService, firestationService);
     }
-
+    // test the getHouseholdByStationAddress method from FloodService class
+    // it must return a List of Household
     @Test
-    public void getFloodWithOneAddress() {
-        List<Person> listPersons = new ArrayList<>();
-        Person person1 = new Person();
-        person1.setFirstName("John");
-        person1.setLastName("Boyd");
-        person1.setAddress("1509 Culver St");
-        person1.setPhone("test");
-        listPersons.add(person1);
-
-        Person person2 = new Person();
-        person2.setFirstName("Jacob");
-        person2.setLastName("Boyd");
-        person2.setAddress("1509 Culver St");
-        listPersons.add(person2);
-
-        List<Firestation> firestationList = new ArrayList<>();
-        Firestation firestation = new Firestation();
-        firestation.setStation("2");
-        firestation.setAddress("1509 Culver St");
-        firestationList.add(firestation);
-
-        when(dataContainer.getPersons()).thenReturn(listPersons);
-        when(dataContainer.getFirestations()).thenReturn(firestationList);
-
-        Assert.assertNotNull(floodService.getHouseholdByStationAddress("2"));
-        Assert.assertEquals(1, floodService.getHouseholdByStationAddress("2").size());
-    }
-
-    @Test
-    public void getFloodWithTwoAddress() {
+    public void getFloodTest() {
         List<Person> listPersons = new ArrayList<>();
         Person person1 = new Person();
         person1.setFirstName("John");
@@ -74,6 +44,7 @@ public class FloodServiceTest {
         person2.setFirstName("Jacob");
         person2.setLastName("Boyd");
         person2.setAddress("1510 Culver St");
+        person2.setPhone("test");
         listPersons.add(person2);
 
         List<Firestation> firestationList = new ArrayList<>();
@@ -87,35 +58,57 @@ public class FloodServiceTest {
         firestation1.setAddress("1510 Culver St");
         firestationList.add(firestation1);
 
+        List<String> medications = new ArrayList<>();
+        List<String> allergies = new ArrayList<>();
+        Flood flood = new Flood("John", "Boyd", 0, "test", medications, allergies );
+        List<Flood> floodList = new ArrayList<>();
+        floodList.add(flood);
+        Flood flood1 = new Flood("Jacob", "Boyd", 0, "test", medications, allergies );
+        List<Flood> floodList1 = new ArrayList<>();
+        floodList1.add(flood1);
+
+        Household household = new Household("1509 Culver St", floodList);
+        Household household1 = new Household("1510 Culver St", floodList1);
+
+        List<Household> householdList = new ArrayList<>();
+        householdList.add(household);
+        householdList.add(household1);
+
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getFirestations()).thenReturn(firestationList);
 
         Assert.assertNotNull(floodService.getHouseholdByStationAddress("2"));
-        Assert.assertEquals(2, floodService.getHouseholdByStationAddress("2").size());
+        Assert.assertEquals(householdList.toString(), floodService.getHouseholdByStationAddress("2").toString());
     }
 
+    // test the getHouseholdByStationAddress method from FloodService class when the station number doesn't match anything
+    // it must return an empty List of Household
     @Test
-    public void getFloodWithNoData() {
+    public void getFloodWithNoDataTest() {
         List<Person> listPersons = new ArrayList<>();
         List<Firestation> firestationList = new ArrayList<>();
+        List<Household> householdList = new ArrayList<>();
 
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getFirestations()).thenReturn(firestationList);
 
         Assert.assertNotNull(floodService.getHouseholdByStationAddress("2"));
-        Assert.assertEquals(0, floodService.getHouseholdByStationAddress("2").size());
+        Assert.assertEquals(householdList.toString(), floodService.getHouseholdByStationAddress("2").toString());
     }
 
+    // test the getHouseholdByStationAddress method from FloodService class when the station number is incorrect
+    // it must return an empty List of Household
     @Test
-    public void getFloodWithNoStationNumber() {
+    public void getFloodWithIncorrectParamNumberTest() {
         List<Person> listPersons = new ArrayList<>();
         List<Firestation> firestationList = new ArrayList<>();
+        List<Household> householdList = new ArrayList<>();
 
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getFirestations()).thenReturn(firestationList);
 
-        Assert.assertNotNull(floodService.getHouseholdByStationAddress(null));
-        Assert.assertEquals(0, floodService.getHouseholdByStationAddress(null).size());
+        Assert.assertNotNull(floodService.getHouseholdByStationAddress(""));
+        Assert.assertEquals(householdList.toString(), floodService.getHouseholdByStationAddress("").toString());
     }
 
 }

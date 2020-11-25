@@ -31,255 +31,88 @@ public class PersonServiceTest {
         personService = new PersonService(dataContainer);
     }
 
+    // test the add method from PersonService class
+    // it must add a Person to the List of Person and then return the List of Person with the new Person added
     @Test
     public void testAdd() throws Exception {
-        List<Person> listPersons = new ArrayList<>();
-        Person person1 = new Person();
-        person1.setFirstName("John");
-        person1.setLastName("Boyd");
-        person1.setAddress("1509 Culver St");
-        person1.setCity("Culver");
-        person1.setZip("97451");
-        person1.setPhone("841-874-6512");
-        person1.setEmail("jaboyd@email.com");
+        List<Person> personList = new ArrayList<>();
+        Person person = new Person();
+        person.setFirstName("John");
+        person.setLastName("Boyd");
+        person.setAddress("1509 Culver St");
+        person.setCity("Culver");
+        person.setZip("97451");
+        person.setPhone("841-874-6512");
+        person.setEmail("jaboyd@email.com");
 
-        listPersons.add(person1);
+        personList.add(person);
 
-        Person person2 = new Person();
-        person2.setFirstName("Jacob");
-        person2.setLastName("Boyd");
-        person2.setAddress("1509 Culver St");
-        person2.setCity("Culver");
-        person2.setZip("97451");
-        person2.setPhone("841-874-6513");
-        person2.setEmail("drk@email.com" );
-
-        listPersons.add(person2);
-
-        Person person3 = new Person();
-        person3.setFirstName("Tenley");
-        person3.setLastName("Boyd");
-        person3.setAddress("1509 Culver St");
-        person3.setCity("Culver");
-        person3.setZip("97451");
-        person3.setPhone("841-874-6512");
-        person3.setEmail("tenz@email.com");
-
-        listPersons.add(person3);
-
-        Person person4 = new Person();
-        person4.setFirstName("Roger");
-        person4.setLastName("Boyd");
-        person4.setAddress("1509 Culver St");
-        person4.setCity("Culver");
-        person4.setZip("97451");
-        person4.setPhone("841-874-6512");
-        person4.setEmail("jaboyd@email.com");
-
-        listPersons.add(person4);
-
-        Person person5 = new Person();
-        person5.setFirstName("Felicia");
-        person5.setLastName("Boyd");
-        person5.setAddress("1509 Culver St");
-        person5.setCity("Culver");
-        person5.setZip("97451");
-        person5.setPhone("841-874-6544");
-        person5.setEmail("jaboyd@email.com");
-
-        listPersons.add(person5);
-
-        Person person6 = new Person();
-        person6.setFirstName("Allison");
-        person6.setLastName("Boyd");
-        person6.setAddress("112 Steppes Pl");
-        person6.setCity("Culver");
-        person6.setZip("97451");
-        person6.setPhone("841-874-9888");
-        person6.setEmail("aly@imail.com");
-
-        listPersons.add(person6);
-
-        assertEquals(6, listPersons.size());
 
         Person newPerson = new Person();
-        newPerson.setFirstName("AAAAA");
-        newPerson.setLastName("BBBBB");
-        newPerson.setAddress("CCCCCC");
-        newPerson.setCity("DDDDD");
-        newPerson.setZip("EEEEE");
-        newPerson.setPhone("FFFFF");
-        newPerson.setEmail("GGGGG");
+        newPerson.setFirstName("John");
+        newPerson.setLastName("Doe");
+        newPerson.setAddress("random");
+        newPerson.setCity("Random");
+        newPerson.setZip("000");
+        newPerson.setPhone("444-444");
+        newPerson.setEmail("john.doe@testmail.com");
 
-        when(dataContainer.getPersons()).thenReturn(listPersons);
-        listPersons = personService.add(newPerson);
+        when(dataContainer.getPersons()).thenReturn(personList);
+        personList = personService.add(newPerson);
 
-        assertEquals(7, listPersons.size());
-        assertEquals(newPerson.getFirstName(), listPersons.get(6).getFirstName());
-        assertEquals(newPerson.getLastName(), listPersons.get(6).getLastName());
-        assertEquals(newPerson.getAddress(), listPersons.get(6).getAddress());
-        assertEquals(newPerson.getCity(), listPersons.get(6).getCity());
-        assertEquals(newPerson.getZip(), listPersons.get(6).getZip());
-        assertEquals(newPerson.getPhone(), listPersons.get(6).getPhone());
-        assertEquals(newPerson.getEmail(), listPersons.get(6).getEmail());
+        assertEquals(2, personList.size());
+        assertEquals(newPerson.getFirstName(), personList.get(1).getFirstName());
+        assertEquals(newPerson.getLastName(), personList.get(1).getLastName());
+        assertEquals(newPerson.getAddress(), personList.get(1).getAddress());
+        assertEquals(newPerson.getCity(), personList.get(1).getCity());
+        assertEquals(newPerson.getZip(), personList.get(1).getZip());
+        assertEquals(newPerson.getPhone(), personList.get(1).getPhone());
+        assertEquals(newPerson.getEmail(), personList.get(1).getEmail());
     }
 
+    // test the update method from PersonService class
+    // it must update a Person from the List of Person and then return the List of Person with the  Person updated
     @Test
-    public void testUpdate() throws Exception {
-        List<Person> listPersons = new ArrayList<>();
-        Person person1 = new Person();
-        person1.setFirstName("John");
-        person1.setLastName("Boyd");
-        person1.setAddress("1509 Culver St");
-        person1.setCity("Culver");
-        person1.setZip("97451");
-        person1.setPhone("841-874-6512");
-        person1.setEmail("jaboyd@email.com");
-
-        listPersons.add(person1);
-
-        Person person2 = new Person();
-        person2.setFirstName("Jacob");
-        person2.setLastName("Boyd");
-        person2.setAddress("1509 Culver St");
-        person2.setCity("Culver");
-        person2.setZip("97451");
-        person2.setPhone("841-874-6513");
-        person2.setEmail("drk@email.com" );
-
-        listPersons.add(person2);
-
-        Person person3 = new Person();
-        person3.setFirstName("Tenley");
-        person3.setLastName("Boyd");
-        person3.setAddress("1509 Culver St");
-        person3.setCity("Culver");
-        person3.setZip("97451");
-        person3.setPhone("841-874-6512");
-        person3.setEmail("tenz@email.com");
-
-        listPersons.add(person3);
-
-        Person person4 = new Person();
-        person4.setFirstName("Roger");
-        person4.setLastName("Boyd");
-        person4.setAddress("1509 Culver St");
-        person4.setCity("Culver");
-        person4.setZip("97451");
-        person4.setPhone("841-874-6512");
-        person4.setEmail("jaboyd@email.com");
-
-        listPersons.add(person4);
-
-        Person person5 = new Person();
-        person5.setFirstName("Felicia");
-        person5.setLastName("Boyd");
-        person5.setAddress("1509 Culver St");
-        person5.setCity("Culver");
-        person5.setZip("97451");
-        person5.setPhone("841-874-6544");
-        person5.setEmail("jaboyd@email.com");
-
-        listPersons.add(person5);
-
-        Person person6 = new Person();
-        person6.setFirstName("Allison");
-        person6.setLastName("Boyd");
-        person6.setAddress("112 Steppes Pl");
-        person6.setCity("Culver");
-        person6.setZip("97451");
-        person6.setPhone("841-874-9888");
-        person6.setEmail("aly@imail.com");
-
-        listPersons.add(person6);
-
-        assertEquals("aly@imail.com", listPersons.get(5).getEmail());
+    public void testUpdate() {
+        List<Person> personList = new ArrayList<>();
+        Person person = new Person();
+        person.setFirstName("John");
+        person.setLastName("Boyd");
+        person.setAddress("1509 Culver St");
+        person.setCity("Culver");
+        person.setZip("97451");
+        person.setPhone("841-874-6512");
+        person.setEmail("jaboyd@email.com");
+        personList.add(person);
 
         Person updatedPerson = new Person();
-        updatedPerson.setFirstName("Allison");
+        updatedPerson.setFirstName("John");
         updatedPerson.setLastName("Boyd");
-        updatedPerson.setEmail("aaaabbb@gmail.com");
+        updatedPerson.setEmail("jaboyd@testmail.com");
 
-        when(dataContainer.getPersons()).thenReturn(listPersons);
-        listPersons = personService.update(updatedPerson);
+        when(dataContainer.getPersons()).thenReturn(personList);
+        personList = personService.update(updatedPerson);
 
-        assertEquals("aaaabbb@gmail.com", listPersons.get(5).getEmail());
+        assertEquals("jaboyd@testmail.com", personList.get(0).getEmail());
     }
 
+    // test the delete method from PersonService class
+    // it must delete a Person from the List of Person and then return the List of Person without the  Person deleted
     @Test
     public void testDelete() throws Exception {
-        List<Person> listPersons = new ArrayList<>();
-        Person person1 = new Person();
-        person1.setFirstName("John");
-        person1.setLastName("Boyd");
-        person1.setAddress("1509 Culver St");
-        person1.setCity("Culver");
-        person1.setZip("97451");
-        person1.setPhone("841-874-6512");
-        person1.setEmail("jaboyd@email.com");
+        List<Person> personList = new ArrayList<>();
+        Person person = new Person();
+        person.setFirstName("John");
+        person.setLastName("Boyd");
+        person.setAddress("1509 Culver St");
+        person.setCity("Culver");
+        person.setZip("97451");
+        person.setPhone("841-874-6512");
+        person.setEmail("jaboyd@email.com");
 
-        listPersons.add(person1);
+        when(dataContainer.getPersons()).thenReturn(personList);
+        personList = personService.delete(person.getFirstName(), person.getLastName());
 
-        Person person2 = new Person();
-        person2.setFirstName("Jacob");
-        person2.setLastName("Boyd");
-        person2.setAddress("1509 Culver St");
-        person2.setCity("Culver");
-        person2.setZip("97451");
-        person2.setPhone("841-874-6513");
-        person2.setEmail("drk@email.com" );
-
-        listPersons.add(person2);
-
-        Person person3 = new Person();
-        person3.setFirstName("Tenley");
-        person3.setLastName("Boyd");
-        person3.setAddress("1509 Culver St");
-        person3.setCity("Culver");
-        person3.setZip("97451");
-        person3.setPhone("841-874-6512");
-        person3.setEmail("tenz@email.com");
-
-        listPersons.add(person3);
-
-        Person person4 = new Person();
-        person4.setFirstName("Roger");
-        person4.setLastName("Boyd");
-        person4.setAddress("1509 Culver St");
-        person4.setCity("Culver");
-        person4.setZip("97451");
-        person4.setPhone("841-874-6512");
-        person4.setEmail("jaboyd@email.com");
-
-        listPersons.add(person4);
-
-        Person person5 = new Person();
-        person5.setFirstName("Felicia");
-        person5.setLastName("Boyd");
-        person5.setAddress("1509 Culver St");
-        person5.setCity("Culver");
-        person5.setZip("97451");
-        person5.setPhone("841-874-6544");
-        person5.setEmail("jaboyd@email.com");
-
-        listPersons.add(person5);
-
-        Person person6 = new Person();
-        person6.setFirstName("Allison");
-        person6.setLastName("Boyd");
-        person6.setAddress("112 Steppes Pl");
-        person6.setCity("Culver");
-        person6.setZip("97451");
-        person6.setPhone("841-874-9888");
-        person6.setEmail("aly@imail.com");
-
-        listPersons.add(person6);
-
-        assertEquals(6, listPersons.size());
-
-        when(dataContainer.getPersons()).thenReturn(listPersons);
-        listPersons = personService.delete(person6.getFirstName(), person6.getLastName());
-
-        assertEquals(5, listPersons.size());
+        assertEquals(0, personList.size());
     }
 }

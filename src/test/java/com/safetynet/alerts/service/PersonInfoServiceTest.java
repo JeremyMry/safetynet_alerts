@@ -4,6 +4,7 @@ import com.safetynet.alerts.SafetynetAlertsApplication;
 import com.safetynet.alerts.model.DataContainer;
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.model.Person;
+import com.safetynet.alerts.model.PersonInfo;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -29,8 +30,10 @@ public class PersonInfoServiceTest {
         personInfoService = new PersonInfoService(dataContainer, medicalRecordService);
     }
 
+    //Test the getPersonInformation method from PersonInfoService
+    // it must return a PersonInfo List
     @Test
-    public void getPersonInfo() {
+    public void getPersonInfoTest() {
         List<Person> listPersons = new ArrayList<>();
         Person person = new Person();
         person.setFirstName("John");
@@ -50,82 +53,45 @@ public class PersonInfoServiceTest {
         medicalRecord.setBirthdate("03/06/1984");
         medicalRecordList.add(medicalRecord);
 
-        when(dataContainer.getPersons()).thenReturn(listPersons);
-        when(dataContainer.getMedicalrecords()).thenReturn(medicalRecordList);
-
-        Assert.assertNotNull(personInfoService.getPersonInformation("John", "Boyd"));
-        Assert.assertEquals("John" ,personInfoService.getPersonInformation("John", "Boyd").getFirstName());
-        Assert.assertEquals("Boyd" ,personInfoService.getPersonInformation("John", "Boyd").getLastName());
-        Assert.assertEquals("test" ,personInfoService.getPersonInformation("John", "Boyd").getAddress());
-        Assert.assertEquals("test@testmail.com" ,personInfoService.getPersonInformation("John", "Boyd").getEmail());
-        Assert.assertEquals(36 ,personInfoService.getPersonInformation("John", "Boyd").getAge());
-    }
-
-    @Test
-    public void getPersonInfoWithNoData() {
-        List<Person> listPersons = new ArrayList<>();
-
-        List<MedicalRecord> medicalRecordList = new ArrayList<>();
+        List<PersonInfo> personInfoList = new ArrayList<>();
+        PersonInfo personInfo = new PersonInfo("John", "Boyd", "test", 36, "test@testmail.com", medications, allergies);
+        personInfoList.add(personInfo);
 
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getMedicalrecords()).thenReturn(medicalRecordList);
 
         Assert.assertNotNull(personInfoService.getPersonInformation("John", "Boyd"));
-        Assert.assertNull(null ,personInfoService.getPersonInformation("John", "Boyd").getFirstName());
-        Assert.assertNull(null ,personInfoService.getPersonInformation("John", "Boyd").getLastName());
-        Assert.assertNull(null ,personInfoService.getPersonInformation("John", "Boyd").getAddress());
-        Assert.assertNull(null ,personInfoService.getPersonInformation("John", "Boyd").getEmail());
-        Assert.assertEquals(0 ,personInfoService.getPersonInformation("John", "Boyd").getAge());
+        Assert.assertEquals(personInfoList.toString(), personInfoService.getPersonInformation("John", "Boyd").toString());
+
     }
 
+    //Test the getPersonInformation method from PersonInfoService when the parameters doesn't match anything
+    // it must return an empty PersonInfo List
     @Test
-    public void getPersonInfoWithNoFirstName() {
+    public void getPersonInfoWithNoDataTest() {
         List<Person> listPersons = new ArrayList<>();
-
         List<MedicalRecord> medicalRecordList = new ArrayList<>();
+        List<PersonInfo> personInfoList = new ArrayList<>();
 
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getMedicalrecords()).thenReturn(medicalRecordList);
 
-        Assert.assertNotNull(personInfoService.getPersonInformation(null, "Boyd"));
-        Assert.assertNull(null ,personInfoService.getPersonInformation("John", "Boyd").getFirstName());
-        Assert.assertNull(null ,personInfoService.getPersonInformation("John", "Boyd").getLastName());
-        Assert.assertNull(null ,personInfoService.getPersonInformation("John", "Boyd").getAddress());
-        Assert.assertNull(null ,personInfoService.getPersonInformation("John", "Boyd").getEmail());
-        Assert.assertEquals(0 ,personInfoService.getPersonInformation("John", "Boyd").getAge());
+        Assert.assertNotNull(personInfoService.getPersonInformation("John", "Boyd"));
+        Assert.assertEquals(personInfoList.toString() ,personInfoService.getPersonInformation("John", "Boyd").toString());
     }
 
+    //Test the getPersonInformation method from PersonInfoService when the parameters doesn't match anything
+    // it must return an empty PersonInfo List
     @Test
-    public void getPersonInfoWithNoLastName() {
+    public void getPersonInfoWithIncorrectParamTest() {
         List<Person> listPersons = new ArrayList<>();
-
         List<MedicalRecord> medicalRecordList = new ArrayList<>();
+        List<PersonInfo> personInfoList = new ArrayList<>();
 
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getMedicalrecords()).thenReturn(medicalRecordList);
 
-        Assert.assertNotNull(personInfoService.getPersonInformation("eee", null));
-        Assert.assertNull(null ,personInfoService.getPersonInformation("John", "Boyd").getFirstName());
-        Assert.assertNull(null ,personInfoService.getPersonInformation("John", "Boyd").getLastName());
-        Assert.assertNull(null ,personInfoService.getPersonInformation("John", "Boyd").getAddress());
-        Assert.assertNull(null ,personInfoService.getPersonInformation("John", "Boyd").getEmail());
-        Assert.assertEquals(0 ,personInfoService.getPersonInformation("John", "Boyd").getAge());
-    }
-
-    @Test
-    public void getPersonInfoWithNoName() {
-        List<Person> listPersons = new ArrayList<>();
-
-        List<MedicalRecord> medicalRecordList = new ArrayList<>();
-
-        when(dataContainer.getPersons()).thenReturn(listPersons);
-        when(dataContainer.getMedicalrecords()).thenReturn(medicalRecordList);
-
-        Assert.assertNotNull(personInfoService.getPersonInformation(null, null));
-        Assert.assertNull(null ,personInfoService.getPersonInformation("John", "Boyd").getFirstName());
-        Assert.assertNull(null ,personInfoService.getPersonInformation("John", "Boyd").getLastName());
-        Assert.assertNull(null ,personInfoService.getPersonInformation("John", "Boyd").getAddress());
-        Assert.assertNull(null ,personInfoService.getPersonInformation("John", "Boyd").getEmail());
-        Assert.assertEquals(0 ,personInfoService.getPersonInformation("John", "Boyd").getAge());
+        Assert.assertNotNull(personInfoService.getPersonInformation("", ""));
+        Assert.assertEquals(personInfoList.toString() ,personInfoService.getPersonInformation("", "").toString());
     }
 }

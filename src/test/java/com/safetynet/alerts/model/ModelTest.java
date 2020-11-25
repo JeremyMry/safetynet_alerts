@@ -9,6 +9,7 @@ import java.util.List;
 public class ModelTest {
 
     @Test
+    // Test the getters/setters and constructor of DataContainer class
     public void dataContainerTest() {
         List<Person> personList = new ArrayList<>();
         List<Firestation> firestationList = new ArrayList<>();
@@ -21,6 +22,7 @@ public class ModelTest {
         Assert.assertEquals(medicalRecordList, dc.getMedicalrecords());
     }
 
+    // Test the getters/setters and constructor of Person class
     @Test
     public void personTest() {
         Person person = new Person("John", "Doe", "Neverland", "Funeralopolis", "000", "45", "john.doe@testmail.com");
@@ -36,6 +38,7 @@ public class ModelTest {
         Assert.assertEquals(toString, person.toString());
     }
 
+    // Test the getters/setters and constructor of Firestation class
     @Test
     public void fireStationTest() {
         Firestation fs = new Firestation("000", "111");
@@ -46,8 +49,9 @@ public class ModelTest {
         Assert.assertEquals(toString, fs.toString());
     }
 
+    // Test the getters/setters and constructor of MedicalRecord class
     @Test
-    public void medicalRecordTest() throws Exception {
+    public void medicalRecordTest() {
         List<String> medication = new ArrayList<>();
         List<String> allergies = new ArrayList<>();
         MedicalRecord mr = new MedicalRecord("John", "Doe", "01/01/01", medication, allergies);
@@ -62,8 +66,9 @@ public class ModelTest {
 
     }
 
+    // Test the getters/setters and constructor of ChildAlert class
     @Test
-    public void childAlertTest() throws Exception {
+    public void childAlertTest() {
         List<String> family = new ArrayList<>();
         family.add("eee");
         ChildAlert childAlert = new ChildAlert("John", "Doe", 2, family);
@@ -75,6 +80,7 @@ public class ModelTest {
         Assert.assertEquals(toString, childAlert.toString());
     }
 
+    // Test the getters/setters and constructor of FireAlert class
     @Test
     public void fireAlertTest()  {
         List<String> medication = new ArrayList<>();
@@ -93,8 +99,9 @@ public class ModelTest {
         Assert.assertEquals(toString, fa.toString());
     }
 
+    // Test the getters/setters and constructor of Flood class
     @Test
-    public void floodTest() throws Exception {
+    public void floodTest() {
         List<String> medication = new ArrayList<>();
         List<String> allergies = new ArrayList<>();
         Flood flood = new Flood("John", "Doe", 15, "000", medication, allergies);
@@ -109,6 +116,7 @@ public class ModelTest {
         Assert.assertEquals(toString, flood.toString());
     }
 
+    // Test the getters/setters and constructor of HouseHold class
     @Test
     public void householdTest() {
         List<Flood> flood = new ArrayList<>();
@@ -125,6 +133,7 @@ public class ModelTest {
         Assert.assertEquals(toString, hh.toString());
     }
 
+    // Test the getters/setters and constructor of PersonCovered class
     @Test
     public void personCoveredTest() {
         PersonCovered pc = new PersonCovered("John", "Doe", "000", "000");
@@ -137,8 +146,9 @@ public class ModelTest {
         Assert.assertEquals(toString, pc.toString());
     }
 
+    // Test the getters/setters and constructor of PersonInfo class
     @Test
-    public void personInfoTest() throws Exception {
+    public void personInfoTest() {
         List<String> medication = new ArrayList<>();
         List<String> allergies = new ArrayList<>();
         PersonInfo pi = new PersonInfo("John", "Doe", "000", 15, "000", medication, allergies);
@@ -154,8 +164,9 @@ public class ModelTest {
         Assert.assertEquals(toString, pi.toString());
     }
 
+    // Test the getters/setters and constructor of StationCoverage class
     @Test
-    public void stationCoverageTest() throws Exception {
+    public void stationCoverageTest() {
         List<PersonCovered> personCovered = new ArrayList<>();
         StationCoverage sc = new StationCoverage(1, 1, personCovered);
         String toString = "Coverage: adults = 1, child = 1, person covered = []";

@@ -6,7 +6,6 @@ import com.safetynet.alerts.model.StationCoverage;
 import com.safetynet.alerts.service.FirestationService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -58,23 +57,29 @@ public class FirestationControllerTest {
                 .andExpect(status().is2xxSuccessful());
     }
 
+    // Test the getPersonsCoverageStation method when the request is correct
+    // It must return a 200 status and a json array
     @Test
     public void getFireStationTest() throws Exception {
         PersonCovered pc = new PersonCovered("eee", "eee", "eee", "eee");
         List<PersonCovered> personCoveredList = new ArrayList<>();
         personCoveredList.add(pc);
         StationCoverage sc = new StationCoverage(1, 1, personCoveredList);
+        List<StationCoverage> stationCoverageList = new ArrayList<>();
+        stationCoverageList.add(sc);
 
-        when(firestationService.getPersonsCoverageByStationNumber("3")).thenReturn(sc);
+        when(firestationService.getPersonsCoverageByStationNumber("3")).thenReturn(stationCoverageList);
 
         this.mvc.perform(MockMvcRequestBuilders.get("/firestation")
                 .param("stationNumber", "3"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().json("{\"adults\":1,\"child\":1,\"personsCovered\":[{\"firstName\":\"eee\",\"lastName\":\"eee\",\"address\":\"eee\",\"phone\":\"eee\"}]}"));
+                .andExpect(content().json("[{\"adults\":1,\"child\":1,\"personsCovered\":[{\"firstName\":\"eee\",\"lastName\":\"eee\",\"address\":\"eee\",\"phone\":\"eee\"}]}]"));
 
     }
 
+    // Test the getPersonsCoverageStation method when the request parameter name is incorrect
+    // It must return a 400 status
     @Test
     public void getFireStationTestWithIncorrectParamName() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/firestation")
@@ -83,18 +88,19 @@ public class FirestationControllerTest {
                 .andExpect(status().is4xxClientError());
     }
 
+    // Test the getPersonsCoverageStation method when the request parameter value is incorrect
+    // It must return a 200 status and an empty json array
     @Test
     public void getFireStationTestWithIncorrectParamValue() throws Exception {
-        List<PersonCovered> personCoveredList = new ArrayList<>();
-        StationCoverage sc = new StationCoverage(0, 0, personCoveredList);
+        List<StationCoverage> stationCoverageList = new ArrayList<>();
 
-        when(firestationService.getPersonsCoverageByStationNumber("a")).thenReturn(sc);
+        when(firestationService.getPersonsCoverageByStationNumber("a")).thenReturn(stationCoverageList);
 
         this.mvc.perform(MockMvcRequestBuilders.get("/firestation")
                 .param("stationNumber", "a"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().json("{\"adults\":0,\"child\":0,\"personsCovered\":[]}"));
+                .andExpect(content().json("[]"));
     }
 
 }

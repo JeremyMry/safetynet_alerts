@@ -28,265 +28,98 @@ public class MedicalRecordServiceTest {
         medicalRecordService = new MedicalRecordService(dataContainer);
     }
 
+    // test the add method from MedicalRecordService class
+    // it must add a MedicalRecord to the List of MedicalRecord and then return the List of MedicalRecord with the new one added
     @Test
-    public void testAdd() throws Exception {
+    public void testAdd() {
         List<MedicalRecord> listMedicalrecords = new ArrayList<>();
 
-        MedicalRecord medicalrecord1 = new MedicalRecord();
-        medicalrecord1.setFirstName("Peter");
-        medicalrecord1.setLastName("Duncan");
-        medicalrecord1.setBirthdate("09/06/2000");
+        MedicalRecord medicalRecord = new MedicalRecord();
+        medicalRecord.setFirstName("John");
+        medicalRecord.setLastName("Boyd");
+        medicalRecord.setBirthdate("09/06/2000");
         List<String>  allergies = new ArrayList<>();
         allergies.add("shellfish");
-        medicalrecord1.setAllergies(allergies);
+        medicalRecord.setAllergies(allergies);
         List<String>  medications = new ArrayList<>();
-        medicalrecord1.setMedications(medications);
-        listMedicalrecords.add(medicalrecord1);
-
-        MedicalRecord medicalrecord2 = new MedicalRecord();
-        medicalrecord2.setFirstName("Reginold");
-        medicalrecord2.setLastName("Walker");
-        medicalrecord2.setBirthdate("08/30/1979");
-        List<String>  allergies2 = new ArrayList<>();
-        allergies2.add("illisoxian");
-        medicalrecord2.setAllergies(allergies2);
-        List<String>  medications2 = new ArrayList<>();
-        medications2.add("thradox:700mg");
-        medicalrecord2.setMedications(medications2);
-        listMedicalrecords.add(medicalrecord2);
-
-        MedicalRecord medicalrecord3 = new MedicalRecord();
-        medicalrecord3.setFirstName("Jamie");
-        medicalrecord3.setLastName("Peters");
-        medicalrecord3.setBirthdate("03/06/1982");
-        List<String>  allergies3 = new ArrayList<>();
-        medicalrecord3.setAllergies(allergies3);
-        List<String>  medications3 = new ArrayList<>();
-        medicalrecord3.setMedications(medications3);
-        listMedicalrecords.add(medicalrecord3);
-
-        MedicalRecord medicalrecord4 = new MedicalRecord();
-        medicalrecord4.setFirstName("Brian");
-        medicalrecord4.setLastName("Stelzer");
-        medicalrecord4.setBirthdate("12/06/1975");
-        List<String>  allergies4 = new ArrayList<>();
-        allergies4.add("nillacilan");
-        medicalrecord4.setAllergies(allergies4);
-        List<String>  medications4 = new ArrayList<>();
-        medications4.add("ibupurin:200mg");
-        medications4.add("hydrapermazol:400mg");
-        medicalrecord4.setMedications(medications4);
-        listMedicalrecords.add(medicalrecord4);
-
-        MedicalRecord medicalrecord5 = new MedicalRecord();
-        medicalrecord5.setFirstName("Shawna");
-        medicalrecord5.setLastName("Stelzer");
-        medicalrecord5.setBirthdate("07/08/1980");
-        List<String> allergies5 = new ArrayList<>();
-        medicalrecord5.setAllergies(allergies5);
-        List<String> medications5 = new ArrayList<>();
-        medicalrecord5.setMedications(medications5);
-        listMedicalrecords.add(medicalrecord5);
-
-        MedicalRecord medicalrecord6 = new MedicalRecord();
-        medicalrecord6.setFirstName("Kendrik");
-        medicalrecord6.setLastName("Stelzer");
-        medicalrecord6.setBirthdate("03/06/2014");
-        List<String> allergies6 = new ArrayList<>();
-        medicalrecord6.setAllergies(allergies6);
-        List<String> medications6 = new ArrayList<>();
-        medications6.add("noxidian:100mg");
-        medications6.add("pharmacol:2500mg");
-        medicalrecord6.setMedications(medications6);
-        listMedicalrecords.add(medicalrecord6);
+        medicalRecord.setMedications(medications);
+        listMedicalrecords.add(medicalRecord);
 
         MedicalRecord newMedicalrecord = new MedicalRecord();
-        newMedicalrecord.setFirstName("AAAAAA");
-        newMedicalrecord.setLastName("BBBBBB");
-        newMedicalrecord.setBirthdate("01/10/1987");
+        newMedicalrecord.setFirstName("John");
+        newMedicalrecord.setLastName("Doe");
+        newMedicalrecord.setBirthdate("01/10/1999");
         List<String> allergies7 = new ArrayList<>();
         newMedicalrecord.setAllergies(allergies7);
         List<String> medications7 = new ArrayList<>();
-        medications7.add("doliprane:100mg");
+        medications7.add("doliprane:1000mg");
         newMedicalrecord.setMedications(medications7);
+
+        List<MedicalRecord> medicalRecordList = new ArrayList<>();
+        medicalRecordList.add(medicalRecord);
+        medicalRecordList.add(newMedicalrecord);
 
         when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
 
-        assertEquals(7, medicalRecordService.add(newMedicalrecord).size());
-        assertEquals(newMedicalrecord.getFirstName(), listMedicalrecords.get(6).getFirstName());
+        assertEquals(medicalRecordList.toString(), medicalRecordService.add(newMedicalrecord).toString());
+        assertEquals(newMedicalrecord.getFirstName(), listMedicalrecords.get(1).getFirstName());
     }
 
+    // test the update method from MedicalRecordService class
+    // it must update a MedicalRecord from the List of MedicalRecord and then return the List of MedicalRecord with the MedicalRecord updated
     @Test
     public void testUpdate() {
         List<MedicalRecord> listMedicalrecords = new ArrayList<>();
 
-        MedicalRecord medicalrecord1 = new MedicalRecord();
-        medicalrecord1.setFirstName("Peter");
-        medicalrecord1.setLastName("Duncan");
-        medicalrecord1.setBirthdate("09/06/2000");
+        MedicalRecord medicalrecord = new MedicalRecord();
+        medicalrecord.setFirstName("John");
+        medicalrecord.setLastName("Boyd");
+        medicalrecord.setBirthdate("03/06/1985");
         List<String> allergies = new ArrayList<>();
-        allergies.add("shellfish");
-        medicalrecord1.setAllergies(allergies);
-        List<String>  medications = new ArrayList<>();
-        medicalrecord1.setMedications(medications);
+        medicalrecord.setAllergies(allergies);
+        List<String> medications = new ArrayList<>();
+        medications.add("noxidian:100mg");
+        medications.add("pharmacol:2500mg");
+        medicalrecord.setMedications(medications);
 
-        listMedicalrecords.add(medicalrecord1);
-
-        MedicalRecord medicalrecord2 = new MedicalRecord();
-        medicalrecord2.setFirstName("Reginold");
-        medicalrecord2.setLastName("Walker");
-        medicalrecord2.setBirthdate("08/30/1979");
-        List<String> allergies2 = new ArrayList<>();
-        allergies2.add("illisoxian");
-        medicalrecord2.setAllergies(allergies2);
-        List<String> medications2 = new ArrayList<>();
-        medications2.add("thradox:700mg");
-        medicalrecord2.setMedications(medications2);
-
-        listMedicalrecords.add(medicalrecord2);
-
-        MedicalRecord medicalrecord3 = new MedicalRecord();
-        medicalrecord3.setFirstName("Jamie");
-        medicalrecord3.setLastName("Peters");
-        medicalrecord3.setBirthdate("03/06/1982");
-        List<String> allergies3 = new ArrayList<>();
-        medicalrecord3.setAllergies(allergies3);
-        List<String> medications3 = new ArrayList<>();
-        medicalrecord3.setMedications(medications3);
-
-        listMedicalrecords.add(medicalrecord3);
-
-        MedicalRecord medicalrecord4 = new MedicalRecord();
-        medicalrecord4.setFirstName("Brian");
-        medicalrecord4.setLastName("Stelzer");
-        medicalrecord4.setBirthdate("12/06/1975");
-        List<String> allergies4 = new ArrayList<>();
-        allergies4.add("nillacilan");
-        medicalrecord4.setAllergies(allergies4);
-        List<String> medications4 = new ArrayList<>();
-        medications4.add("ibupurin:200mg");
-        medications4.add("hydrapermazol:400mg");
-        medicalrecord4.setMedications(medications4);
-
-        listMedicalrecords.add(medicalrecord4);
-
-        MedicalRecord medicalrecord5 = new MedicalRecord();
-        medicalrecord5.setFirstName("Shawna");
-        medicalrecord5.setLastName("Stelzer");
-        medicalrecord5.setBirthdate("07/08/1980");
-        List<String> allergies5 = new ArrayList<>();
-        medicalrecord5.setAllergies(allergies5);
-        List<String> medications5 = new ArrayList<>();
-        medicalrecord5.setMedications(medications5);
-
-        listMedicalrecords.add(medicalrecord5);
-
-        MedicalRecord medicalrecord6 = new MedicalRecord();
-        medicalrecord6.setFirstName("Kendrik");
-        medicalrecord6.setLastName("Stelzer");
-        medicalrecord6.setBirthdate("03/06/2014");
-        List<String> allergies6 = new ArrayList<>();
-        medicalrecord6.setAllergies(allergies6);
-        List<String> medications6 = new ArrayList<>();
-        medications6.add("noxidian:100mg");
-        medications6.add("pharmacol:2500mg");
-        medicalrecord6.setMedications(medications6);
-
-        listMedicalrecords.add(medicalrecord6);
+        listMedicalrecords.add(medicalrecord);
 
         MedicalRecord updatedMedicalrecord = new MedicalRecord();
-        updatedMedicalrecord.setFirstName("Kendrik");
-        updatedMedicalrecord.setLastName("Stelzer");
-        updatedMedicalrecord.setBirthdate("01/10/1987");
+        updatedMedicalrecord.setFirstName("John");
+        updatedMedicalrecord.setLastName("Boyd");
+        updatedMedicalrecord.setBirthdate("01/10/1980");
 
         when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
 
-        assertEquals("01/10/1987", medicalRecordService.update(updatedMedicalrecord).get(5).getBirthdate());
+        assertEquals("01/10/1980", medicalRecordService.update(updatedMedicalrecord).get(0).getBirthdate());
     }
 
+    // test the delete method from MedicalRecordService class
+    // it must delete a MedicalRecord from the List of MedicalRecord and then return the List of MedicalRecord without the MedicalRecord deleted
     @Test
-    public void testDelete() throws Exception {
+    public void testDelete()  {
         List<MedicalRecord> listMedicalrecords = new ArrayList<>();
-        MedicalRecord medicalrecord1 = new MedicalRecord();
-        medicalrecord1.setFirstName("Peter");
-        medicalrecord1.setLastName("Duncan");
-        medicalrecord1.setBirthdate("09/06/2000");
+
+        MedicalRecord medicalRecord = new MedicalRecord();
+        medicalRecord.setFirstName("Peter");
+        medicalRecord.setLastName("Duncan");
+        medicalRecord.setBirthdate("09/06/2000");
         List<String> allergies = new ArrayList<>();
         allergies.add("shellfish");
-        medicalrecord1.setAllergies(allergies);
+        medicalRecord.setAllergies(allergies);
         List<String> medications = new ArrayList<>();
-        medicalrecord1.setMedications(medications);
+        medicalRecord.setMedications(medications);
 
-        listMedicalrecords.add(medicalrecord1);
-
-        MedicalRecord medicalrecord2 = new MedicalRecord();
-        medicalrecord2.setFirstName("Reginold");
-        medicalrecord2.setLastName("Walker");
-        medicalrecord2.setBirthdate("08/30/1979");
-        List<String> allergies2 = new ArrayList<>();
-        allergies2.add("illisoxian");
-        medicalrecord2.setAllergies(allergies2);
-        List<String> medications2 = new ArrayList<>();
-        medications2.add("thradox:700mg");
-        medicalrecord2.setMedications(medications2);
-
-        listMedicalrecords.add(medicalrecord2);
-
-        MedicalRecord medicalrecord3 = new MedicalRecord();
-        medicalrecord3.setFirstName("Jamie");
-        medicalrecord3.setLastName("Peters");
-        medicalrecord3.setBirthdate("03/06/1982");
-        List<String> allergies3 = new ArrayList<>();
-        medicalrecord3.setAllergies(allergies3);
-        List<String> medications3 = new ArrayList<>();
-        medicalrecord3.setMedications(medications3);
-
-        listMedicalrecords.add(medicalrecord3);
-
-        MedicalRecord medicalrecord4 = new MedicalRecord();
-        medicalrecord4.setFirstName("Brian");
-        medicalrecord4.setLastName("Stelzer");
-        medicalrecord4.setBirthdate("12/06/1975");
-        List<String> allergies4 = new ArrayList<>();
-        allergies4.add("nillacilan");
-        medicalrecord4.setAllergies(allergies4);
-        List<String> medications4 = new ArrayList<>();
-        medications4.add("ibupurin:200mg");
-        medications4.add("hydrapermazol:400mg");
-        medicalrecord4.setMedications(medications4);
-
-        listMedicalrecords.add(medicalrecord4);
-
-        MedicalRecord medicalrecord5 = new MedicalRecord();
-        medicalrecord5.setFirstName("Shawna");
-        medicalrecord5.setLastName("Stelzer");
-        medicalrecord5.setBirthdate("07/08/1980");
-        List<String> allergies5 = new ArrayList<>();
-        medicalrecord5.setAllergies(allergies5);
-        List<String> medications5 = new ArrayList<>();
-        medicalrecord5.setMedications(medications5);
-
-        listMedicalrecords.add(medicalrecord5);
-
-        MedicalRecord medicalrecord6 = new MedicalRecord();
-        medicalrecord6.setFirstName("Kendrik");
-        medicalrecord6.setLastName("Stelzer");
-        medicalrecord6.setBirthdate("03/06/2014");
-        List<String> allergies6 = new ArrayList<>();
-        medicalrecord5.setAllergies(allergies6);
-        List<String> medications6 = new ArrayList<>();
-        medicalrecord5.setMedications(medications6);
-
-        listMedicalrecords.add(medicalrecord6);
-
-        assertEquals(6, listMedicalrecords.size());
+        listMedicalrecords.add(medicalRecord);
 
         when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
-        listMedicalrecords = medicalRecordService.delete(medicalrecord6.getFirstName(), medicalrecord6.getLastName());
+        listMedicalrecords = medicalRecordService.delete(medicalRecord.getFirstName(), medicalRecord.getLastName());
 
-        assertEquals(5, listMedicalrecords.size());
+        assertEquals(0, listMedicalrecords.size());
     }
 
+    // test the getAge method from the MedicalRecordService class
+    // it must return an Integer
     @Test
     public void getAgeTest() {
         List<MedicalRecord> listMedicalrecords = new ArrayList<>();
@@ -302,8 +135,10 @@ public class MedicalRecordServiceTest {
         assertEquals(44, medicalRecordService.getAge("Brian", "Stelzer"));
     }
 
+    // test the getAge method from the MedicalRecordService class when the parameters doesn't match anything
+    // it must return 0
     @Test
-    public void getAgeTestWithNoParam() {
+    public void getAgeWithNoDataTest() {
         List<MedicalRecord> listMedicalrecords = new ArrayList<>();
         MedicalRecord medicalrecord = new MedicalRecord();
         medicalrecord.setFirstName("Brian");
@@ -313,11 +148,24 @@ public class MedicalRecordServiceTest {
 
         when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
 
-        assertEquals(0, medicalRecordService.getAge(null, null));
+        assertEquals(0, medicalRecordService.getAge("John", "Doe"));
     }
 
+    // test the getAge method from the MedicalRecordService class when the parameters are incorrect
+    // it must return 0
     @Test
-    public void getMedications() {
+    public void getAgeWithNoParamTest() {
+        List<MedicalRecord> listMedicalrecords = new ArrayList<>();
+
+        when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
+
+        assertEquals(0, medicalRecordService.getAge("", ""));
+    }
+
+    // test the getMedication method from MedicalRecordService class
+    // it must return a List of medications
+    @Test
+    public void getMedicationsTest() {
         List<MedicalRecord> listMedicalrecords = new ArrayList<>();
         MedicalRecord medicalrecord = new MedicalRecord();
         medicalrecord.setFirstName("Brian");
@@ -339,8 +187,10 @@ public class MedicalRecordServiceTest {
         assertEquals(medication1, medicalRecordService.getMedications("Brian", "Stelzer"));
     }
 
+    // test the getMedication method from MedicalRecordService class when the parameters doesn't match anything
+    // it must return an empty List
     @Test
-    public void getMedicationsWithNoParam() {
+    public void getMedicationsWithIncorrectParamTest() {
         List<MedicalRecord> listMedicalrecords = new ArrayList<>();
         MedicalRecord medicalrecord = new MedicalRecord();
         medicalrecord.setFirstName("Brian");
@@ -351,12 +201,27 @@ public class MedicalRecordServiceTest {
 
         when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
 
-        assertNotNull(medicalRecordService.getMedications(null, null));
-        assertEquals(medication1, medicalRecordService.getMedications(null, null));
+        assertNotNull(medicalRecordService.getMedications("John", "Doe"));
+        assertEquals(medication1, medicalRecordService.getMedications("John", "Doe"));
     }
 
+    // test the getMedication method from MedicalRecordService class when the parameters are incorrect
+    // it must return an empty List
     @Test
-    public void getAllergies() {
+    public void getMedicationsWithNoDataTest() {
+        List<MedicalRecord> listMedicalrecords = new ArrayList<>();
+        List<String> medication1 = new ArrayList<>();
+
+        when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
+
+        assertNotNull(medicalRecordService.getMedications("", ""));
+        assertEquals(medication1, medicalRecordService.getMedications("", ""));
+    }
+
+    // test the get Allergies method from the MedicalRecord class
+    // it must return a List of allergies
+    @Test
+    public void getAllergiesTest() {
         List<MedicalRecord> listMedicalrecords = new ArrayList<>();
         MedicalRecord medicalrecord = new MedicalRecord();
         medicalrecord.setFirstName("Brian");
@@ -374,8 +239,10 @@ public class MedicalRecordServiceTest {
         assertEquals(allergies1, medicalRecordService.getAllergies("Brian", "Stelzer"));
     }
 
+    // test the get Allergies method from the MedicalRecord class when the parameters doesn't match anything
+    // it must return an empty List
     @Test
-    public void getAllergiesWithNoParam() {
+    public void getAllergiesWithNoDataTest() {
         List<MedicalRecord> listMedicalrecords = new ArrayList<>();
         MedicalRecord medicalrecord = new MedicalRecord();
         medicalrecord.setFirstName("Brian");
@@ -385,8 +252,21 @@ public class MedicalRecordServiceTest {
         List<String> allergies1 = new ArrayList<>();
         when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
 
-        assertNotNull(medicalRecordService.getAllergies(null, null));
-        assertEquals(allergies1, medicalRecordService.getAllergies(null, null));
+        assertNotNull(medicalRecordService.getAllergies("John","Doe"));
+        assertEquals(allergies1, medicalRecordService.getAllergies("John","Doe"));
+    }
+
+    // test the get Allergies method from the MedicalRecord class when the parameters doesn't match anything
+    // it must return an empty List
+    @Test
+    public void getAllergiesWithNoIncorrectParamTest() {
+        List<MedicalRecord> listMedicalrecords = new ArrayList<>();
+        List<String> allergies1 = new ArrayList<>();
+
+        when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
+
+        assertNotNull(medicalRecordService.getAllergies("", ""));
+        assertEquals(allergies1, medicalRecordService.getAllergies("", ""));
     }
 
 }

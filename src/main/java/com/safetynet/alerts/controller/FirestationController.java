@@ -18,8 +18,6 @@ public class FirestationController {
 
     private final Logger logger;
 
-    private StationCoverage stationCoverage;
-
     public FirestationController(Logger logger) {
         this.logger = logger;
     }
@@ -32,11 +30,7 @@ public class FirestationController {
         List<Firestation> response = firestationService.add(firestation);
 
         logger.info("Request = " + firestation );
-        if(!response.isEmpty()) {
-            logger.info("HTTP POST request received, SUCCESS / Response = " + response.toString());
-        } else {
-            logger.error("HTTP POST request received, ERROR / Response = " + response.toString());
-        }
+        logger.info("HTTP POST request received, SUCCESS / Response = " + response.toString());
         return response;
     }
 
@@ -45,11 +39,7 @@ public class FirestationController {
         List<Firestation> response = firestationService.update(firestation);
 
         logger.info("Request = " + firestation );
-        if(!response.isEmpty()) {
-            logger.info("HTTP PUT request received, SUCCESS / Response = " + response.toString());
-        } else {
-            logger.error("HTTP PUT request received, ERROR / Response = " + response.toString());
-        }
+        logger.info("HTTP PUT request received, SUCCESS / Response = " + response.toString());
         return response;
     }
 
@@ -58,21 +48,17 @@ public class FirestationController {
         List<Firestation> response = firestationService.delete(address);
 
         logger.info("Request = " + address);
-        if(!response.isEmpty()) {
-            logger.info("HTTP DELETE request received, SUCCESS / Response = " + response.toString());
-        } else {
-            logger.error("HTTP DELETE request received, ERROR / Response = " + response.toString());
-        }
+        logger.info("HTTP DELETE request received, SUCCESS / Response = " + response.toString());
         return response;
     }
 
     @GetMapping("")
-    public StationCoverage getPersonsCoverageStation(@RequestParam String stationNumber) {
-        StationCoverage response = firestationService.getPersonsCoverageByStationNumber(stationNumber);
-        List<PersonCovered> personCoveredList = firestationService.getPersonsCoverageByStationNumber(stationNumber).getPersonsCovered();
+    public List<StationCoverage> getPersonsCoverageStation(@RequestParam String stationNumber) {
+        List<StationCoverage> response = firestationService.getPersonsCoverageByStationNumber(stationNumber);
 
         logger.info("Request = /firestation?stationNumber=" + stationNumber );
-        if(!personCoveredList.isEmpty()) {
+        // If the response list is empty, it means that the request is correct but the parameter doesn't match with anything the json file
+        if(!response.isEmpty()) {
             logger.info("HTTP GET request received, SUCCESS / Response =" + response.toString());
         } else {
             logger.error("HTTP GET request received, ERROR / Response = " + response.toString());

@@ -31,6 +31,8 @@ public class FireAlertControllerTest {
     @MockBean
     private FireAlertService fireAlertService;
 
+    // Test the getPersonsByAddress method when the request is correct
+    // It must return a 200 status and json array
     @Test
     public void getPersonsByAddress() throws Exception {
         List<FireAlert> fireAlertList = new ArrayList<>();
@@ -45,6 +47,8 @@ public class FireAlertControllerTest {
                 .andExpect(content().json("[{\"firstName\":\"John\",\"lastName\":\"Doe\",\"age\":15,\"phone\":\"000\",\"medications\":null,\"allergies\":null,\"stationNumber\":null}]"));
     }
 
+    // Test the getPersonsByAddress method when the request parameter name is incorrect
+    // It must return a 400 status
     @Test
     public void getPersonsByAddressWithIncorrectParamValue() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/fire")
@@ -53,6 +57,8 @@ public class FireAlertControllerTest {
                 .andExpect(status().is4xxClientError());
     }
 
+    // Test the getPersonsByAddress method when the request parameter value is incorrect
+    // It must return a 200 status and an empty json array
     @Test
     public void getPersonsByAddressWithIncorrectParamName() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/fire")

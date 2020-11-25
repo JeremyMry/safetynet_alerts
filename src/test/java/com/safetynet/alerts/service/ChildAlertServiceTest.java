@@ -34,6 +34,8 @@ public class ChildAlertServiceTest {
         childAlertService = new ChildAlertService(dataContainer, medicalRecordService);
     }
 
+    // test the getChildByAddress method from ChildAlertService class
+    // it must return a List of ChildAlert
     @Test
     public void getChildFromListWhenThereIsTwoChild() {
         List<Person> listPersons = new ArrayList<>();
@@ -98,13 +100,26 @@ public class ChildAlertServiceTest {
         medicalRecord4.setBirthdate("01/08/1986");
         listMedicalrecords.add(medicalRecord4);
 
+        List<ChildAlert> childAlertList = new ArrayList<>();
+        List<String> family = new ArrayList<>();
+        family.add("John Boyd");
+        family.add("Jacob Boyd");
+        family.add("Felicia Boyd");
+         ChildAlert childAlert = new ChildAlert("Tenley", "Boyd", 8, family);
+         ChildAlert childAlert1 = new ChildAlert("Roger", "Boyd", 3, family);
+         childAlertList.add(childAlert);
+         childAlertList.add(childAlert1);
+
+
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
 
         Assert.assertNotNull(childAlertService.getChildByAddress("1509 Culver St"));
-        Assert.assertEquals(2, childAlertService.getChildByAddress("1509 Culver St").size());
+        Assert.assertEquals(childAlertList.toString(), childAlertService.getChildByAddress("1509 Culver St").toString());
     }
 
+    // test the getChildByAddress method from ChildAlertService class when there is no child in the address
+    // it must return an empty List of ChildAlert
     @Test
     public void getChildFromListWhenThereIsNoChild() {
         List<Person> listPersons = new ArrayList<>();
@@ -122,34 +137,27 @@ public class ChildAlertServiceTest {
         medicalRecord.setBirthdate("03/06/1984");
         listMedicalrecords.add(medicalRecord);
 
+        List<ChildAlert> childAlertList = new ArrayList<>();
+
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
 
         Assert.assertNotNull(childAlertService.getChildByAddress("1509 Culver St"));
-        Assert.assertEquals(0, childAlertService.getChildByAddress("1509 Culver St").size());
+        Assert.assertEquals(childAlertList.toString(), childAlertService.getChildByAddress("1509 Culver St").toString());
     }
 
+    // test the getChildByAddress method from ChildAlertService class when the address is incorrect
+    // it must return an empty List of ChildAlert
     @Test
     public void getChildFromListWhenThereIsNoData() {
         List<Person> listPersons = new ArrayList<>();
         List<MedicalRecord> listMedicalrecords = new ArrayList<>();
+        List<ChildAlert> childAlertList = new ArrayList<>();
 
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
 
-        Assert.assertNotNull(childAlertService.getChildByAddress("1509 Culver St"));
-        Assert.assertEquals(0, childAlertService.getChildByAddress("1509 Culver St").size());
-    }
-
-    @Test
-    public void getChildFromListWhenThereIsNoCity() {
-        List<Person> listPersons = new ArrayList<>();
-        List<MedicalRecord> listMedicalrecords = new ArrayList<>();
-
-        when(dataContainer.getPersons()).thenReturn(listPersons);
-        when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
-
-        Assert.assertNotNull(childAlertService.getChildByAddress(null));
-        Assert.assertEquals(0, childAlertService.getChildByAddress(null).size());
+        Assert.assertNotNull(childAlertService.getChildByAddress(""));
+        Assert.assertEquals(childAlertList.toString(), childAlertService.getChildByAddress("").toString());
     }
 }

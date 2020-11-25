@@ -58,7 +58,7 @@ public class FirestationControllerTest {
     }
 
     // Test the getPersonsCoverageStation method when the request is correct
-    // It must return a 200 status and a json array
+    // It must return a 200 status and a json array containing the response
     @Test
     public void getFireStationTest() throws Exception {
         PersonCovered pc = new PersonCovered("eee", "eee", "eee", "eee");
@@ -89,7 +89,7 @@ public class FirestationControllerTest {
     }
 
     // Test the getPersonsCoverageStation method when the request parameter value is incorrect
-    // It must return a 200 status and an empty json array
+    // It must return a 200 status and a json array containing the error message
     @Test
     public void getFireStationTestWithIncorrectParamValue() throws Exception {
         List<StationCoverage> stationCoverageList = new ArrayList<>();
@@ -100,7 +100,7 @@ public class FirestationControllerTest {
                 .param("stationNumber", "a"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().json("[]"));
+                .andExpect(content().json("[\"The request 'a' doesn't match anything or is incorrect\"]"));
     }
 
 }

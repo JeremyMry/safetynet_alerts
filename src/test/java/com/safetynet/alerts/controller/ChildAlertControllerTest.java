@@ -32,7 +32,7 @@ public class ChildAlertControllerTest {
     private ChildAlertService childAlertService;
 
     // Test the getChildByAddress method when the request is correct
-    // It must return a 200 status and json array
+    // It must return a 200 status and json array containing the response
     @Test
     public void getChildByAddressTest() throws Exception {
         List<String> family = new ArrayList<>();
@@ -59,13 +59,13 @@ public class ChildAlertControllerTest {
     }
 
     // Test the getChildByAddress method when the request parameter value is incorrect
-    // It must return a 200 status and an empty json array
+    // It must return a 200 status and a json array containing the error message
     @Test
     public void getChildByAddressTestWithIncorrectParamValue() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/childAlert")
                 .param("address", "a"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().json("[]"));
+                .andExpect(content().json("[\"The request 'a' doesn't match anything or is incorrect\"]"));
     }
 }

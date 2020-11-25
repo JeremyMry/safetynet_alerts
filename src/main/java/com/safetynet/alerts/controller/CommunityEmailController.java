@@ -24,14 +24,18 @@ public class CommunityEmailController {
     @GetMapping("/communityEmail")
     public List<String> getEmailsByCity(@RequestParam String city) {
         List<String> response = communityEmailService.getEmailByCity(city);
+        List<String> error = new ArrayList<>();
+        error.add("The request '" + city + "' doesn't match anything or is incorrect");
 
         logger.info("Request = /communityEmail?city=" + city );
         // If the response list is empty, it means that the request is correct but the parameter doesn't match with anything the json file
         if(!response.isEmpty()) {
             logger.info("HTTP GET request received, SUCCESS / Response = " + response.toString());
+            return response;
         } else {
             logger.error("HTTP GET request received, ERROR / Response = " + response.toString());
+            return error;
         }
-        return response;
+
     }
 }

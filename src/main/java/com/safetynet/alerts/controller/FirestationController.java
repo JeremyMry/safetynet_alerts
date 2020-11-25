@@ -53,16 +53,20 @@ public class FirestationController {
     }
 
     @GetMapping("")
-    public List<StationCoverage> getPersonsCoverageStation(@RequestParam String stationNumber) {
+    public List getPersonsCoverageStation(@RequestParam String stationNumber) {
         List<StationCoverage> response = firestationService.getPersonsCoverageByStationNumber(stationNumber);
+        List<String> error = new ArrayList<>();
+        error.add("The request '" + stationNumber + "' doesn't match anything or is incorrect");
 
         logger.info("Request = /firestation?stationNumber=" + stationNumber );
         // If the response list is empty, it means that the request is correct but the parameter doesn't match with anything the json file
         if(!response.isEmpty()) {
             logger.info("HTTP GET request received, SUCCESS / Response =" + response.toString());
+            return response;
         } else {
             logger.error("HTTP GET request received, ERROR / Response = " + response.toString());
+            return error;
         }
-        return response;
+
     }
 }

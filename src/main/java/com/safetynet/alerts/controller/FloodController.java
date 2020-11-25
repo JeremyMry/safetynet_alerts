@@ -24,16 +24,19 @@ public class FloodController {
     FloodService floodService;
 
     @GetMapping("/flood/stations")
-    public List<Household> getHouseholdByFireStationAddress(@RequestParam String stations) {
+    public List getHouseholdByFireStationAddress(@RequestParam String stations) {
         List<Household> response = floodService.getHouseholdByStationAddress(stations);
+        List<String> error = new ArrayList<>();
+        error.add("The request '" + stations + "' doesn't match anything or is incorrect");
 
         logger.info("Request = /flood/stations?stations=" + stations );
         // If the response list is empty, it means that the request is correct but the parameter doesn't match with anything the json file
         if(!response.isEmpty()) {
             logger.info("HTTP GET request received, SUCCESS / Response = " + response.toString());
+            return response;
         } else {
             logger.error("HTTP GET request received, ERROR / Response = " + response.toString());
+            return error;
         }
-        return response;
     }
 }

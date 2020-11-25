@@ -25,16 +25,19 @@ public class PhoneAlertController {
     @GetMapping("/phoneAlert")
     public List<String> getPhoneNumbersByCoverageStation(@RequestParam String firestation) {
         List<String> response = phoneAlertService.getPhoneNumberByCoverage(firestation);
+        List<String> error = new ArrayList<>();
+        error.add("The request '" + firestation + "' doesn't match anything or is incorrect");
 
         // Show the request
         logger.info("Request = /phoneAlert?firestation=" + firestation );
         // If the response list is empty, it means that the request is correct but the parameter doesn't match with anything the json file
         if(!response.isEmpty()) {
             logger.info("HTTP GET request received, SUCCESS / Response =" + response.toString());
+            return response;
         } else {
             logger.error("HTTP GET request received, ERROR / Response = " + response.toString());
+            return error;
         }
-        return response;
     }
 
 }

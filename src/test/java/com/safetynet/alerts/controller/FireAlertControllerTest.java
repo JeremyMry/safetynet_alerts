@@ -32,7 +32,7 @@ public class FireAlertControllerTest {
     private FireAlertService fireAlertService;
 
     // Test the getPersonsByAddress method when the request is correct
-    // It must return a 200 status and json array
+    // It must return a 200 status and json array containing the response
     @Test
     public void getPersonsByAddress() throws Exception {
         List<FireAlert> fireAlertList = new ArrayList<>();
@@ -58,13 +58,13 @@ public class FireAlertControllerTest {
     }
 
     // Test the getPersonsByAddress method when the request parameter value is incorrect
-    // It must return a 200 status and an empty json array
+    // It must return a 200 status and a json array containing an error message
     @Test
     public void getPersonsByAddressWithIncorrectParamName() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/fire")
                 .param("address", "a"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().json("[]"));
+                .andExpect(content().json("[\"The request 'a' doesn't match anything or is incorrect\"]"));
     }
 }

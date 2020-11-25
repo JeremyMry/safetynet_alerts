@@ -29,7 +29,7 @@ public class CommunityEmailControllerTest {
     private CommunityEmailService communityEmailService;
 
     // Test the getEmailsByCity method when the request is correct
-    // It must return a 200 status and json array
+    // It must return a 200 status and json array the response
     @Test
     public void getEmailTestByCity() throws Exception {
         List<String> email = new ArrayList<>();
@@ -54,13 +54,13 @@ public class CommunityEmailControllerTest {
     }
 
     // Test the getEmailsByCity method when the request parameter value is incorrect
-    // It must return a 200 status and an empty json array
+    // It must return a 200 status and a json array containing the error message
     @Test
     public void getEmailTestByCityWithIncorrectParamValue() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/communityEmail")
                 .param("city", "a"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().json("[]"));
+                .andExpect(content().json("[\"The request 'a' doesn't match anything or is incorrect\"]"));
     }
 }

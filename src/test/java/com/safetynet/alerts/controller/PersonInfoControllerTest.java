@@ -35,7 +35,7 @@ public class PersonInfoControllerTest {
     private PersonInfoService personInfoService;
 
     // Test the getAPersonInformation method when the request is correct
-    // It must return a 200 status and a json array
+    // It must return a 200 status and a json array containing the response
     @Test
     public void getPersonInformationTest() throws Exception {
 
@@ -64,7 +64,7 @@ public class PersonInfoControllerTest {
     }
 
     // Test the getAPersonInformation method when the request parameter value is incorrect
-    // It must return a 200 status and an empty json array
+    // It must return a 200 status and a json array containing the error message
     @Test
     public void getPersonInformationTestWithIncorrectParamValue() throws Exception {
         List<PersonInfo> personInfoList = new ArrayList<>();
@@ -75,7 +75,7 @@ public class PersonInfoControllerTest {
                 .param("firstName", "").param("lastName", ""))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().json("[]"));
+                .andExpect(content().json("[\"The request '' or '' doesn't match anything or is incorrect\"]"));
     }
 
 }

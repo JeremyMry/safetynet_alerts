@@ -30,7 +30,7 @@ public class PhoneAlertControllerTest {
     private PhoneAlertService phoneAlertService;
 
     // Test the getPhoneNumbersByCoverageStation method when the request is correct
-    // It must return a 200 status and a json array
+    // It must return a 200 status and a json array containing the response
     @Test
     public void getPhoneNumbersByStationTest() throws Exception {
         List<String> stringList = new ArrayList<>();
@@ -56,7 +56,7 @@ public class PhoneAlertControllerTest {
     }
 
     // Test the getPhoneNumbersByCoverageStation method when the request parameter value is incorrect
-    // It must return a 200 status and an empty json array
+    // It must return a 200 status and a json array containing the error message
     @Test
     public void getPhoneNumbersByStationTestWithIncorrectParamValue() throws Exception {
         List<String> stringList = new ArrayList<>();
@@ -67,6 +67,6 @@ public class PhoneAlertControllerTest {
                 .param("firestation", "a"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().json("[]"));
+                .andExpect(content().json("[\"The request 'a' doesn't match anything or is incorrect\"]"));
     }
 }

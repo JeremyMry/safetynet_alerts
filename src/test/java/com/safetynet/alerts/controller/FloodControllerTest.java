@@ -32,7 +32,7 @@ public class FloodControllerTest {
     private FloodService floodService;
 
     // Test the getHouseholdByFireStationAddress method when the request parameter is correct
-    // It must return a 200 status and json array
+    // It must return a 200 status and json array containing the response
     @Test
     public void getHouseholdByFireStationAddressTest() throws Exception {
         List<Household> hh = new ArrayList<>();
@@ -62,13 +62,13 @@ public class FloodControllerTest {
     }
 
     // Test the getHouseholdByFireStationAddress method when the request parameter value is incorrect
-    // It must return a 200 status and an empty json array
+    // It must return a 200 status and a json array containing the error message
     @Test
     public void getHouseholdByFireStationAddressTestWithIncorrectParamValue() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/flood/stations")
                 .param("stations", "a"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().json("[]"));
+                .andExpect(content().json("[\"The request 'a' doesn't match anything or is incorrect\"]"));
     }
 }

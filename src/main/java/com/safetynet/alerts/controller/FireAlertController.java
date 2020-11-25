@@ -24,16 +24,19 @@ public class FireAlertController {
     FireAlertService fireAlertService;
 
     @GetMapping("/fire")
-    public List<FireAlert> getPersonsByAddress(@RequestParam String address) {
+    public List getPersonsByAddress(@RequestParam String address) {
         List<FireAlert> response = fireAlertService.getPersonsByAddress(address);
+        List<String> error = new ArrayList<>();
+        error.add("The request '" + address + "' doesn't match anything or is incorrect");
 
         logger.info("Request = /fire?address=" + address );
         // If the response list is empty, it means that the request is correct but the parameter doesn't match with anything the json file
         if(!response.isEmpty()) {
             logger.info("HTTP GET request received, SUCCESS / Response = " + response.toString());
+            return response;
         } else {
             logger.error("HTTP GET request received, ERROR / Response = " + response.toString());
+            return error;
         }
-        return response;
     }
 }

@@ -79,13 +79,14 @@ public class FirestationControllerTest {
     }
 
     // Test the getPersonsCoverageStation method when the request parameter name is incorrect
-    // It must return a 400 status
+    // It must return a 400 status and an error message
     @Test
     public void getFireStationTestWithIncorrectParamName() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/firestation")
                 .param("a", "3"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().is4xxClientError());
+                .andExpect(status().is4xxClientError())
+                .andExpect(status().reason("Required String parameter 'stationNumber' is not present"));
     }
 
     // Test the getPersonsCoverageStation method when the request parameter value is incorrect

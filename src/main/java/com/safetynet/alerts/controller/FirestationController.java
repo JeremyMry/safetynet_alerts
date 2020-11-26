@@ -23,7 +23,7 @@ public class FirestationController {
     }
 
     @Autowired
-    private FirestationService firestationService;
+    FirestationService firestationService;
 
     @PostMapping("/add")
     public List<Firestation> addFireStation(@RequestBody Firestation firestation) {

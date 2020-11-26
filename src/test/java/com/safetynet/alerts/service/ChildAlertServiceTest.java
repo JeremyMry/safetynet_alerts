@@ -151,7 +151,20 @@ public class ChildAlertServiceTest {
     @Test
     public void getChildFromListWhenThereIsNoData() {
         List<Person> listPersons = new ArrayList<>();
+        Person person1 = new Person();
+        person1.setFirstName("John");
+        person1.setLastName("Boyd");
+        person1.setAddress("1509 Culver St");
+        listPersons.add(person1);
+
         List<MedicalRecord> listMedicalrecords = new ArrayList<>();
+
+        MedicalRecord medicalRecord = new MedicalRecord();
+        medicalRecord.setFirstName("John");
+        medicalRecord.setLastName("Boyd");
+        medicalRecord.setBirthdate("03/06/1984");
+        listMedicalrecords.add(medicalRecord);
+
         List<ChildAlert> childAlertList = new ArrayList<>();
 
         when(dataContainer.getPersons()).thenReturn(listPersons);

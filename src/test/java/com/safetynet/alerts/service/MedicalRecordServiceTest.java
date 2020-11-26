@@ -31,7 +31,7 @@ public class MedicalRecordServiceTest {
     // test the add method from MedicalRecordService class
     // it must add a MedicalRecord to the List of MedicalRecord and then return the List of MedicalRecord with the new one added
     @Test
-    public void testAdd() {
+    public void addTest() {
         List<MedicalRecord> listMedicalrecords = new ArrayList<>();
 
         MedicalRecord medicalRecord = new MedicalRecord();
@@ -68,7 +68,7 @@ public class MedicalRecordServiceTest {
     // test the update method from MedicalRecordService class
     // it must update a MedicalRecord from the List of MedicalRecord and then return the List of MedicalRecord with the MedicalRecord updated
     @Test
-    public void testUpdate() {
+    public void updateTest() {
         List<MedicalRecord> listMedicalrecords = new ArrayList<>();
 
         MedicalRecord medicalrecord = new MedicalRecord();
@@ -94,10 +94,87 @@ public class MedicalRecordServiceTest {
         assertEquals("01/10/1980", medicalRecordService.update(updatedMedicalrecord).get(0).getBirthdate());
     }
 
+    // test the update method from MedicalRecordService class with unknown param
+    // it must return the MedicalRecord list with no change
+    @Test
+    public void updateWithWrongParamTest() {
+        List<MedicalRecord> listMedicalrecords = new ArrayList<>();
+
+        MedicalRecord medicalrecord = new MedicalRecord();
+        medicalrecord.setFirstName("John");
+        medicalrecord.setLastName("Boyd");
+        medicalrecord.setBirthdate("03/06/1985");
+        List<String> allergies = new ArrayList<>();
+        medicalrecord.setAllergies(allergies);
+        List<String> medications = new ArrayList<>();
+        medications.add("noxidian:100mg");
+        medications.add("pharmacol:2500mg");
+        medicalrecord.setMedications(medications);
+
+        listMedicalrecords.add(medicalrecord);
+
+        MedicalRecord updatedMedicalrecord = new MedicalRecord();
+        updatedMedicalrecord.setFirstName("John");
+        updatedMedicalrecord.setLastName("Doe");
+
+        when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
+
+        assertEquals(listMedicalrecords.toString(), medicalRecordService.update(updatedMedicalrecord).toString());
+    }
+
+    @Test
+    public void updateWithWrongParamTest2() {
+        List<MedicalRecord> listMedicalrecords = new ArrayList<>();
+
+        MedicalRecord medicalrecord = new MedicalRecord();
+        medicalrecord.setFirstName("John");
+        medicalrecord.setLastName("Boyd");
+        medicalrecord.setBirthdate("03/06/1985");
+        List<String> allergies = new ArrayList<>();
+        medicalrecord.setAllergies(allergies);
+        List<String> medications = new ArrayList<>();
+        medications.add("noxidian:100mg");
+        medications.add("pharmacol:2500mg");
+        medicalrecord.setMedications(medications);
+
+        listMedicalrecords.add(medicalrecord);
+
+        MedicalRecord updatedMedicalrecord = new MedicalRecord();
+        updatedMedicalrecord.setFirstName("Paul");
+        updatedMedicalrecord.setLastName("Boyd");
+
+        when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
+
+        assertEquals(listMedicalrecords.toString(), medicalRecordService.update(updatedMedicalrecord).toString());
+    }
+
+
     // test the delete method from MedicalRecordService class
     // it must delete a MedicalRecord from the List of MedicalRecord and then return the List of MedicalRecord without the MedicalRecord deleted
     @Test
-    public void testDelete()  {
+    public void deleteTest()  {
+        List<MedicalRecord> listMedicalrecords = new ArrayList<>();
+
+        MedicalRecord medicalRecord = new MedicalRecord();
+        medicalRecord.setFirstName("Peter");
+        medicalRecord.setLastName("Duncan");
+        medicalRecord.setBirthdate("09/06/2000");
+        List<String> allergies = new ArrayList<>();
+        allergies.add("shellfish");
+        medicalRecord.setAllergies(allergies);
+        List<String> medications = new ArrayList<>();
+        medicalRecord.setMedications(medications);
+        listMedicalrecords.add(medicalRecord);
+
+        when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
+
+        assertEquals(0, medicalRecordService.delete(medicalRecord.getFirstName(), medicalRecord.getLastName()).size());
+    }
+
+    // test the delete method from MedicalRecordService class with unknown param
+    // it must the  List of MedicalRecord with no changes
+    @Test
+    public void deleteTestWithIncorrectParamTest()  {
         List<MedicalRecord> listMedicalrecords = new ArrayList<>();
 
         MedicalRecord medicalRecord = new MedicalRecord();
@@ -113,9 +190,8 @@ public class MedicalRecordServiceTest {
         listMedicalrecords.add(medicalRecord);
 
         when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
-        listMedicalrecords = medicalRecordService.delete(medicalRecord.getFirstName(), medicalRecord.getLastName());
 
-        assertEquals(0, listMedicalrecords.size());
+        assertEquals(listMedicalrecords.toString(), medicalRecordService.delete("ee", "ee").toString());
     }
 
     // test the getAge method from the MedicalRecordService class
@@ -148,7 +224,23 @@ public class MedicalRecordServiceTest {
 
         when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
 
-        assertEquals(0, medicalRecordService.getAge("John", "Doe"));
+        assertEquals(0, medicalRecordService.getAge("Brian", "Doe"));
+    }
+
+    // test the getAge method from the MedicalRecordService class when the parameters doesn't match anything
+    // it must return 0
+    @Test
+    public void getAgeWithNoDataTest2() {
+        List<MedicalRecord> listMedicalrecords = new ArrayList<>();
+        MedicalRecord medicalrecord = new MedicalRecord();
+        medicalrecord.setFirstName("Brian");
+        medicalrecord.setLastName("Stelzer");
+        medicalrecord.setBirthdate("12/06/1975");
+        listMedicalrecords.add(medicalrecord);
+
+        when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
+
+        assertEquals(0, medicalRecordService.getAge("John", "Stelzer"));
     }
 
     // test the getAge method from the MedicalRecordService class when the parameters are incorrect
@@ -156,6 +248,11 @@ public class MedicalRecordServiceTest {
     @Test
     public void getAgeWithNoParamTest() {
         List<MedicalRecord> listMedicalrecords = new ArrayList<>();
+        MedicalRecord medicalrecord = new MedicalRecord();
+        medicalrecord.setFirstName("Brian");
+        medicalrecord.setLastName("Stelzer");
+        medicalrecord.setBirthdate("12/06/1975");
+        listMedicalrecords.add(medicalrecord);
 
         when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
 
@@ -195,14 +292,40 @@ public class MedicalRecordServiceTest {
         MedicalRecord medicalrecord = new MedicalRecord();
         medicalrecord.setFirstName("Brian");
         medicalrecord.setLastName("Stelzer");
+        List<String> medication = new ArrayList<>();
+        medication.add("ibupurin:200mg");
+        medication.add("hydrapermazol:400mg");
+        medicalrecord.setMedications(medication);
         listMedicalrecords.add(medicalrecord);
 
         List<String> medication1 = new ArrayList<>();
 
         when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
 
-        assertNotNull(medicalRecordService.getMedications("John", "Doe"));
-        assertEquals(medication1, medicalRecordService.getMedications("John", "Doe"));
+        assertNotNull(medicalRecordService.getMedications("John", "Stelzer"));
+        assertEquals(medication1, medicalRecordService.getMedications("John", "Stelzer"));
+    }
+
+    // test the getMedication method from MedicalRecordService class when the parameters doesn't match anything
+    // it must return an empty List
+    @Test
+    public void getMedicationsWithIncorrectParamTest2() {
+        List<MedicalRecord> listMedicalrecords = new ArrayList<>();
+        MedicalRecord medicalrecord = new MedicalRecord();
+        medicalrecord.setFirstName("Brian");
+        medicalrecord.setLastName("Stelzer");
+        List<String> medication = new ArrayList<>();
+        medication.add("ibupurin:200mg");
+        medication.add("hydrapermazol:400mg");
+        medicalrecord.setMedications(medication);
+        listMedicalrecords.add(medicalrecord);
+
+        List<String> medication1 = new ArrayList<>();
+
+        when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
+
+        assertNotNull(medicalRecordService.getMedications("Brian", "Doe"));
+        assertEquals(medication1, medicalRecordService.getMedications("Brian", "Doe"));
     }
 
     // test the getMedication method from MedicalRecordService class when the parameters are incorrect
@@ -210,6 +333,15 @@ public class MedicalRecordServiceTest {
     @Test
     public void getMedicationsWithNoDataTest() {
         List<MedicalRecord> listMedicalrecords = new ArrayList<>();
+        MedicalRecord medicalrecord = new MedicalRecord();
+        medicalrecord.setFirstName("Brian");
+        medicalrecord.setLastName("Stelzer");
+        List<String> medication = new ArrayList<>();
+        medication.add("ibupurin:200mg");
+        medication.add("hydrapermazol:400mg");
+        medicalrecord.setMedications(medication);
+        listMedicalrecords.add(medicalrecord);
+
         List<String> medication1 = new ArrayList<>();
 
         when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
@@ -247,13 +379,16 @@ public class MedicalRecordServiceTest {
         MedicalRecord medicalrecord = new MedicalRecord();
         medicalrecord.setFirstName("Brian");
         medicalrecord.setLastName("Stelzer");
+        List<String> allergies = new ArrayList<>();
+        allergies.add("nillacilan");
+        medicalrecord.setAllergies(allergies);
         listMedicalrecords.add(medicalrecord);
 
         List<String> allergies1 = new ArrayList<>();
         when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
 
-        assertNotNull(medicalRecordService.getAllergies("John","Doe"));
-        assertEquals(allergies1, medicalRecordService.getAllergies("John","Doe"));
+        assertNotNull(medicalRecordService.getAllergies("",""));
+        assertEquals(allergies1, medicalRecordService.getAllergies("",""));
     }
 
     // test the get Allergies method from the MedicalRecord class when the parameters doesn't match anything
@@ -261,12 +396,41 @@ public class MedicalRecordServiceTest {
     @Test
     public void getAllergiesWithNoIncorrectParamTest() {
         List<MedicalRecord> listMedicalrecords = new ArrayList<>();
+        MedicalRecord medicalrecord = new MedicalRecord();
+        medicalrecord.setFirstName("Brian");
+        medicalrecord.setLastName("Stelzer");
+        List<String> allergies = new ArrayList<>();
+        allergies.add("nillacilan");
+        medicalrecord.setAllergies(allergies);
+        listMedicalrecords.add(medicalrecord);
+
         List<String> allergies1 = new ArrayList<>();
 
         when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
 
-        assertNotNull(medicalRecordService.getAllergies("", ""));
-        assertEquals(allergies1, medicalRecordService.getAllergies("", ""));
+        assertNotNull(medicalRecordService.getAllergies("Brian", "Doe"));
+        assertEquals(allergies1, medicalRecordService.getAllergies("Brian", "Doe"));
+    }
+
+    // test the get Allergies method from the MedicalRecord class when the parameters doesn't match anything
+    // it must return an empty List
+    @Test
+    public void getAllergiesWithNoIncorrectParamTest2() {
+        List<MedicalRecord> listMedicalrecords = new ArrayList<>();
+        MedicalRecord medicalrecord = new MedicalRecord();
+        medicalrecord.setFirstName("Brian");
+        medicalrecord.setLastName("Stelzer");
+        List<String> allergies = new ArrayList<>();
+        allergies.add("nillacilan");
+        medicalrecord.setAllergies(allergies);
+        listMedicalrecords.add(medicalrecord);
+
+        List<String> allergies1 = new ArrayList<>();
+
+        when(dataContainer.getMedicalrecords()).thenReturn(listMedicalrecords);
+
+        assertNotNull(medicalRecordService.getAllergies("John", "Stelzer"));
+        assertEquals(allergies1, medicalRecordService.getAllergies("John", "Stelzer"));
     }
 
 }

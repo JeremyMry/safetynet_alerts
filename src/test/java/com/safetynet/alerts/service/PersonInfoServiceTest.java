@@ -73,11 +73,29 @@ public class PersonInfoServiceTest {
         List<MedicalRecord> medicalRecordList = new ArrayList<>();
         List<PersonInfo> personInfoList = new ArrayList<>();
 
+        Person person = new Person();
+        person.setFirstName("John");
+        person.setLastName("Boyd");
+        person.setAddress("test");
+        person.setEmail("test@testmail.com");
+        listPersons.add(person);
+
+        MedicalRecord medicalRecord = new MedicalRecord();
+        medicalRecord.setFirstName("John");
+        medicalRecord.setLastName("Boyd");
+        List<String> medications = new ArrayList<>();
+        List<String> allergies = new ArrayList<>();
+        medicalRecord.setAllergies(allergies);
+        medicalRecord.setMedications(medications);
+        medicalRecord.setBirthdate("03/06/1984");
+        medicalRecordList.add(medicalRecord);
+
+
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getMedicalrecords()).thenReturn(medicalRecordList);
 
-        Assert.assertNotNull(personInfoService.getPersonInformation("John", "Boyd"));
-        Assert.assertEquals(personInfoList.toString() ,personInfoService.getPersonInformation("John", "Boyd").toString());
+        Assert.assertNotNull(personInfoService.getPersonInformation("John", "Doe"));
+        Assert.assertEquals(personInfoList.toString() ,personInfoService.getPersonInformation("John", "Doe").toString());
     }
 
     //Test the getPersonInformation method from PersonInfoService when the parameters doesn't match anything
@@ -87,6 +105,23 @@ public class PersonInfoServiceTest {
         List<Person> listPersons = new ArrayList<>();
         List<MedicalRecord> medicalRecordList = new ArrayList<>();
         List<PersonInfo> personInfoList = new ArrayList<>();
+
+        Person person = new Person();
+        person.setFirstName("John");
+        person.setLastName("Boyd");
+        person.setAddress("test");
+        person.setEmail("test@testmail.com");
+        listPersons.add(person);
+
+        MedicalRecord medicalRecord = new MedicalRecord();
+        medicalRecord.setFirstName("John");
+        medicalRecord.setLastName("Boyd");
+        List<String> medications = new ArrayList<>();
+        List<String> allergies = new ArrayList<>();
+        medicalRecord.setAllergies(allergies);
+        medicalRecord.setMedications(medications);
+        medicalRecord.setBirthdate("03/06/1984");
+        medicalRecordList.add(medicalRecord);
 
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getMedicalrecords()).thenReturn(medicalRecordList);

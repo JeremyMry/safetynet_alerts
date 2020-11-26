@@ -91,15 +91,49 @@ public class PhoneAlertServiceTest {
     public void getPhoneNumberListWithNoDataTest() {
         List<Person> listPersons = new ArrayList<>();
         List<String> phoneList = new ArrayList<>();
+
+        Person person1 = new Person();
+        person1.setAddress("1510 Culver St");
+        person1.setPhone("testphone1");
+        listPersons.add(person1);
+
+        Person person2 = new Person();
+        person2.setAddress("1509 Culver St");
+        person2.setPhone("testphone2");
+        listPersons.add(person2);
+
+        Person person3 = new Person();
+        person3.setAddress("1509 Culver St");
+        person3.setPhone("testphone3");
+        listPersons.add(person3);
+
+        Person person4 = new Person();
+        person4.setAddress("1509 Culver St");
+        person4.setPhone("testphone4");
+        listPersons.add(person4);
+
+        Person person5 = new Person();
+        person5.setAddress("1509 Culver St");
+        person5.setPhone("testphone5");
+        listPersons.add(person5);
+
         List<Firestation> firestationList = new ArrayList<>();
-        Firestation firestation = new Firestation("000", "3");
+        Firestation firestation = new Firestation();
+        firestation.setStation("2");
+        firestation.setAddress("1509 Culver St");
+        firestationList.add(firestation);
+
+        Firestation firestation1 = new Firestation();
+        firestation1.setStation("2");
+        firestation1.setAddress("1510 Culver St");
+        firestationList.add(firestation1);
         firestationList.add(firestation);
 
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getFirestations()).thenReturn(firestationList);
 
-        Assert.assertNotNull(phoneAlertService.getPhoneNumberByCoverage("2"));
-        Assert.assertEquals(phoneList.toString(), phoneAlertService.getPhoneNumberByCoverage("2").toString());
+        Assert.assertNotNull(phoneAlertService.getPhoneNumberByCoverage("1"));
+        Assert.assertEquals(phoneList.toString(), phoneAlertService.getPhoneNumberByCoverage("1").toString());
     }
 
     // test the getPhoneNumberByCoverage method from the PhoneAlertService class when the parameters are incorrect
@@ -109,6 +143,42 @@ public class PhoneAlertServiceTest {
         List<Person> listPersons = new ArrayList<>();
         List<String> phoneList = new ArrayList<>();
         List<Firestation> firestationList = new ArrayList<>();
+
+        Person person1 = new Person();
+        person1.setAddress("1510 Culver St");
+        person1.setPhone("testphone1");
+        listPersons.add(person1);
+
+        Person person2 = new Person();
+        person2.setAddress("1509 Culver St");
+        person2.setPhone("testphone2");
+        listPersons.add(person2);
+
+        Person person3 = new Person();
+        person3.setAddress("1509 Culver St");
+        person3.setPhone("testphone3");
+        listPersons.add(person3);
+
+        Person person4 = new Person();
+        person4.setAddress("1509 Culver St");
+        person4.setPhone("testphone4");
+        listPersons.add(person4);
+
+        Person person5 = new Person();
+        person5.setAddress("1509 Culver St");
+        person5.setPhone("testphone5");
+        listPersons.add(person5);
+
+        Firestation firestation = new Firestation();
+        firestation.setStation("2");
+        firestation.setAddress("1509 Culver St");
+        firestationList.add(firestation);
+
+        Firestation firestation1 = new Firestation();
+        firestation1.setStation("2");
+        firestation1.setAddress("1510 Culver St");
+        firestationList.add(firestation1);
+        firestationList.add(firestation);
 
         when(dataContainer.getPersons()).thenReturn(listPersons);
         when(dataContainer.getFirestations()).thenReturn(firestationList);

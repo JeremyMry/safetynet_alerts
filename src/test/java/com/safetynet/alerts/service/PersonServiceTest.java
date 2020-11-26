@@ -34,7 +34,7 @@ public class PersonServiceTest {
     // test the add method from PersonService class
     // it must add a Person to the List of Person and then return the List of Person with the new Person added
     @Test
-    public void testAdd() throws Exception {
+    public void addTest() throws Exception {
         List<Person> personList = new ArrayList<>();
         Person person = new Person();
         person.setFirstName("John");
@@ -73,7 +73,7 @@ public class PersonServiceTest {
     // test the update method from PersonService class
     // it must update a Person from the List of Person and then return the List of Person with the  Person updated
     @Test
-    public void testUpdate() {
+    public void updateTest() {
         List<Person> personList = new ArrayList<>();
         Person person = new Person();
         person.setFirstName("John");
@@ -91,15 +91,15 @@ public class PersonServiceTest {
         updatedPerson.setEmail("jaboyd@testmail.com");
 
         when(dataContainer.getPersons()).thenReturn(personList);
-        personList = personService.update(updatedPerson);
+        personService.update(updatedPerson);
 
-        assertEquals("jaboyd@testmail.com", personList.get(0).getEmail());
+        assertEquals(personList.get(0).getEmail(), personService.update(updatedPerson).get(0).getEmail());
     }
 
-    // test the delete method from PersonService class
-    // it must delete a Person from the List of Person and then return the List of Person without the  Person deleted
+    // test the update method from PersonService class with unknown param
+    // it must return the Person List with no changes
     @Test
-    public void testDelete() throws Exception {
+    public void updateWithIncorrectParamTest() {
         List<Person> personList = new ArrayList<>();
         Person person = new Person();
         person.setFirstName("John");
@@ -109,10 +109,100 @@ public class PersonServiceTest {
         person.setZip("97451");
         person.setPhone("841-874-6512");
         person.setEmail("jaboyd@email.com");
+        personList.add(person);
+
+        Person updatedPerson = new Person();
+        updatedPerson.setFirstName("John");
+        updatedPerson.setLastName("Doe");
+        updatedPerson.setEmail("jaboyd@email.com");
 
         when(dataContainer.getPersons()).thenReturn(personList);
-        personList = personService.delete(person.getFirstName(), person.getLastName());
 
-        assertEquals(0, personList.size());
+        assertEquals(personList.toString(), personService.update(updatedPerson).toString());
+    }
+
+    // test the update method from PersonService class with unknown param
+    // it must return the Person List with no changes
+    @Test
+    public void updateWithIncorrectParamTest2() {
+        List<Person> personList = new ArrayList<>();
+        Person person = new Person();
+        person.setFirstName("John");
+        person.setLastName("Boyd");
+        person.setAddress("1509 Culver St");
+        person.setCity("Culver");
+        person.setZip("97451");
+        person.setPhone("841-874-6512");
+        person.setEmail("jaboyd@email.com");
+        personList.add(person);
+
+        Person updatedPerson = new Person();
+        updatedPerson.setFirstName("Paul");
+        updatedPerson.setLastName("Boyd");
+        updatedPerson.setEmail("jaboyd@email.com");
+
+        when(dataContainer.getPersons()).thenReturn(personList);
+
+        assertEquals(personList.toString(), personService.update(updatedPerson).toString());
+    }
+
+    // test the delete method from PersonService class
+    // it must delete a Person from the List of Person and then return the List of Person without the  Person deleted
+    @Test
+    public void testDelete() {
+        List<Person> personList = new ArrayList<>();
+        Person person = new Person();
+        person.setFirstName("John");
+        person.setLastName("Boyd");
+        person.setAddress("1509 Culver St");
+        person.setCity("Culver");
+        person.setZip("97451");
+        person.setPhone("841-874-6512");
+        person.setEmail("jaboyd@email.com");
+        personList.add(person);
+
+        when(dataContainer.getPersons()).thenReturn(personList);
+
+        assertEquals(0, personService.delete(person.getFirstName(), person.getLastName()).size());
+    }
+
+    // test the delete method from PersonService class with unknown param
+    // it must return the Person List with no changes
+    @Test
+    public void deleteTestWithIncorrectParamTest()  {
+        List<Person> personList = new ArrayList<>();
+        Person person = new Person();
+        person.setFirstName("John");
+        person.setLastName("Boyd");
+        person.setAddress("1509 Culver St");
+        person.setCity("Culver");
+        person.setZip("97451");
+        person.setPhone("841-874-6512");
+        person.setEmail("jaboyd@email.com");
+        personList.add(person);
+
+        when(dataContainer.getPersons()).thenReturn(personList);
+
+        assertEquals(personList.toString(), personService.delete("ee", "Boyd").toString());
+    }
+
+    // test the delete method from PersonService class with unknown param
+    // it must return the Person List with no changes
+    @Test
+    public void deleteTestWithIncorrectParamTest2()  {
+        List<Person> personList = new ArrayList<>();
+        Person person = new Person();
+        person.setFirstName("John");
+        person.setLastName("Boyd");
+        person.setAddress("1509 Culver St");
+        person.setCity("Culver");
+        person.setZip("97451");
+        person.setPhone("841-874-6512");
+        person.setEmail("jaboyd@email.com");
+        personList.add(person);
+
+        when(dataContainer.getPersons()).thenReturn(personList);
+
+        assertEquals(personList.toString(), personService.delete("John", "ee").toString());
     }
 }

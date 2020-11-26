@@ -19,7 +19,7 @@ public class PersonController {
     }
 
     @Autowired
-    private PersonService personService;
+    PersonService personService;
 
     @PostMapping("/add")
     public List<Person> addPerson(@RequestBody Person person) {

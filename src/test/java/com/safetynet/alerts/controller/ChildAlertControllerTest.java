@@ -49,13 +49,14 @@ public class ChildAlertControllerTest {
     }
 
     // Test the getChildByAddress method when the request parameter name is incorrect
-    // It must return a 400 status
+    // It must return a 400 status and an error message
     @Test
     public void getChildByAddressTestWithIncorrectParamName() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/childAlert")
                 .param("a", "1509 Culver St"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().is4xxClientError());
+                .andExpect(status().is4xxClientError())
+                .andExpect(status().reason("Required String parameter 'address' is not present"));
     }
 
     // Test the getChildByAddress method when the request parameter value is incorrect

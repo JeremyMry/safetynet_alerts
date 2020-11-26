@@ -54,12 +54,22 @@ public class CommunityEmailServiceTest {
     @Test
     public void getEmailListWithNoEmailInTheCity() {
         List<Person> listPersons = new ArrayList<>();
+        Person person = new Person();
+        person.setEmail("test@testmail.com");
+        person.setCity("Culver");
+        listPersons.add(person);
+
+        Person person1 = new Person();
+        person1.setEmail("test2@testmail.com");
+        person1.setCity("Culver");
+        listPersons.add(person1);
+
         List<String> emailList = new ArrayList<>();
 
         when(dataContainer.getPersons()).thenReturn(listPersons);
 
-        Assert.assertNotNull(communityEmailService.getEmailByCity("Culver"));
-        Assert.assertEquals(emailList.toString(), communityEmailService.getEmailByCity("Culver").toString());
+        Assert.assertNotNull(communityEmailService.getEmailByCity("Culve"));
+        Assert.assertEquals(emailList.toString(), communityEmailService.getEmailByCity("Culve").toString());
     }
 
     // test the getEmailByCity method from the CommunityEmailService class when the city is incorrect
@@ -67,6 +77,16 @@ public class CommunityEmailServiceTest {
     @Test
     public void getEmailListWithIncorrectParam() {
         List<Person> listPersons = new ArrayList<>();
+        Person person = new Person();
+        person.setEmail("test@testmail.com");
+        person.setCity("Culver");
+        listPersons.add(person);
+
+        Person person1 = new Person();
+        person1.setEmail("test2@testmail.com");
+        person1.setCity("Culver");
+        listPersons.add(person1);
+
         List<String> emailList = new ArrayList<>();
 
         when(dataContainer.getPersons()).thenReturn(listPersons);

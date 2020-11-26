@@ -14,12 +14,12 @@ public class CommunityEmailController {
 
     private final Logger logger;
 
-    public CommunityEmailController(Logger logger) {
+    public CommunityEmailController(Logger logger, CommunityEmailService communityEmailService) {
         this.logger = logger;
     }
 
     @Autowired
-    private CommunityEmailService communityEmailService;
+    CommunityEmailService communityEmailService;
 
     @GetMapping("/communityEmail")
     public List<String> getEmailsByCity(@RequestParam String city) {

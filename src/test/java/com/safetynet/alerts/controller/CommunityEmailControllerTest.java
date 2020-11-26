@@ -44,13 +44,14 @@ public class CommunityEmailControllerTest {
     }
 
     // Test the getEmailsByCity method when the request parameter name is incorrect
-    // It must return a 400 status
+    // It must return a 400 status and an error message
     @Test
     public void getEmailTestByCityWithIncorrectParamName() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/communityEmail")
                 .param("a", "Culver"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().is4xxClientError());
+                .andExpect(status().is4xxClientError())
+                .andExpect(status().reason("Required String parameter 'city' is not present"));
     }
 
     // Test the getEmailsByCity method when the request parameter value is incorrect

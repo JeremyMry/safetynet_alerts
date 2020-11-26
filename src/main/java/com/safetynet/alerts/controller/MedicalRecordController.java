@@ -19,7 +19,7 @@ public class MedicalRecordController {
     }
 
     @Autowired
-    private MedicalRecordService medicalRecordService;
+    MedicalRecordService medicalRecordService;
 
 
     @PostMapping("/add")

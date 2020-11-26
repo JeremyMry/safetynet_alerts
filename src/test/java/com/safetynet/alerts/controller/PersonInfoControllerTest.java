@@ -53,14 +53,15 @@ public class PersonInfoControllerTest {
     }
 
     // Test the getAPersonInformation method when the request parameter name is incorrect
-    // It must return a 400 status
+    // It must return a 400 status and an error message
     @Test
     public void getPersonInformationTestWithIncorrectParamName() throws Exception {
 
         this.mvc.perform(MockMvcRequestBuilders.get("/personInfo")
                 .param("a", "John").param("lastName", "a"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().is4xxClientError());
+                .andExpect(status().is4xxClientError())
+                .andExpect(status().reason("Required String parameter 'firstName' is not present"));
     }
 
     // Test the getAPersonInformation method when the request parameter value is incorrect

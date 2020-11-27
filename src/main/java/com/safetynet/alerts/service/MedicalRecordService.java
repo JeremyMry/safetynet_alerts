@@ -14,12 +14,13 @@ import java.util.List;
 public class MedicalRecordService implements IMedicalRecordService {
 
     @Autowired
-    private DataContainer dataContainer;
+    DataContainer dataContainer;
 
     public MedicalRecordService(DataContainer dataContainer) {
         this.dataContainer = dataContainer;
     }
 
+    // add a MedicalRecord to the medicalRecord List
     @Override
     public List<MedicalRecord> add(MedicalRecord medicalRecord) {
         List<MedicalRecord> medicalRecordsList = dataContainer.getMedicalrecords();
@@ -28,6 +29,7 @@ public class MedicalRecordService implements IMedicalRecordService {
 
     }
 
+    // update a MedicalRecord from the MedicalRecord List
     @Override
     public List<MedicalRecord> update(MedicalRecord medicalRecord) {
         String firstName = medicalRecord.getFirstName();
@@ -46,6 +48,7 @@ public class MedicalRecordService implements IMedicalRecordService {
 
     }
 
+    // delete a MedicalRecord from the MedicalRecord List
     @Override
     public List<MedicalRecord> delete(String firstName, String lastName) {
         List<MedicalRecord> medicalRecordsList = dataContainer.getMedicalrecords();
@@ -54,6 +57,7 @@ public class MedicalRecordService implements IMedicalRecordService {
         return medicalRecordsList;
     }
 
+    // get the age of Person using her birthdate
     @Override
     public int getAge(String firstname, String lastName) {
         int age = 0;
@@ -69,6 +73,7 @@ public class MedicalRecordService implements IMedicalRecordService {
         return age;
     }
 
+    // get the medications of a specific person
     @Override
     public List<String> getMedications(String firstName, String lastName) {
         List<MedicalRecord> medicalRecordList = dataContainer.getMedicalrecords();
@@ -82,6 +87,7 @@ public class MedicalRecordService implements IMedicalRecordService {
         return medications;
     }
 
+    // get the allergies of a specific person
     @Override
     public List<String> getAllergies(String firstName, String lastName) {
         List<MedicalRecord> medicalRecordList = dataContainer.getMedicalrecords();

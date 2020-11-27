@@ -1,7 +1,6 @@
 package com.safetynet.alerts.controller;
 
 import com.safetynet.alerts.model.Firestation;
-import com.safetynet.alerts.model.PersonCovered;
 import com.safetynet.alerts.model.StationCoverage;
 import com.safetynet.alerts.service.FirestationService;
 import org.apache.logging.log4j.Logger;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RequestMapping("/firestation")
 @RestController

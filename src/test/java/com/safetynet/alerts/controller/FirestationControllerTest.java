@@ -31,8 +31,9 @@ public class FirestationControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private FirestationService firestationService;
+    FirestationService firestationService;
 
+    // test the add method
     @Test
     public void addFireStationTest() throws Exception {
         this.mvc.perform(post("/firestation/add")
@@ -41,6 +42,7 @@ public class FirestationControllerTest {
                 .andExpect(status().is2xxSuccessful());
     }
 
+    // test the delete method
     @Test
     public void deleteFireStationTest() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.delete("/firestation/delete")
@@ -49,6 +51,7 @@ public class FirestationControllerTest {
                 .andExpect(status().is2xxSuccessful());
     }
 
+    // Test the update method
     @Test
     public void updateFireStationTest() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.put("/firestation/update")

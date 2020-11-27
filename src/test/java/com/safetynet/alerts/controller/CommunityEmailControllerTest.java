@@ -26,7 +26,7 @@ public class CommunityEmailControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private CommunityEmailService communityEmailService;
+    CommunityEmailService communityEmailService;
 
     // Test the getEmailsByCity method when the request is correct
     // It must return a 200 status and json array the response

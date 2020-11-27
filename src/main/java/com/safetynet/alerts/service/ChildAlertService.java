@@ -21,11 +21,13 @@ public class ChildAlertService implements IChildAlertservice {
         this.medicalRecordService = medicalRecordService;
     }
 
+    // get all the child living at the address in parameter
     @Override
     public List<ChildAlert> getChildByAddress(String address) {
         List<Person> personList = dataContainer.getPersons();
         List<String> family = new ArrayList<>();
         List<ChildAlert> childAlertList = new ArrayList<>();
+
 
         for(Person person: personList) {
             if(person.getAddress().equals(address)) {

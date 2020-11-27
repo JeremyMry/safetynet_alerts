@@ -17,35 +17,31 @@ public class FloodServiceTest {
 
     private static DataContainer dataContainer;
 
-    private static FirestationService firestationService;
-
-    private static MedicalRecordService medicalRecordService;
-
     @BeforeAll
     private static void setup() {
         dataContainer = mock(DataContainer.class);
-        medicalRecordService = new MedicalRecordService(dataContainer);
-        firestationService = new FirestationService(dataContainer, medicalRecordService);
+        MedicalRecordService medicalRecordService = new MedicalRecordService(dataContainer);
+        FirestationService firestationService = new FirestationService(dataContainer, medicalRecordService);
         floodService = new FloodService(dataContainer, medicalRecordService, firestationService);
     }
     // test the getHouseholdByStationAddress method from FloodService class
     // it must return a List of Household
     @Test
     public void getFloodTest() {
-        List<Person> listPersons = new ArrayList<>();
+        List<Person> personList = new ArrayList<>();
         Person person1 = new Person();
         person1.setFirstName("John");
         person1.setLastName("Boyd");
         person1.setAddress("1509 Culver St");
         person1.setPhone("test");
-        listPersons.add(person1);
+        personList.add(person1);
 
         Person person2 = new Person();
         person2.setFirstName("Jacob");
         person2.setLastName("Boyd");
         person2.setAddress("1510 Culver St");
         person2.setPhone("test");
-        listPersons.add(person2);
+        personList.add(person2);
 
         List<Firestation> firestationList = new ArrayList<>();
         Firestation firestation = new Firestation();
@@ -74,7 +70,7 @@ public class FloodServiceTest {
         householdList.add(household);
         householdList.add(household1);
 
-        when(dataContainer.getPersons()).thenReturn(listPersons);
+        when(dataContainer.getPersons()).thenReturn(personList);
         when(dataContainer.getFirestations()).thenReturn(firestationList);
 
         Assert.assertNotNull(floodService.getHouseholdByStationAddress("2"));
@@ -85,11 +81,11 @@ public class FloodServiceTest {
     // it must return an empty List of Household
     @Test
     public void getFloodWithNoDataTest() {
-        List<Person> listPersons = new ArrayList<>();
+        List<Person> personList = new ArrayList<>();
         List<Firestation> firestationList = new ArrayList<>();
         List<Household> householdList = new ArrayList<>();
 
-        when(dataContainer.getPersons()).thenReturn(listPersons);
+        when(dataContainer.getPersons()).thenReturn(personList);
         when(dataContainer.getFirestations()).thenReturn(firestationList);
 
         Assert.assertNotNull(floodService.getHouseholdByStationAddress("2"));
@@ -100,11 +96,11 @@ public class FloodServiceTest {
     // it must return an empty List of Household
     @Test
     public void getFloodWithIncorrectParamNumberTest() {
-        List<Person> listPersons = new ArrayList<>();
+        List<Person> personList = new ArrayList<>();
         List<Firestation> firestationList = new ArrayList<>();
         List<Household> householdList = new ArrayList<>();
 
-        when(dataContainer.getPersons()).thenReturn(listPersons);
+        when(dataContainer.getPersons()).thenReturn(personList);
         when(dataContainer.getFirestations()).thenReturn(firestationList);
 
         Assert.assertNotNull(floodService.getHouseholdByStationAddress(""));

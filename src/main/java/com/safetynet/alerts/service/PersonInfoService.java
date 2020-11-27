@@ -23,6 +23,7 @@ public class PersonInfoService implements  IPersonInfoService {
         this.medicalRecordService = medicalRecordService;
     }
 
+    // get specific information on a Person using his firstName and lastName in parameter to find her
     @Override
     public List<PersonInfo> getPersonInformation(String firstName, String lastName) {
         List<Person> personList = dataContainer.getPersons();

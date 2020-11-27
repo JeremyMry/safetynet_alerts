@@ -29,7 +29,7 @@ public class ChildAlertControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private ChildAlertService childAlertService;
+    ChildAlertService childAlertService;
 
     // Test the getChildByAddress method when the request is correct
     // It must return a 200 status and json array containing the response

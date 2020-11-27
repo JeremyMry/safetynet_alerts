@@ -2,7 +2,6 @@ package com.safetynet.alerts.controller;
 
 import com.safetynet.alerts.model.Flood;
 import com.safetynet.alerts.model.Household;
-import com.safetynet.alerts.service.ChildAlertService;
 import com.safetynet.alerts.service.FloodService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,7 +28,7 @@ public class FloodControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private FloodService floodService;
+    FloodService floodService;
 
     // Test the getHouseholdByFireStationAddress method when the request parameter is correct
     // It must return a 200 status and json array containing the response

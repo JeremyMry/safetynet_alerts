@@ -26,10 +26,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class FireAlertControllerTest {
 
     @Autowired
-    private MockMvc mvc;
+    MockMvc mvc;
 
     @MockBean
-    private FireAlertService fireAlertService;
+    FireAlertService fireAlertService;
 
     // Test the getPersonsByAddress method when the request is correct
     // It must return a 200 status and json array containing the response

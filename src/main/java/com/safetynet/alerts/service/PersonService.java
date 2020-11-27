@@ -10,12 +10,13 @@ import java.util.List;
 public class PersonService implements IPersonService {
 
     @Autowired
-    private DataContainer dataContainer;
+    DataContainer dataContainer;
 
     public PersonService(DataContainer dataContainer) {
         this.dataContainer = dataContainer;
     }
 
+    // add a Person to the Person List
     @Override
     public List<Person> add(Person person) {
         List<Person> listPersons = dataContainer.getPersons();
@@ -23,6 +24,7 @@ public class PersonService implements IPersonService {
         return listPersons;
     }
 
+    // update a Person from the Person List
     @Override
     public List<Person> update(Person person) {
         String firstname = person.getFirstName();
@@ -43,6 +45,7 @@ public class PersonService implements IPersonService {
 
     }
 
+    // delete a Person from the Person List
     @Override
     public List<Person> delete(String firstName, String lastName) {
         List<Person> listPersons = dataContainer.getPersons();

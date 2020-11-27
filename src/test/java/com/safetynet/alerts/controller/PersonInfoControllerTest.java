@@ -29,10 +29,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class PersonInfoControllerTest {
 
     @Autowired
-    private MockMvc mvc;
+    MockMvc mvc;
 
     @MockBean
-    private PersonInfoService personInfoService;
+    PersonInfoService personInfoService;
 
     // Test the getAPersonInformation method when the request is correct
     // It must return a 200 status and a json array containing the response

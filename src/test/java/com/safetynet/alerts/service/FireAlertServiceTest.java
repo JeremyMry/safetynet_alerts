@@ -1,14 +1,11 @@
 package com.safetynet.alerts.service;
 
-import com.safetynet.alerts.model.*;
-import com.safetynet.alerts.service.ChildAlertService;
-import com.safetynet.alerts.service.FireAlertService;
-import com.safetynet.alerts.service.FirestationService;
-import com.safetynet.alerts.service.MedicalRecordService;
+import com.safetynet.alerts.model.DataContainer;
+import com.safetynet.alerts.model.FireAlert;
+import com.safetynet.alerts.model.Person;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,15 +19,11 @@ public class FireAlertServiceTest {
 
     private static DataContainer dataContainer;
 
-    private static FirestationService firestationService;
-
-    private static MedicalRecordService medicalRecordService;
-
     @BeforeAll
     private static void setup() {
         dataContainer = mock(DataContainer.class);
-        medicalRecordService = new MedicalRecordService(dataContainer);
-        firestationService = new FirestationService(dataContainer, medicalRecordService);
+        MedicalRecordService medicalRecordService = new MedicalRecordService(dataContainer);
+        FirestationService firestationService = new FirestationService(dataContainer, medicalRecordService);
         fireAlertService = new FireAlertService(dataContainer, medicalRecordService, firestationService);
     }
 
@@ -39,19 +32,19 @@ public class FireAlertServiceTest {
     @Test
     public void getFireAlertTest() {
 
-        List<Person> listPersons = new ArrayList<>();
+        List<Person> personList = new ArrayList<>();
         Person person = new Person();
         person.setFirstName("John");
         person.setLastName("Boyd");
         person.setAddress("1509 Culver St");
         person.setPhone("test");
-        listPersons.add(person);
+        personList.add(person);
 
         Person person2 = new Person();
         person2.setFirstName("Tenley");
         person2.setLastName("Boyd");
         person2.setAddress("1510 Culver St");
-        listPersons.add(person2);
+        personList.add(person2);
 
         List<FireAlert> fireAlertList = new ArrayList<>();
         List<String> medications = new ArrayList<>();
@@ -60,7 +53,7 @@ public class FireAlertServiceTest {
         FireAlert fireAlert = new FireAlert("John", "Boyd", 0, "test", medications, allergies, stationNumber);
         fireAlertList.add(fireAlert);
 
-        when(dataContainer.getPersons()).thenReturn(listPersons);
+        when(dataContainer.getPersons()).thenReturn(personList);
 
         Assert.assertNotNull(fireAlertService.getPersonsByAddress("1509 Culver St"));
         Assert.assertEquals(fireAlertList.toString(), fireAlertService.getPersonsByAddress("1509 Culver St").toString());
@@ -70,10 +63,10 @@ public class FireAlertServiceTest {
     // it must return an empty List of FireAlert
     @Test
     public void getFireAlertWithNoData() {
-        List<Person> listPersons = new ArrayList<>();
+        List<Person> personList = new ArrayList<>();
         List<FireAlert> fireAlertList = new ArrayList<>();
 
-        when(dataContainer.getPersons()).thenReturn(listPersons);
+        when(dataContainer.getPersons()).thenReturn(personList);
 
         Assert.assertNotNull(fireAlertService.getPersonsByAddress("1509 Culver St"));
         Assert.assertEquals(fireAlertList.toString(), fireAlertService.getPersonsByAddress("1509 Culver St").toString());
@@ -83,10 +76,10 @@ public class FireAlertServiceTest {
     // it must return an empty List of FireAlert
     @Test
     public void getFireAlertWithNoAddress() {
-        List<Person> listPersons = new ArrayList<>();
+        List<Person> personList = new ArrayList<>();
         List<FireAlert> fireAlertList = new ArrayList<>();
 
-        when(dataContainer.getPersons()).thenReturn(listPersons);
+        when(dataContainer.getPersons()).thenReturn(personList);
 
         Assert.assertNotNull(fireAlertService.getPersonsByAddress(""));
         Assert.assertEquals(fireAlertList.toString(), fireAlertService.getPersonsByAddress("").toString());

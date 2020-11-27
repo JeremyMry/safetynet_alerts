@@ -1,10 +1,7 @@
 package com.safetynet.alerts.service;
 
 import com.safetynet.alerts.model.DataContainer;
-import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.model.Person;
-import com.safetynet.alerts.service.MedicalRecordService;
-import com.safetynet.alerts.service.PersonService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,7 +31,7 @@ public class PersonServiceTest {
     // test the add method from PersonService class
     // it must add a Person to the List of Person and then return the List of Person with the new Person added
     @Test
-    public void addTest() throws Exception {
+    public void addTest() {
         List<Person> personList = new ArrayList<>();
         Person person = new Person();
         person.setFirstName("John");

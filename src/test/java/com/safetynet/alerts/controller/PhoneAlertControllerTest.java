@@ -1,6 +1,5 @@
 package com.safetynet.alerts.controller;
 
-import com.safetynet.alerts.service.ChildAlertService;
 import com.safetynet.alerts.service.PhoneAlertService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,10 +23,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class PhoneAlertControllerTest {
 
     @Autowired
-    private MockMvc mvc;
+    MockMvc mvc;
 
     @MockBean
-    private PhoneAlertService phoneAlertService;
+    PhoneAlertService phoneAlertService;
 
     // Test the getPhoneNumbersByCoverageStation method when the request is correct
     // It must return a 200 status and a json array containing the response

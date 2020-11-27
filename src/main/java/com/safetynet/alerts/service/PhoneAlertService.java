@@ -21,6 +21,7 @@ public class PhoneAlertService implements IPhoneAlertService {
         this.firestationService = firestationService;
     }
 
+    // get the Phone Numbers of all the Persons covered by the station who is in parameter
     @Override
     public List<String> getPhoneNumberByCoverage(String firestation_number) {
         List<Person> personList = dataContainer.getPersons();

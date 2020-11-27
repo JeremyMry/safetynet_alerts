@@ -2,9 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Request error</title>
 </head>
 <body>
-    <p1>This is a request error</p1>
+    <h1>A request error has occurred</h1>
+    <h2>Please take a look to this list of pages</h2>
+    <ul>
+        <li>http://localhost:8080/firestation?stationNumber=<em>station_number</em></li>
+        <li>http://localhost:8080/childAlert?address=<em>address</em></li>
+        <li>http://localhost:8080/phoneAlert?firestation=<em>firestation_number</em></li>
+        <li>http://localhost:8080/fire?address=<em>address</em></li>
+        <li>http://localhost:8080/flood/stations?stations=<em>station_number</em></li>
+        <li>http://localhost:8080/personInfo?firstName=<em>firstName</em>&lastName=<em>lastName</em></li>
+        <li>http://localhost:8080/communityEmail?city=<em>city</em></li>
+        <li>http://localhost:8080/actuator/info</li>
+        <li>http://localhost:8080/actuator/health</li>
+        <li>http://localhost:8080/actuator/httptrace</li>
+        <li>http://localhost:8080/actuator/metrics</li>
 </body>
 </html>

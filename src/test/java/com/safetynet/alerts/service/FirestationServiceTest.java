@@ -5,7 +5,6 @@ import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
@@ -20,14 +19,12 @@ public class FirestationServiceTest {
 
     private static FirestationService firestationService;
 
-    private static MedicalRecordService medicalRecordService;
-
     private static DataContainer dataContainer;
 
     @BeforeAll
     private static void setUp() {
         dataContainer = mock(DataContainer.class);
-        medicalRecordService = new MedicalRecordService(dataContainer);
+        MedicalRecordService medicalRecordService = new MedicalRecordService(dataContainer);
         firestationService = new FirestationService(dataContainer, medicalRecordService);
     }
 
@@ -111,7 +108,7 @@ public class FirestationServiceTest {
     // test the delete method from FirestationService class with unknown param
     // it must return a Firestation List with no changes
     @Test
-    public void deleteWithIncorrectParamTest () throws Exception {
+    public void deleteWithIncorrectParamTest () {
         List<Firestation> firestationList = new ArrayList<>();
         Firestation firestation = new Firestation();
         firestation.setAddress("1509 Culver St");

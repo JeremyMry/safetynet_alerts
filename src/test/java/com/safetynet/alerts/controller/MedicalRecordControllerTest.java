@@ -22,11 +22,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class MedicalRecordControllerTest {
 
     @Autowired
-    private MockMvc mvc;
+    MockMvc mvc;
 
     @MockBean
-    private MedicalRecordService medicalRecordService;
+    MedicalRecordService medicalRecordService;
 
+    // test the add method
     @Test
     public void addMedicalRecordTest() throws Exception {
         this.mvc.perform(post("/medicalRecord/add")
@@ -35,6 +36,7 @@ public class MedicalRecordControllerTest {
                 .andExpect(status().is2xxSuccessful());
     }
 
+    // test the delete method
     @Test
     public void deleteMedicalRecordTest() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.delete("/medicalRecord/delete")
@@ -43,6 +45,7 @@ public class MedicalRecordControllerTest {
                 .andExpect(status().is2xxSuccessful());
     }
 
+    // test the update method
     @Test
     public void updateMedicalRecordTest() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.put("/medicalRecord/update")

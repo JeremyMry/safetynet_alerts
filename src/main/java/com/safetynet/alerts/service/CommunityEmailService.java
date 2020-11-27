@@ -11,12 +11,13 @@ import java.util.List;
 public class CommunityEmailService implements ICommunityEmailService {
 
     @Autowired
-    private DataContainer dataContainer;
+    DataContainer dataContainer;
 
     public CommunityEmailService(DataContainer dataContainer) {
         this.dataContainer = dataContainer;
     }
 
+    // get all the emails of the persons living in the city passed into parameter
     @Override
     public List<String> getEmailByCity(String city) {
         List<Person> personList = dataContainer.getPersons();

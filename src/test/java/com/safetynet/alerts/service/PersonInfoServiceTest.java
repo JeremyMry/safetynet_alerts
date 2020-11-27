@@ -1,6 +1,5 @@
 package com.safetynet.alerts.service;
 
-import com.safetynet.alerts.SafetynetAlertsApplication;
 import com.safetynet.alerts.model.DataContainer;
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.model.Person;
@@ -21,12 +20,10 @@ public class PersonInfoServiceTest {
 
     private static DataContainer dataContainer;
 
-    private static MedicalRecordService medicalRecordService;
-
     @BeforeAll
     private static void setup() {
         dataContainer = mock(DataContainer.class);
-        medicalRecordService = new MedicalRecordService(dataContainer);
+        MedicalRecordService medicalRecordService = new MedicalRecordService(dataContainer);
         personInfoService = new PersonInfoService(dataContainer, medicalRecordService);
     }
 
@@ -34,13 +31,13 @@ public class PersonInfoServiceTest {
     // it must return a PersonInfo List
     @Test
     public void getPersonInfoTest() {
-        List<Person> listPersons = new ArrayList<>();
+        List<Person> personList = new ArrayList<>();
         Person person = new Person();
         person.setFirstName("John");
         person.setLastName("Boyd");
         person.setAddress("test");
         person.setEmail("test@testmail.com");
-        listPersons.add(person);
+        personList.add(person);
 
         List<MedicalRecord> medicalRecordList = new ArrayList<>();
         MedicalRecord medicalRecord = new MedicalRecord();
@@ -57,7 +54,7 @@ public class PersonInfoServiceTest {
         PersonInfo personInfo = new PersonInfo("John", "Boyd", "test", 36, "test@testmail.com", medications, allergies);
         personInfoList.add(personInfo);
 
-        when(dataContainer.getPersons()).thenReturn(listPersons);
+        when(dataContainer.getPersons()).thenReturn(personList);
         when(dataContainer.getMedicalrecords()).thenReturn(medicalRecordList);
 
         Assert.assertNotNull(personInfoService.getPersonInformation("John", "Boyd"));
@@ -69,7 +66,7 @@ public class PersonInfoServiceTest {
     // it must return an empty PersonInfo List
     @Test
     public void getPersonInfoWithNoDataTest() {
-        List<Person> listPersons = new ArrayList<>();
+        List<Person> personList = new ArrayList<>();
         List<MedicalRecord> medicalRecordList = new ArrayList<>();
         List<PersonInfo> personInfoList = new ArrayList<>();
 
@@ -78,7 +75,7 @@ public class PersonInfoServiceTest {
         person.setLastName("Boyd");
         person.setAddress("test");
         person.setEmail("test@testmail.com");
-        listPersons.add(person);
+        personList.add(person);
 
         MedicalRecord medicalRecord = new MedicalRecord();
         medicalRecord.setFirstName("John");
@@ -91,7 +88,7 @@ public class PersonInfoServiceTest {
         medicalRecordList.add(medicalRecord);
 
 
-        when(dataContainer.getPersons()).thenReturn(listPersons);
+        when(dataContainer.getPersons()).thenReturn(personList);
         when(dataContainer.getMedicalrecords()).thenReturn(medicalRecordList);
 
         Assert.assertNotNull(personInfoService.getPersonInformation("John", "Doe"));
@@ -102,7 +99,7 @@ public class PersonInfoServiceTest {
     // it must return an empty PersonInfo List
     @Test
     public void getPersonInfoWithIncorrectParamTest() {
-        List<Person> listPersons = new ArrayList<>();
+        List<Person> personList = new ArrayList<>();
         List<MedicalRecord> medicalRecordList = new ArrayList<>();
         List<PersonInfo> personInfoList = new ArrayList<>();
 
@@ -111,7 +108,7 @@ public class PersonInfoServiceTest {
         person.setLastName("Boyd");
         person.setAddress("test");
         person.setEmail("test@testmail.com");
-        listPersons.add(person);
+        personList.add(person);
 
         MedicalRecord medicalRecord = new MedicalRecord();
         medicalRecord.setFirstName("John");
@@ -123,7 +120,7 @@ public class PersonInfoServiceTest {
         medicalRecord.setBirthdate("03/06/1984");
         medicalRecordList.add(medicalRecord);
 
-        when(dataContainer.getPersons()).thenReturn(listPersons);
+        when(dataContainer.getPersons()).thenReturn(personList);
         when(dataContainer.getMedicalrecords()).thenReturn(medicalRecordList);
 
         Assert.assertNotNull(personInfoService.getPersonInformation("", ""));

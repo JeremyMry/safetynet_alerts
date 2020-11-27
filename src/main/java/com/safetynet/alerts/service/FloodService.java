@@ -28,6 +28,7 @@ public class FloodService implements IFloodService {
         this.firestationService = firestationService;
     }
 
+    // get all the persons covered by the station and regroup them by household
     @Override
     public List<Household> getHouseholdByStationAddress(String stationNumber) {
         List<String> stationAddressList = firestationService.getFireStationAddressByStationNumber(stationNumber);

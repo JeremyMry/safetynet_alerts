@@ -25,6 +25,7 @@ public class FireAlertService implements IFireAlertService{
         this.firestationService = firestationService;
     }
 
+    // get the persons living in a specific address. Return a list of this persons with specific information
     @Override
     public List<FireAlert> getPersonsByAddress(String address) {
         List<FireAlert> fireAlertList = new ArrayList<>();

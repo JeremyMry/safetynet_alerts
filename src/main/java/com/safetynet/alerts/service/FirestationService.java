@@ -20,6 +20,7 @@ public class FirestationService implements IFirestationService {
         this.medicalRecordService = medicalRecordService;
     }
 
+    // add a firestation
     @Override
     public List<Firestation> add(Firestation firestation) {
         List<Firestation> listFirestations = dataContainer.getFirestations();
@@ -27,6 +28,7 @@ public class FirestationService implements IFirestationService {
         return listFirestations;
     }
 
+    // update a firestation number
     @Override
     public List<Firestation> update(Firestation firestation) {
 
@@ -42,6 +44,7 @@ public class FirestationService implements IFirestationService {
         return listFirestations;
     }
 
+    // delete a firestation
     @Override
     public List<Firestation> delete(String address) {
         List<Firestation> listFirestations = dataContainer.getFirestations();
@@ -50,6 +53,7 @@ public class FirestationService implements IFirestationService {
         return listFirestations;
     }
 
+    // get the persons covered by a station / return stationCoverage list containing the number of adults, child and a list of persons covered
     @Override
     public List<StationCoverage> getPersonsCoverageByStationNumber(String stationNumber) {
         List<Person> personList = dataContainer.getPersons();
@@ -80,6 +84,7 @@ public class FirestationService implements IFirestationService {
         return stationCoverageList;
     }
 
+    // find a station address by using it number
     @Override
     public List<String> getFireStationAddressByStationNumber(String stationNumber) {
         List<Firestation> firestationList = dataContainer.getFirestations();
@@ -94,6 +99,7 @@ public class FirestationService implements IFirestationService {
         return fireStationAddressList;
     }
 
+    // find a station number by using it address
     @Override
     public List<String> getFireStationStationNumberByAddress(String address) {
         List<Firestation> firestationList = dataContainer.getFirestations();

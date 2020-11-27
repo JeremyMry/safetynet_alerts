@@ -27,23 +27,23 @@ public class CommunityEmailServiceTest {
     // it must return a List of email
     @Test
     public void getEmailList() {
-        List<Person> listPersons = new ArrayList<>();
+        List<Person> personList = new ArrayList<>();
 
         Person person = new Person();
         person.setEmail("test@testmail.com");
         person.setCity("Culver");
-        listPersons.add(person);
+        personList.add(person);
 
         Person person1 = new Person();
         person1.setEmail("test2@testmail.com");
         person1.setCity("Culver");
-        listPersons.add(person1);
+        personList.add(person1);
 
         List<String> emailList = new ArrayList<>();
         emailList.add("test@testmail.com");
         emailList.add("test2@testmail.com");
 
-        when(dataContainer.getPersons()).thenReturn(listPersons);
+        when(dataContainer.getPersons()).thenReturn(personList);
 
         Assert.assertNotNull(communityEmailService.getEmailByCity("Culver"));
         Assert.assertEquals(emailList.toString(), communityEmailService.getEmailByCity("Culver").toString());
@@ -53,20 +53,20 @@ public class CommunityEmailServiceTest {
     // it must return an empty List of email
     @Test
     public void getEmailListWithNoEmailInTheCity() {
-        List<Person> listPersons = new ArrayList<>();
+        List<Person> personList = new ArrayList<>();
         Person person = new Person();
         person.setEmail("test@testmail.com");
         person.setCity("Culver");
-        listPersons.add(person);
+        personList.add(person);
 
         Person person1 = new Person();
         person1.setEmail("test2@testmail.com");
         person1.setCity("Culver");
-        listPersons.add(person1);
+        personList.add(person1);
 
         List<String> emailList = new ArrayList<>();
 
-        when(dataContainer.getPersons()).thenReturn(listPersons);
+        when(dataContainer.getPersons()).thenReturn(personList);
 
         Assert.assertNotNull(communityEmailService.getEmailByCity("Culve"));
         Assert.assertEquals(emailList.toString(), communityEmailService.getEmailByCity("Culve").toString());
@@ -76,20 +76,20 @@ public class CommunityEmailServiceTest {
     // it must return an empty List of email
     @Test
     public void getEmailListWithIncorrectParam() {
-        List<Person> listPersons = new ArrayList<>();
+        List<Person> personList = new ArrayList<>();
         Person person = new Person();
         person.setEmail("test@testmail.com");
         person.setCity("Culver");
-        listPersons.add(person);
+        personList.add(person);
 
         Person person1 = new Person();
         person1.setEmail("test2@testmail.com");
         person1.setCity("Culver");
-        listPersons.add(person1);
+        personList.add(person1);
 
         List<String> emailList = new ArrayList<>();
 
-        when(dataContainer.getPersons()).thenReturn(listPersons);
+        when(dataContainer.getPersons()).thenReturn(personList);
 
         Assert.assertNotNull(communityEmailService.getEmailByCity(""));
         Assert.assertEquals(emailList.toString(), communityEmailService.getEmailByCity("").toString());

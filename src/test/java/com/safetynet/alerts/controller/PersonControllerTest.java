@@ -20,11 +20,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class PersonControllerTest {
 
     @Autowired
-    private MockMvc mvc;
+    MockMvc mvc;
 
     @MockBean
-    private PersonService service;
+    PersonService service;
 
+    // test the add method
     @Test
     public void addPersonTest() throws Exception {
         this.mvc.perform(post("/person/add")
@@ -33,6 +34,7 @@ public class PersonControllerTest {
                 .andExpect(status().is2xxSuccessful());
     }
 
+    // test the delete method
     @Test
     public void deletePersonTest() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.delete("/person/delete")
@@ -41,6 +43,7 @@ public class PersonControllerTest {
                 .andExpect(status().is2xxSuccessful());
     }
 
+    // test the update method
     @Test
     public void updatePersonTest() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.put("/person/update")

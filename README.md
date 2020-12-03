@@ -1,8 +1,8 @@
 # safetynet_alerts
 
-#To launch the app, you must launch the class SafetynetAlertsApplication
+# To launch the app, you must launch the class SafetynetAlertsApplication
 
-#Once the app is launched you can go you the endpoints via the addresses bellow:
+# Once the app is launched you can go you the endpoints via the addresses bellow:
 
     http://localhost:8080/firestation?stationNumber=station_number
     http://localhost:8080/childAlert?address=address
@@ -17,7 +17,7 @@
     http://localhost:8080/actuator/metrics
 
 
-#For the crud operations you can use postman. The endpoints for crud are : 
+# For the crud operations you can use postman. The endpoints for crud are : 
 
     http://localhost:8080/firestation/add - update - delete  
     http://localhost:8080/person/add - update - delete
@@ -29,5 +29,6 @@
 
 # The Json file containing the data is located in the resources folder (safetynet_alerts/src/main/resources)
 
-# The dependencies used are in the pom.xml : springboot / springboot actuator (endpoint health/metrics/info/trace) / junit (test) / mockito (test) / jackson (manipulate json) / log4j (logger) / mysql (request) / jacoco (test coverage) / thymeleaf (custom error pages)/ surefire (test execution) / spotbugs (bugs correction)
+# The dependencies used are in the pom.xml : 
+springboot / springboot actuator (endpoint health/metrics/info/trace) / junit (test) / mockito (test) / jackson (manipulate json) / log4j (logger) / mysql (request) / jacoco (test coverage) / thymeleaf (custom error pages)/ surefire (test execution) / spotbugs (bugs correction)
 

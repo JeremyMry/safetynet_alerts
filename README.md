@@ -1,6 +1,8 @@
 # safetynet_alerts
 
-# To launch the app, you must launch the class SafetynetAlertsApplication
+# To launch the app, you must launch the class 
+
+    SafetynetAlertsApplication.java
 
 # Once the app is launched you can go you the endpoints via the addresses bellow:
 

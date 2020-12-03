@@ -23,12 +23,20 @@
     http://localhost:8080/person/add - update - delete
     http://localhost:8080/medicalRecord/add - update - delete
 
-# To launch the test, you can use the terminal command: mvn test
+# To launch the test, you can use the terminal command: 
+    
+    mvn test
 
-# To generate the target folder, you can use the terminal command: mvn site
+# To generate the target folder, you can use the terminal command: 
 
-# The Json file containing the data is located in the resources folder (safetynet_alerts/src/main/resources)
+    mvn site
+
+# The Json file containing the data is located in the resources folder: 
+
+    safetynet_alerts/src/main/resources
 
 # The dependencies used are in the pom.xml : 
-springboot / springboot actuator (endpoint health/metrics/info/trace) / junit (test) / mockito (test) / jackson (manipulate json) / log4j (logger) / mysql (request) / jacoco (test coverage) / thymeleaf (custom error pages)/ surefire (test execution) / spotbugs (bugs correction)
+
+    springboot / springboot actuator (endpoint health/metrics/info/trace) / junit (test) / mockito (test) / jackson (manipulate json) / log4j (logger) / 
+    mysql (request) / jacoco (test coverage) / thymeleaf (custom error pages)/ surefire (test execution) / spotbugs (bugs correction)
 

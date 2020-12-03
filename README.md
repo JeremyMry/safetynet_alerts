@@ -42,3 +42,6 @@
     springboot / springboot actuator (endpoint health/metrics/info/trace) / junit (test) / mockito (test) / jackson (manipulate json) / log4j (logger) / 
     mysql (request) / jacoco (test coverage) / thymeleaf (custom error pages)/ surefire (test execution) / spotbugs (bugs correction)
 
+# The completed project is in the branch : 
+ 
+    develop
